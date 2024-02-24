@@ -1,136 +1,141 @@
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+    border: none;
     outline: none;
-    border: 0;
+}
+
+:root {
+    --main-background: #eef0ebff;
+    --font-color: #393939;
+    --button-bg: #153243ff;
+    --header-bg: #b4b8abff;
+    --footer-bg: #284b63ff;
 }
 
 body {
+    font-family: 'Helvetica', sans-serif;
+    background-color: var(--main-background);
     display: flex;
     flex-direction: column;
-
     height: 100vh;
 }
 
 header {
+    background-color: var(--header-bg);
+}
+
+.container {
+    max-width: 80vw;
+}
+
+.header-container {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 16px;
     align-items: center;
     justify-content: center;
-    color: #f9f9f9;
-    background-color: #000;
-    padding: 20px;
-}
-
-main {
-    display: flex;
-    background-color: #f5f5f5;
-    flex: 1;
-    align-items: flex-start;
-}
-
-main.workspaces {
-    display: flex;
-    flex-direction: column;
-    background-color: #f5f5f5;
-    flex: 1;
-    align-items: flex-start;
-}
-
-main.workspaces h2 {
-    padding: 1rem;
-}
-
-.properties {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    margin-top: 20px;
-    padding: 1rem;
-}
-.properties strong {
-    align-self: flex-end;
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
-}
-.properties a {
-    padding: 0.5rem;
-    border: 0;
-    background-color: #000;
-    color: #f9f9f9;
-    cursor: pointer;
-    align-self: flex-end;
-    text-decoration: none;
-}
-
-.workspace {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    margin-top: 20px;
-    padding: 1rem;
-    width: 100%;
-}
-
-.workspace strong {
-    align-self: flex-end;
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
-}
-.workspace a {
-    padding: 0.5rem;
-    border: 0;
-    background-color: #000;
-    color: #f9f9f9;
-    cursor: pointer;
-    align-self: flex-end;
-    text-decoration: none;
-}
-
-.coworking {
-    display: flex;
-    flex-direction: column;
-
-    padding: 1rem;
-    width: 80%;
+    height: 148px;
     margin: 0 auto;
 }
 
-.coworking img {
-    width: 100%;
-    max-height: 300px;
-    object-fit: cover;
+.logo {
+    height: 100%;
 }
 
-.coworking label {
-    margin-top: 1rem;
-    font-weight: bold;
+.header-container nav {
+    flex: 1;
 }
 
-.coworking p {
-    font-size: 1.25rem;
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
-.coworking button {
-    padding: 0.5rem;
-    border: 0;
-    background-color: #000;
-    color: #f9f9f9;
-    cursor: pointer;
-    align-self: flex-end;
+nav ul li {
+    list-style: none;
+}
+
+.header-button {
+    font-size: 14px;
+    padding: 12px 16px;
+    color: white;
+    background-color: var(--button-bg);
+    font-weight: bolder;
+    border-radius: 16px;
+}
+
+li a {
     text-decoration: none;
-    margin-bottom: 1rem;
+}
+
+main {
+    flex: 1;
 }
 
 footer {
+    background-color: var(--footer-bg);
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 16px;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 24px;
+    color: white;
+}
+
+.footer-logo {
+    filter: invert(0.5);
+    max-height: 148px;
+}
+
+.our-customers {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    color: #f9f9f9;
-    background-color: gray;
-    padding: 20px;
+    gap: 16px;
+    margin-left: auto;
+}
+.our-customers h2 {
+    font-size: inherit;
+}
+
+.separator {
+    display: flex;
+}
+
+.separator::before {
+    content: '';
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    margin-right: 16px;
+}
+
+.customers-logo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.customers-logo img {
+    max-height: 48px;
+}
+
+.footer-link {
+    padding: 12px 16px;
+    font-size: 24px;
+    color: white;
+    font-weight: bolder;
+    border-radius: 16px;
 }
