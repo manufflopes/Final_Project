@@ -2,7 +2,9 @@ function createHeader() {
     const headerTag = document.createElement('header')
     headerTag.innerHTML = `
         <div class="container header-container">
-            <img class="logo" src="./images/OpenDesks.png" alt="logo" />
+            <a href="/">
+                <img class="logo" src="./images/OpenDesks.png" alt="logo" />
+            </a>
             <nav>
                 <ul>
                     <li><a class="base-button" href="#">About Us</a></li>
