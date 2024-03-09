@@ -1,17 +1,81 @@
+const hasParkingGarage = (hasParkingGarage) => {
+  return hasParkingGarage
+    ? "<img src='./assets/svg/parking.svg' class='svg-icon'/>"
+    : "";
+};
+
+const hasPublicTransport = (hasPublicTransportNearBy) => {
+  return hasPublicTransportNearBy
+    ? "<img src='./assets/svg/bus.svg' class='svg-icon'/>"
+    : "";
+};
+
+const isSmokingAllowed = (isSmokingAllowed) => {
+  return isSmokingAllowed
+    ? "<img src='./assets/svg/smoking-allowed.svg' class='svg-icon'/>"
+    : "<img src='./assets/svg/smoking-not-allowed.svg' class='svg-icon'/>";
+};
+
+const propertyType = (propertyType) => {
+  const mappedPropertyType = {
+    meeting_room: "<img src='./assets/svg/meeting-room.svg' class='svg-icon'/>",
+    private_office:
+      "<img src='./assets/svg/private-room.svg' class='svg-icon'/>",
+    desk: "<img src='./assets/svg/shared-space-desk.svg' class='svg-icon'/>",
+  };
+
+  return mappedPropertyType[propertyType] || "";
+};
+
 function addProperty(propertyData) {
   const property = document.createElement("div");
   property.classList.add("workspace");
 
   property.innerHTML = `
                     <div class="workspace-container">
-                        <img class="workspace-image" src="images/${propertyData.image}" />
-                        <div class="workspace-info">
-                            <p>Address: ${propertyData.address}</p>
-                            <p>Building Name: ${propertyData.buildingName}</p>
-                            <p>Types: ${propertyData.types}</p>
+                      <h2 class="workspace-title">${
+                        propertyData.buildingName
+                      }</h2>
+                      <img class="workspace-image" src="images/${
+                        propertyData.image
+                      }" />
+                      <div class="workspace-info">
+                        <div class="info-container">
+                          <label>Address:</label>
+                          <span>${propertyData.address}</span>
                         </div>
+                        <div class="info-container">
+                          <label>Neighborhood:</label>
+                          <span>${propertyData.neighborhood}</span>
+                        </div>
+                        <div class="info-container">
+                          <label>Square Feet:</label>
+                          <span>${propertyData.squareFeet}</span>
+                        </div>
+                        <div class="info-container">
+                          <label class="info-label">Facilities</label>
+                          <div class="facilities-container">
+                            <div class="icons-container">
+                            ${hasParkingGarage(propertyData.hasParkingGarage)}
+                            ${hasPublicTransport(
+                              propertyData.hasPublicTransportNearBy
+                            )}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="info-container">
+                          <label class="info-label">Available Workspaces</label>
+                          <div class="icons-container">
+                            ${propertyData.workspaceTypes
+                              .map(propertyType)
+                              .join("")}
+                          </div>    
+                        </div>
+                      </div>
                     </div>
-                    <a href="./workspaces.html?propertyId=${propertyData.id}" class="check-button">Check</a>
+                    <a href="./workspaces.html?propertyId=${
+                      propertyData.id
+                    }" class="check-button">View Details</a>
                 `;
   return property;
 }
@@ -21,86 +85,88 @@ function addWorkspace(workspaceData) {
   workspace.classList.add("workspace");
 
   workspace.innerHTML = `
-                    <div class="workspace-container">
+                      <div class="workspace-container">
+                        <h2 class="workspace-title">${workspaceData.name}</h2>
                         <img class="workspace-image" src="images/${
                           workspaceData.image
                         }" />
                         <div class="workspace-info">
-                            <p>Name: ${workspaceData.name}</p>
-                            <p>Places: ${workspaceData.places}</p>
-                            <p>Price: ${workspaceData.price}</p>
-                            ${
-                              workspaceData.smokingIsAllowed
-                                ? "Smoking is Allowed"
-                                : ""
-                            }
+                          <div class="info-container">
+                            <label>Price:</label>
+                            <span>
+                              ${new Intl.NumberFormat({
+                                style: "currency",
+                                currency: "USD",
+                              }).format(workspaceData.price)}
+                            </span>
+                          </div>
+                          <div class="info-container">
+                            <label>Lease Term:</label>
+                            <span>
+                              ${
+                                workspaceData.leaseTerm
+                                  .charAt(0)
+                                  .toUpperCase() +
+                                workspaceData.leaseTerm.slice(1)
+                              }
+                            </span>
+                          </div>
+                          <div class="info-container">
+                            <label>Availability Date</label>
+                            <span>
+                              ${new Intl.DateTimeFormat({
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                              }).format(
+                                new Date(workspaceData.availabilityDate)
+                              )}
+                            </span>
+                          </div>
+                          <div class="info-container">
+                            <div class="icons-container">
+                              ${isSmokingAllowed(
+                                workspaceData.smokingIsAllowed
+                              )}
+                            </div>
+                          </div>
+                          <div class="info-container">
+                            <label class="info-label">Workspace Type</label>
+                            <div class="icons-container">
+                              ${propertyType(workspaceData.type)}
+                            </div>
+                          </div>
                         </div>
-                    </div>
-                    <a disable=true href="./booking.html?workspaceIs\d=${
-                      workspaceData.id
-                    }" class="check-button">Book Now</a>
+                      </div>
+                      <a href="./booking.html?workspaceId=${
+                        workspaceData.id
+                      }" class="check-button">Book Now</a>
                 `;
   return workspace;
 }
 
-const db = [
-  {
-    id: 1,
-    image: "image3.webp",
-    address: "1235 11th Avenue",
-    buildingName: "The Metropolitan",
-    types: "Apartment",
-    workspaces: [
-      {
-        id: 1,
-        name: "AP 901",
-        smokingIsAllowed: false,
-        places: 2,
-        price: 1680,
-        image: "image3.webp",
-      },
-      {
-        id: 2,
-        name: "AP 906",
-        smokingIsAllowed: false,
-        places: 6,
-        price: 2680,
-        image: "image2.webp",
-      },
-    ],
-  },
-  {
-    id: 2,
-    image: "image4.webp",
-    address: "Rua das Flores",
-    buildingName: "The Eleven",
-    types: "Desk",
-    workspaces: [],
-  },
-  {
-    id: 4,
-    image: "image2.webp",
-    address: "Rua Sergipe",
-    buildingName: "Bilbo",
-    types: "Apartment",
-    workspaces: [
-      {
-        id: 3,
-        name: "Sala de reuniao",
-        smokingIsAllowed: false,
-        places: 6,
-        price: 3680,
-        image: "image5.webp",
-      },
-    ],
-  },
-];
+async function fetchProperties() {
+  const response = await fetch("http://localhost:3000/properties");
+  const data = await response.json();
+  return data;
+}
 
-document.addEventListener("DOMContentLoaded", function () {
+async function fetchWorkspaces(propertyId) {
+  const response = await fetch(
+    `http://localhost:3000/workspaces/${propertyId}`
+  );
+  const data = await response.json();
+  return data;
+}
+
+document.addEventListener("DOMContentLoaded", async function () {
+  console.log("DOM fully loaded and parsed");
   if (["/index.html", "/"].includes(location.pathname)) {
     const workspaceSection = document.querySelector(".workspaces-section");
-    for (let index = 0; index < db.length; index++) {
-      workspaceSection.append(addProperty(db[index]));
+
+    const properties = await fetchProperties();
+    for (let index = 0; index < properties.length; index++) {
+      workspaceSection.append(addProperty(properties[index]));
     }
   }
 
@@ -111,21 +177,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const propertyId = params.get("propertyId");
 
     if (propertyId) {
-      const filteredData = db.find((property) => {
-        if (property.id == propertyId) {
-          return true;
-        }
-      });
+      const { spaces } = await fetchWorkspaces(propertyId);
 
-      if (filteredData.workspaces.length == 0) {
+      if (!spaces.length) {
         workspaceSection.innerHTML =
           "<p>There are no workspaces available for this property</p>";
         return;
       }
 
-      for (let index = 0; index < filteredData.workspaces.length; index++) {
-        workspaceSection.append(addWorkspace(filteredData.workspaces[index]));
-      }
+      spaces.forEach((workspace) =>
+        workspaceSection.append(addWorkspace(workspace))
+      );
     } else {
       console.log("Nenhuma propriedade selecionada");
     }

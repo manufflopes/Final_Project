@@ -1,6 +1,6 @@
 function createHeader() {
-    const headerTag = document.createElement('header')
-    headerTag.innerHTML = `
+  const headerTag = document.createElement("header");
+  headerTag.innerHTML = `
         <div class="container header-container">
             <a href="/">
                 <img class="logo" src="./images/OpenDesks.png" alt="logo" />
@@ -17,13 +17,13 @@ function createHeader() {
                 </ul>
             </nav>
         </div>
-        `
-    return headerTag
+        `;
+  return headerTag;
 }
 
 function createFooter() {
-    const footerTag = document.createElement('footer')
-    footerTag.innerHTML = `
+  const footerTag = document.createElement("footer");
+  footerTag.innerHTML = `
   
             <div class="container footer-container">
                 <img
@@ -56,17 +56,17 @@ function createFooter() {
                 </div>
             </div>
 
-    `
+    `;
 
-    return footerTag
+  return footerTag;
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    const domBody = document.body
+document.addEventListener("DOMContentLoaded", async function () {
+  const domBody = document.body;
 
-    const newHeader = createHeader()
-    domBody.prepend(newHeader)
+  const newHeader = createHeader();
+  domBody.prepend(newHeader);
 
-    const newFooter = createFooter()
-    domBody.append(newFooter)
-})
+  const newFooter = createFooter();
+  domBody.append(newFooter);
+});
