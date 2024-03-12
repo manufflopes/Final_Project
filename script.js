@@ -94,7 +94,7 @@ function addWorkspace(workspaceData) {
                           <div class="info-container">
                             <label>Price:</label>
                             <span>
-                              ${new Intl.NumberFormat({
+                              ${new Intl.NumberFormat("en-US", {
                                 style: "currency",
                                 currency: "USD",
                               }).format(workspaceData.price)}
@@ -114,13 +114,9 @@ function addWorkspace(workspaceData) {
                           <div class="info-container">
                             <label>Availability Date</label>
                             <span>
-                              ${new Intl.DateTimeFormat({
-                                year: "numeric",
-                                month: "long",
-                                day: "numeric",
-                              }).format(
-                                new Date(workspaceData.availabilityDate)
-                              )}
+                              ${new Date(
+                                workspaceData.availabilityDate
+                              ).toLocaleDateString("en-CA")}
                             </span>
                           </div>
                           <div class="info-container">
