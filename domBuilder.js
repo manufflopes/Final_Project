@@ -1,29 +1,27 @@
 function createHeader() {
-  const headerTag = document.createElement("header");
-  headerTag.innerHTML = `
+    const headerTag = document.createElement('header')
+    headerTag.innerHTML = `
         <div class="container header-container">
             <a href="/">
                 <img class="logo" src="./images/OpenDesks.png" alt="logo" />
             </a>
             <nav>
                 <ul>
-                    <li><a class="base-button" href="#">About Us</a></li>
-                    <li><a class="base-button" href="#">Register</a></li>
-                    <li>
-                        <a class="base-button" href="#">Workspaces</a>
-                    </li>
-                    <li><a class="base-button" href="#">FAQ</a></li>
-                    <li><a class="login-button" href="#">Login</a></li>
+                    <li><a class="base-button" href="./aboutUs.html">About Us</a></li>
+                    <li><a class="base-button" href="./register.html">Register</a></li>
+                    <li><a class="base-button" href="./faq.html">FAQ</a></li>
+                    <li><a class="base-button" href="./contactUs.html">Contact Us</a></li>
+                    <li><a class="login-button" href="./login.html">Login</a></li>
                 </ul>
             </nav>
         </div>
-        `;
-  return headerTag;
+        `
+    return headerTag
 }
 
 function createFooter() {
-  const footerTag = document.createElement("footer");
-  footerTag.innerHTML = `
+    const footerTag = document.createElement('footer')
+    footerTag.innerHTML = `
   
             <div class="container footer-container">
                 <img
@@ -34,10 +32,10 @@ function createFooter() {
                 <nav>
                     <ul>
                         <li>
-                            <a class="footer-link" href="#">About Us</a>
+                            <a class="footer-link" href="./aboutUs.html">About Us</a>
                         </li>
                         <li>
-                            <a class="footer-link" href="#">Contact Us</a>
+                            <a class="footer-link" href="./contactUs.html">Contact Us</a>
                         </li>
                     </ul>
                 </nav>
@@ -56,17 +54,17 @@ function createFooter() {
                 </div>
             </div>
 
-    `;
+    `
 
-  return footerTag;
+    return footerTag
 }
 
-document.addEventListener("DOMContentLoaded", async function () {
-  const domBody = document.body;
+document.addEventListener('DOMContentLoaded', async function () {
+    const domBody = document.body
 
-  const newHeader = createHeader();
-  domBody.prepend(newHeader);
+    const newHeader = createHeader()
+    domBody.prepend(newHeader)
 
-  const newFooter = createFooter();
-  domBody.append(newFooter);
-});
+    const newFooter = createFooter()
+    domBody.append(newFooter)
+})
