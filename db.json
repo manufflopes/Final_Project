@@ -1,143 +1,215 @@
 {
-    "properties": [
+  "properties": [
+    {
+      "id": "1",
+      "image": "image3.webp",
+      "address": "1235 11th Avenue SW, Calgary, AB T3C 0M6",
+      "neighborhood": "Beltline",
+      "squareFeet": 1000,
+      "hasParkingGarage": true,
+      "hasPublicTransportNearBy": true,
+      "buildingName": "The Metropolitan",
+      "workspaceTypes": [
+        "meeting_room"
+      ]
+    },
+    {
+      "id": "2",
+      "image": "image4.webp",
+      "address": "225 South 6th Street, Minneapolis, MN 55402",
+      "neighborhood": "Downtown",
+      "squareFeet": 1500,
+      "hasParkingGarage": false,
+      "hasPublicTransportNearBy": true,
+      "buildingName": "Capella Tower",
+      "workspaceTypes": [
+        "desk",
+        "meeting_room",
+        "private_office"
+      ]
+    },
+    {
+      "id": "ab75",
+      "buildingName": "Dorian Farrell",
+      "address": "Vero quidem corrupti",
+      "neighborhood": "Iste occaecat aliqua",
+      "squareFeet": "Incidunt dignissimo",
+      "hasParkingGarage": false,
+      "hasPublicTransportNearBy": false,
+      "workspaceTypes": [
+        "desk",
+        "meeting_room",
+        "private_office"
+      ],
+      "image": ""
+    },
+    {
+      "id": "0751",
+      "buildingName": "Marcia Ramsey",
+      "address": "Architecto irure qui",
+      "neighborhood": "Officia earum doloru",
+      "squareFeet": "Architecto totam pla",
+      "hasParkingGarage": true,
+      "hasPublicTransportNearBy": true,
+      "workspaceTypes": [
+        "private_office"
+      ],
+      "image": ""
+    },
+    {
+      "id": "d15c",
+      "buildingName": "Kitra Lewis",
+      "address": "Vero maxime qui haru",
+      "neighborhood": "Beatae sint fugiat ",
+      "squareFeet": "Error placeat enim ",
+      "hasParkingGarage": false,
+      "hasPublicTransportNearBy": true,
+      "workspaceTypes": [
+        "desk",
+        "meeting_room"
+      ],
+      "image": ""
+    },
+    {
+      "id": "0bad",
+      "buildingName": "Zelenia Scott",
+      "address": "Quasi molestiae offi",
+      "neighborhood": "Veritatis unde repre",
+      "squareFeet": "Non reiciendis verit",
+      "hasParkingGarage": false,
+      "hasPublicTransportNearBy": true,
+      "workspaceTypes": [
+        "desk",
+        "meeting_room",
+        "private_office"
+      ],
+      "image": ""
+    },
+    {
+      "id": "aa2a",
+      "buildingName": "Zenia Castro",
+      "address": "In eu consequat Ea ",
+      "neighborhood": "Dolor placeat tempo",
+      "squareFeet": "Debitis rerum quis c",
+      "hasParkingGarage": true,
+      "hasPublicTransportNearBy": true,
+      "workspaceTypes": [
+        "desk",
+        "meeting_room",
+        "private_office"
+      ],
+      "image": ""
+    }
+  ],
+  "workspaces": [
+    {
+      "id": "1",
+      "spaces": [
         {
-            "id": 1,
-            "image": "image3.webp",
-            "address": "1235 11th Avenue SW, Calgary, AB T3C 0M6",
-            "neighborhood": "Beltline",
-            "squareFeet": 1000,
-            "hasParkingGarage": true,
-            "hasPublicTransportNearBy": true,
-            "buildingName": "The Metropolitan",
-            "workspaceTypes": [
-                "meeting_room"
-            ]
+          "id": 1,
+          "name": "AP 901",
+          "isSmokingAllowed": false,
+          "places": 2,
+          "image": "image3.webp",
+          "availabilityDate": "2021-10-01",
+          "leaseTerm": "month",
+          "type": "desk",
+          "price": 1680
         },
         {
-            "id": 2,
-            "image": "image4.webp",
-            "address": "225 South 6th Street, Minneapolis, MN 55402",
-            "neighborhood": "Downtown",
-            "squareFeet": 1500,
-            "hasParkingGarage": false,
-            "hasPublicTransportNearBy": true,
-            "buildingName": "Capella Tower",
-            "workspaceTypes": [
-                "desk",
-                "meeting_room",
-                "private_office"
-            ]
+          "id": 2,
+          "name": "AP 906",
+          "smokingIsAllowed": false,
+          "places": 6,
+          "image": "image2.webp",
+          "availabilityDate": "2021-10-01",
+          "leaseTerm": "month",
+          "type": "meeting_room",
+          "price": 2680
         }
-    ],
-    "workspaces": [
+      ]
+    },
+    {
+      "id": "2",
+      "spaces": [
         {
-            "id": "1",
-            "spaces": [
-                {
-                    "id": 1,
-                    "name": "AP 901",
-                    "isSmokingAllowed": false,
-                    "places": 2,
-                    "image": "image3.webp",
-                    "availabilityDate": "2021-10-01",
-                    "leaseTerm": "month",
-                    "type": "desk",
-                    "price": 1680
-                },
-                {
-                    "id": 2,
-                    "name": "AP 906",
-                    "smokingIsAllowed": false,
-                    "places": 6,
-                    "image": "image2.webp",
-                    "availabilityDate": "2021-10-01",
-                    "leaseTerm": "month",
-                    "type": "meeting_room",
-                    "price": 2680
-                }
-            ]
+          "id": 10,
+          "name": "Meeting Room 1",
+          "smokingIsAllowed": false,
+          "places": 10,
+          "image": "image2.webp",
+          "availabilityDate": "2021-10-01",
+          "leaseTerm": "day",
+          "type": "meeting_room",
+          "price": 1000
         },
         {
-            "id": "2",
-            "spaces": [
-                {
-                    "id": 10,
-                    "name": "Meeting Room 1",
-                    "smokingIsAllowed": false,
-                    "places": 10,
-                    "image": "image2.webp",
-                    "availabilityDate": "2021-10-01",
-                    "leaseTerm": "day",
-                    "type": "meeting_room",
-                    "price": 1000
-                },
-                {
-                    "id": 11,
-                    "name": "Meeting Room 2",
-                    "smokingIsAllowed": false,
-                    "places": 6,
-                    "image": "image5.webp",
-                    "availabilityDate": "2021-10-01",
-                    "leaseTerm": "day",
-                    "type": "meeting_room",
-                    "price": 800
-                },
-                {
-                    "id": 12,
-                    "name": "Meeting Room 3",
-                    "smokingIsAllowed": false,
-                    "places": 8,
-                    "image": "image4.webp",
-                    "availabilityDate": "2021-10-01",
-                    "leaseTerm": "day",
-                    "type": "meeting_room",
-                    "price": 900
-                },
-                {
-                    "id": 13,
-                    "name": "Private Office 1",
-                    "smokingIsAllowed": false,
-                    "places": 4,
-                    "image": "image3.webp",
-                    "availabilityDate": "2021-10-01",
-                    "leaseTerm": "day",
-                    "type": "private_office",
-                    "price": 600
-                },
-                {
-                    "id": 14,
-                    "name": "Private Office 2",
-                    "smokingIsAllowed": false,
-                    "places": 3,
-                    "image": "image2.webp",
-                    "availabilityDate": "2021-10-01",
-                    "leaseTerm": "day",
-                    "type": "private_office",
-                    "price": 500
-                },
-                {
-                    "id": 15,
-                    "name": "Desk in Open Work Area 1",
-                    "smokingIsAllowed": false,
-                    "places": 1,
-                    "image": "image5.webp",
-                    "availabilityDate": "2021-10-01",
-                    "leaseTerm": "day",
-                    "type": "desk",
-                    "price": 100
-                },
-                {
-                    "id": 16,
-                    "name": "Desk in Open Work Area 2",
-                    "smokingIsAllowed": false,
-                    "places": 1,
-                    "image": "image4.webp",
-                    "availabilityDate": "2021-10-01",
-                    "leaseTerm": "day",
-                    "type": "desk",
-                    "price": 100
-                }
-            ]
+          "id": 11,
+          "name": "Meeting Room 2",
+          "smokingIsAllowed": false,
+          "places": 6,
+          "image": "image5.webp",
+          "availabilityDate": "2021-10-01",
+          "leaseTerm": "day",
+          "type": "meeting_room",
+          "price": 800
+        },
+        {
+          "id": 12,
+          "name": "Meeting Room 3",
+          "smokingIsAllowed": false,
+          "places": 8,
+          "image": "image4.webp",
+          "availabilityDate": "2021-10-01",
+          "leaseTerm": "day",
+          "type": "meeting_room",
+          "price": 900
+        },
+        {
+          "id": 13,
+          "name": "Private Office 1",
+          "smokingIsAllowed": false,
+          "places": 4,
+          "image": "image3.webp",
+          "availabilityDate": "2021-10-01",
+          "leaseTerm": "day",
+          "type": "private_office",
+          "price": 600
+        },
+        {
+          "id": 14,
+          "name": "Private Office 2",
+          "smokingIsAllowed": false,
+          "places": 3,
+          "image": "image2.webp",
+          "availabilityDate": "2021-10-01",
+          "leaseTerm": "day",
+          "type": "private_office",
+          "price": 500
+        },
+        {
+          "id": 15,
+          "name": "Desk in Open Work Area 1",
+          "smokingIsAllowed": false,
+          "places": 1,
+          "image": "image5.webp",
+          "availabilityDate": "2021-10-01",
+          "leaseTerm": "day",
+          "type": "desk",
+          "price": 100
+        },
+        {
+          "id": 16,
+          "name": "Desk in Open Work Area 2",
+          "smokingIsAllowed": false,
+          "places": 1,
+          "image": "image4.webp",
+          "availabilityDate": "2021-10-01",
+          "leaseTerm": "day",
+          "type": "desk",
+          "price": 100
         }
-    ]
+      ]
+    }
+  ]
 }

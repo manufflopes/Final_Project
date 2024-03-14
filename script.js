@@ -148,12 +148,49 @@ async function fetchProperties() {
     return data
 }
 
-async function fetchWorkspaces(propertyId) {
-    const response = await fetch(
-        `http://localhost:3000/workspaces/${propertyId}`
-    )
+async function createProperty(propertyData) {
+    const response = await fetch('http://localhost:3000/properties', {
+        method: 'POST',
+        body: JSON.stringify(propertyData),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
     const data = await response.json()
     return data
+}
+
+async function fetchWorkspaces(propertyId) {
+    try {
+        const response = await fetch(
+            `http://localhost:3000/workspaces/${propertyId}`
+        )
+
+        if (!response.ok) {
+            throw new Error('Workspaces not found')
+        }
+
+        const data = await response.json()
+
+        return data
+    } catch (error) {
+        return {}
+    }
+}
+
+const uploadImageBtn = document.querySelector('.upload-btn-image')
+const uploadFileInput = document.querySelector('#upload-image-input')
+if (uploadImageBtn) {
+    uploadImageBtn.addEventListener('click', function () {
+        uploadFileInput.click()
+    })
+}
+
+if (uploadFileInput) {
+    uploadFileInput.addEventListener('change', function () {
+        document.querySelector('#uploaded-file-name').textContent =
+            this.files[0]?.name || 'Select an Image for the Property'
+    })
 }
 
 document.addEventListener('DOMContentLoaded', async function () {
@@ -172,11 +209,12 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         const params = new URLSearchParams(location.search)
         const propertyId = params.get('propertyId')
+        console.log(propertyId)
 
         if (propertyId) {
             const { spaces } = await fetchWorkspaces(propertyId)
 
-            if (!spaces.length) {
+            if (!spaces?.length) {
                 workspaceSection.innerHTML =
                     '<p>There are no workspaces available for this property</p>'
                 return
@@ -219,5 +257,41 @@ document.addEventListener('DOMContentLoaded', async function () {
 
             localStorage.setItem('openDesks - users', JSON.stringify(users))
         })
+    }
+
+    if (location.pathname == '/register-property.html') {
+        const propertyRegistrationForm = document.getElementById(
+            'property-registration-form'
+        )
+
+        propertyRegistrationForm.addEventListener(
+            'submit',
+            async function (event) {
+                event.preventDefault()
+
+                const formData = Object.fromEntries(new FormData(event.target))
+                const selectedPropertyTypes = [
+                    ...document.querySelectorAll(
+                        'input[name=workspaceTypes]:checked'
+                    )
+                ]
+
+                // console.log(formData)
+                const newProperty = {
+                    ...formData,
+                    hasParkingGarage: Boolean(
+                        Number(formData.hasParkingGarage)
+                    ),
+                    hasPublicTransportNearBy: Boolean(
+                        Number(formData.hasPublicTransportNearBy)
+                    ),
+                    image: formData.image.name,
+                    workspaceTypes: selectedPropertyTypes.map(btn => btn.value)
+                }
+
+                await createProperty(newProperty)
+                window.location.assign('http://127.0.0.1:5500/')
+            }
+        )
     }
 })

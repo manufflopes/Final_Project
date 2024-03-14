@@ -125,12 +125,15 @@ li a {
     display: flex;
     margin-bottom: 8px;
     margin-bottom: 16px;
+    gap: 16px;
 }
 .input-container {
     display: flex;
     gap: 16px;
     width: 100%;
+    align-items: center;
 }
+
 .input-container label {
     width: 150px;
     text-align: center;
@@ -139,6 +142,19 @@ li a {
     flex: 1;
 }
 
+.upload-btn-image {
+    height: 40px;
+}
+
+#uploaded-file-name {
+    text-align: center;
+    color: rgba(0, 0, 0, 0.7);
+    font-size: small;
+}
+
+.hidden {
+    visibility: hidden;
+}
 select.space-to-fill {
     max-width: 25%;
 }
@@ -146,7 +162,7 @@ select.space-to-fill {
     flex: 1;
     border: 1px solid var(--header-bg);
     padding: 10px 20px;
-    width: 80%vw;
+    /* width: 80%vw; */
 }
 
 #send-button {
@@ -357,6 +373,19 @@ label.info-label::after {
     background-color: var(--button-red);
     flex: 0 0 50%;
     font-size: 20px;
+}
+
+.property-amenities {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.double-choice {
+    margin: 0;
+    width: 50px !important;
+    text-align: center;
+    align-self: center;
 }
 
 /* Main End */
