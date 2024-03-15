@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="style.css" />
+
+</head>
+<body>
+    <main>
+        <h1 class="page-tittle">Contact Us</h1>
+
+        <p id="registeroPage">
+            Field the campus with required informations:
+        </p>
+
+        <form id="user-registration-form">
+            <div class="form-content">
+                <div class="input-container">
+                    <label class="base-button" for="name"
+                        >Name</label
+                    >
+                    <input
+                        type="text"
+                        class="space-to-fill"
+                        id="name"
+                        placeholder="Type your name"
+                    />
+                </div>
+
+                <span class="input-error"></span>
+            </div>
+            <div class="form-content">
+                <div class="input-container">
+                    <label class="base-button" for="email">E-mail</label>
+                    <input
+                        type="email"
+                        class="space-to-fill"
+                        id="email"
+                        placeholder="Type your email"
+                    />
+                </div>
+
+                <span class="input-error"></span>
+            </div>
+            <div class="form-content">
+                <div class="input-container">
+                    <label class="base-button" for="phone">Phone</label>
+                    <input
+                        type="text"
+                        class="space-to-fill"
+                        id="phone"
+                        placeholder="Type your phone number"
+                    />
+                </div>
+
+                <span class="input-error"></span>
+            </div>
+            <div class="form-content">
+                <div class="input-container">
+                    <label class="base-button" for="question"
+                        >Question</label
+                    >
+                    <input
+                        type="text"
+                        class="space-to-fill"
+                        id="question"
+                        placeholder="How can we help?"
+                    />
+                </div>
+
+                <span class="input-error"></span>
+            </div>
+       
+            </div>
+            <button id="send-button" class="base-button" type="submit">
+                Send
+            </button>
+        </form>
+
+
+
+
+    </main>
+        <script src="./domBuilder.js"></script>
+        <script src="./script.js"></script>
+</body>
+</html>
