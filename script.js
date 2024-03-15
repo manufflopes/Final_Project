@@ -142,8 +142,14 @@ function addWorkspace(workspaceData) {
     return workspace
 }
 
-async function fetchProperties() {
-    const response = await fetch('http://localhost:3000/properties')
+async function fetchProperties(ownerId) {
+    console.log(ownerId)
+    let url = ownerId
+        ? `http://localhost:3000/properties?ownerId=${ownerId}`
+        : `http://localhost:3000/properties`
+
+    const response = await fetch(url)
+
     const data = await response.json()
     return data
 }
@@ -152,6 +158,18 @@ async function createProperty(propertyData) {
     const response = await fetch('http://localhost:3000/properties', {
         method: 'POST',
         body: JSON.stringify(propertyData),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    const data = await response.json()
+    return data
+}
+
+async function createUser(userData) {
+    const response = await fetch('http://localhost:3000/users', {
+        method: 'POST',
+        body: JSON.stringify(userData),
         headers: {
             'Content-Type': 'application/json'
         }
@@ -178,6 +196,38 @@ async function fetchWorkspaces(propertyId) {
     }
 }
 
+async function loginUser(loginData) {
+    //This URL MUST be replaced when requesting data from the API
+
+    try {
+        const response = await fetch(
+            `http://localhost:3000/users?email=${loginData.email}&password=${loginData.password}`
+        )
+
+        const userData = await response.json()
+
+        if (userData.length) {
+            sessionStorage.setItem(
+                'open-desks@user',
+                JSON.stringify({
+                    name: userData[0].name,
+                    role: userData[0].role,
+                    userId: userData[0].id
+                })
+            )
+            window.location.assign('http://127.0.0.1:5500/')
+            return
+        }
+
+        throw new Error('User not Found')
+    } catch (error) {
+        console.log(error)
+    }
+
+    // [] quando o usuario nao existe
+    // [{ dados usuario }]
+}
+
 const uploadImageBtn = document.querySelector('.upload-btn-image')
 const uploadFileInput = document.querySelector('#upload-image-input')
 if (uploadImageBtn) {
@@ -194,11 +244,26 @@ if (uploadFileInput) {
 }
 
 document.addEventListener('DOMContentLoaded', async function () {
-    console.log('DOM fully loaded and parsed')
+    /* User Session Handler */
+    const userSession = sessionStorage.getItem('open-desks@user')
+
+    let userData
+
+    if (userSession !== null) {
+        userData = JSON.parse(userSession)
+
+        if (['/login.html', '/booking.html'].includes(location.pathname)) {
+            window.location.assign('http://127.0.0.1:5500/')
+            return
+        }
+    }
+
+    // ROUTES
     if (['/index.html', '/'].includes(location.pathname)) {
         const workspaceSection = document.querySelector('.workspaces-section')
 
-        const properties = await fetchProperties()
+        const properties = await fetchProperties(userData?.userId)
+
         for (let index = 0; index < properties.length; index++) {
             workspaceSection.append(addProperty(properties[index]))
         }
@@ -233,29 +298,12 @@ document.addEventListener('DOMContentLoaded', async function () {
             'user-registration-form'
         )
 
-        userRegistrationForm.addEventListener('submit', function (event) {
+        userRegistrationForm.addEventListener('submit', async function (event) {
             event.preventDefault()
 
-            const name = document.getElementById('username')
-            const email = document.getElementById('email')
-            const phone = document.getElementById('phone')
-            const password = document.getElementById('password')
-            const role = document.getElementById('role')
+            const formData = Object.fromEntries(new FormData(event.target))
 
-            const newUser = {
-                name: name.value,
-                email: email.value,
-                phone: phone.value,
-                password: password.value,
-                role: role.value
-            }
-
-            const localStorage = window.localStorage
-            const previousData = localStorage.getItem('openDesks - users') || []
-            const users = previousData.length ? JSON.parse(previousData) : []
-            users.push(newUser)
-
-            localStorage.setItem('openDesks - users', JSON.stringify(users))
+            await createUser(formData)
         })
     }
 
@@ -293,5 +341,17 @@ document.addEventListener('DOMContentLoaded', async function () {
                 window.location.assign('http://127.0.0.1:5500/')
             }
         )
+    }
+
+    if (location.pathname == '/login.html') {
+        const loginForm = document.getElementById('login-form')
+
+        loginForm.addEventListener('submit', async function (event) {
+            event.preventDefault()
+
+            const formData = Object.fromEntries(new FormData(event.target))
+
+            await loginUser(formData)
+        })
     }
 })

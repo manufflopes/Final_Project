@@ -1,4 +1,4 @@
-function createHeader() {
+function createHeader(userData) {
     const headerTag = document.createElement('header')
     headerTag.innerHTML = `
         <div class="container header-container">
@@ -11,7 +11,11 @@ function createHeader() {
                     <li><a class="base-button" href="./register.html">Register</a></li>
                     <li><a class="base-button" href="./faq.html">FAQ</a></li>
                     <li><a class="base-button" href="./contactUs.html">Contact Us</a></li>
-                    <li><a class="login-button" href="./login.html">Login</a></li>
+                    <li>${
+                        userData
+                            ? userData
+                            : '<a class="login-button" href="./login.html">Login</a>'
+                    }</li>
                 </ul>
             </nav>
         </div>
@@ -60,9 +64,16 @@ function createFooter() {
 }
 
 document.addEventListener('DOMContentLoaded', async function () {
+    const userSession = sessionStorage.getItem('open-desks@user')
+    let userName
+
+    if (userSession !== null) {
+        userName = JSON.parse(userSession).name
+    }
+
     const domBody = document.body
 
-    const newHeader = createHeader()
+    const newHeader = createHeader(userName)
     domBody.prepend(newHeader)
 
     const newFooter = createFooter()

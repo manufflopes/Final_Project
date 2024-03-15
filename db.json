@@ -2,6 +2,7 @@
   "properties": [
     {
       "id": "1",
+      "ownerId": "df54",
       "image": "image3.webp",
       "address": "1235 11th Avenue SW, Calgary, AB T3C 0M6",
       "neighborhood": "Beltline",
@@ -15,6 +16,7 @@
     },
     {
       "id": "2",
+      "ownerId": "df54",
       "image": "image4.webp",
       "address": "225 South 6th Street, Minneapolis, MN 55402",
       "neighborhood": "Downtown",
@@ -30,6 +32,7 @@
     },
     {
       "id": "ab75",
+      "ownerId": "1",
       "buildingName": "Dorian Farrell",
       "address": "Vero quidem corrupti",
       "neighborhood": "Iste occaecat aliqua",
@@ -41,10 +44,11 @@
         "meeting_room",
         "private_office"
       ],
-      "image": ""
+      "image": "image3.webp"
     },
     {
       "id": "0751",
+      "ownerId": "2",
       "buildingName": "Marcia Ramsey",
       "address": "Architecto irure qui",
       "neighborhood": "Officia earum doloru",
@@ -54,10 +58,11 @@
       "workspaceTypes": [
         "private_office"
       ],
-      "image": ""
+      "image": "image4.webp"
     },
     {
       "id": "d15c",
+      "ownerId": "2",
       "buildingName": "Kitra Lewis",
       "address": "Vero maxime qui haru",
       "neighborhood": "Beatae sint fugiat ",
@@ -68,10 +73,11 @@
         "desk",
         "meeting_room"
       ],
-      "image": ""
+      "image": "image2.webp"
     },
     {
       "id": "0bad",
+      "ownerId": "2",
       "buildingName": "Zelenia Scott",
       "address": "Quasi molestiae offi",
       "neighborhood": "Veritatis unde repre",
@@ -83,10 +89,11 @@
         "meeting_room",
         "private_office"
       ],
-      "image": ""
+      "image": "image3.webp"
     },
     {
       "id": "aa2a",
+      "ownerId": "df",
       "buildingName": "Zenia Castro",
       "address": "In eu consequat Ea ",
       "neighborhood": "Dolor placeat tempo",
@@ -98,7 +105,7 @@
         "meeting_room",
         "private_office"
       ],
-      "image": ""
+      "image": "image5.webp"
     }
   ],
   "workspaces": [
@@ -210,6 +217,40 @@
           "price": 100
         }
       ]
+    }
+  ],
+  "users": [
+    {
+      "id": "df54",
+      "name": "wataqytic",
+      "email": "dasev@mailinator.com",
+      "phone": "+1 (257) 466-7594",
+      "password": "12345",
+      "role": "coworker"
+    },
+    {
+      "id": "c5e4",
+      "name": "hivic",
+      "email": "xyridesygo@mailinator.com",
+      "phone": "+1 (974) 205-3976",
+      "password": "12345",
+      "role": "owner"
+    },
+    {
+      "id": "2a4b",
+      "name": "a",
+      "email": "a@a.com",
+      "phone": "13123123asdasdasdasdasd",
+      "password": "teste",
+      "role": "coworker"
+    },
+    {
+      "id": "9e5e",
+      "name": "Thulio",
+      "email": "thulio@gmail.com",
+      "phone": "+1 (494) 751-4183",
+      "password": "teste123",
+      "role": "owner"
     }
   ]
 }

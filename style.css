@@ -18,7 +18,7 @@
 }
 
 body {
-    font-family: 'Helvetica', sans-serif;
+    font-family: 'poppins', sans-serif;
     background-color: var(--main-background);
     display: flex;
     flex-direction: column;
@@ -286,6 +286,9 @@ main {
     flex-grow: 1;
 }
 
+main h4 {
+    margin: 24px 0;
+}
 .info-container {
     margin-bottom: 4px;
 }

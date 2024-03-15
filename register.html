@@ -17,14 +17,14 @@
             <form id="user-registration-form">
                 <div class="form-content">
                     <div class="input-container">
-                        <label class="base-button" for="username"
-                            >User Name</label
-                        >
+                        <label class="base-button" for="name">User Name</label>
                         <input
                             type="text"
                             class="space-to-fill"
-                            id="username"
+                            id="name"
                             placeholder="Type your name"
+                            name="name"
+                            required
                         />
                     </div>
 
@@ -38,6 +38,8 @@
                             class="space-to-fill"
                             id="email"
                             placeholder="Type your email"
+                            name="email"
+                            required
                         />
                     </div>
 
@@ -51,6 +53,8 @@
                             class="space-to-fill"
                             id="phone"
                             placeholder="Type your phone number"
+                            name="phone"
+                            required
                         />
                     </div>
 
@@ -65,7 +69,9 @@
                             type="text"
                             class="space-to-fill"
                             id="password"
-                            placeholder="Confirm your password"
+                            placeholder="Type your password"
+                            name="password"
+                            required
                         />
                     </div>
 
@@ -74,8 +80,15 @@
                 <div class="form-content">
                     <div class="input-container">
                         <label class="base-button" for="role">Role</label>
-                        <select class="space-to-fill" name="role" id="role">
-                            <option disabled selected>Select a role</option>
+                        <select
+                            class="space-to-fill"
+                            name="role"
+                            id="role"
+                            required
+                        >
+                            <option value="" disabled selected>
+                                Select a role
+                            </option>
                             <option value="owner">Owner</option>
                             <option value="coworker">Coworker</option>
                         </select>
