@@ -106,6 +106,19 @@
         "private_office"
       ],
       "image": "image5.webp"
+    },
+    {
+      "id": "2cbe",
+      "buildingName": "Tje met",
+      "address": "wqwqew",
+      "neighborhood": "qweq",
+      "squareFeet": "qw",
+      "hasParkingGarage": true,
+      "hasPublicTransportNearBy": true,
+      "workspaceTypes": [
+        "meeting_room"
+      ],
+      "image": ""
     }
   ],
   "workspaces": [
@@ -226,7 +239,7 @@
       "email": "dasev@mailinator.com",
       "phone": "+1 (257) 466-7594",
       "password": "12345",
-      "role": "coworker"
+      "role": "owner"
     },
     {
       "id": "c5e4",

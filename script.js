@@ -134,11 +134,17 @@ function addWorkspace(workspaceData) {
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <a href="./booking.html?workspaceId=${
-                          workspaceData.id
-                      }" class="check-button">Book Now</a>
-                `
+                      </div>`
+
+    if (userInfo && userInfo?.role == 'owner') {
+        workspace.innerHTML += `
+            <a href="./register-workspace.html?workspaceId=${workspaceData.id}" class="check-button">Edit</a>
+        `
+    } else {
+        workspace.innerHTML += `
+        <a href="./booking.html?workspaceId=${workspaceData.id}" class="check-button">Book Now</a>
+    `
+    }
     return workspace
 }
 
@@ -274,7 +280,6 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         const params = new URLSearchParams(location.search)
         const propertyId = params.get('propertyId')
-        console.log(propertyId)
 
         if (propertyId) {
             const { spaces } = await fetchWorkspaces(propertyId)

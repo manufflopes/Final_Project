@@ -63,19 +63,49 @@ function createFooter() {
     return footerTag
 }
 
-document.addEventListener('DOMContentLoaded', async function () {
-    const userSession = sessionStorage.getItem('open-desks@user')
-    let userName
-
-    if (userSession !== null) {
-        userName = JSON.parse(userSession).name
+function showRegistrationLink(sessionState) {
+    console.log(location.pathname)
+    if (
+        ['/', '/login.html', '/booking.html', '/register.html'].includes(
+            location.pathname
+        )
+    ) {
+        return ''
     }
 
+    if (sessionState) {
+        return ''
+    }
+
+    const div = document.createElement('div')
+    div.classList.add('register-now')
+    div.innerHTML = `<button class="register-button">Register Now</button>`
+
+    return div
+}
+
+/* get user session state */
+const userSession = sessionStorage.getItem('open-desks@user')
+let userInfo
+
+if (userSession !== null) {
+    userInfo = JSON.parse(userSession)
+}
+
+// end get user session state
+
+document.addEventListener('DOMContentLoaded', async function () {
     const domBody = document.body
 
-    const newHeader = createHeader(userName)
+    const main = document.getElementsByTagName('main')[0]
+
+    const newHeader = createHeader(userInfo?.name)
     domBody.prepend(newHeader)
 
     const newFooter = createFooter()
     domBody.append(newFooter)
+
+    const registrationLink = showRegistrationLink(userInfo)
+
+    main.append(registrationLink)
 })
