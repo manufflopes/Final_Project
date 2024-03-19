@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href=""><img src="logo.png" alt="OpenDeskAPI" width="200"></a>
+  <a href=""><img src="images/OpenDesks.png" alt="OpenDeskAPI" width="200"></a>
   <br>
   Open Desks App
   <br>
