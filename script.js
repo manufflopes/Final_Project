@@ -187,7 +187,7 @@ async function createUser(userData) {
 async function fetchWorkspaces(propertyId) {
     try {
         const response = await fetch(
-            `http://localhost:3000/workspaces/${propertyId}`
+            `http://localhost:3000/workspaces?propertyId=${propertyId}`
         )
 
         if (!response.ok) {
@@ -258,8 +258,19 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (userSession !== null) {
         userData = JSON.parse(userSession)
 
-        if (['/login.html', '/booking.html'].includes(location.pathname)) {
+        if (['/login.html'].includes(location.pathname)) {
             window.location.assign('http://127.0.0.1:5500/')
+            return
+        }
+    } else {
+        if (
+            [
+                '/register-property.html',
+                '/register-workspace.html',
+                '/booking.html'
+            ].includes(location.pathname)
+        ) {
+            window.location.assign('http://127.0.0.1:5500/login.html')
             return
         }
     }
@@ -267,8 +278,8 @@ document.addEventListener('DOMContentLoaded', async function () {
     // ROUTES
     if (['/index.html', '/'].includes(location.pathname)) {
         const workspaceSection = document.querySelector('.workspaces-section')
-
-        const properties = await fetchProperties(userData?.userId)
+        const userId = userData?.role == 'coworker' ? null : userData?.userId
+        const properties = await fetchProperties(userId)
 
         for (let index = 0; index < properties.length; index++) {
             workspaceSection.append(addProperty(properties[index]))
@@ -282,7 +293,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         const propertyId = params.get('propertyId')
 
         if (propertyId) {
-            const { spaces } = await fetchWorkspaces(propertyId)
+            const spaces = await fetchWorkspaces(propertyId)
 
             if (!spaces?.length) {
                 workspaceSection.innerHTML =
