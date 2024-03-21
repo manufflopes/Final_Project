@@ -19,7 +19,6 @@ export async function createUser(userData) {
 }
 
 export async function loginUser(loginData) {
-  console.log(loginData);
   //This URL MUST be replaced when requesting data from the API
 
   try {
@@ -58,5 +57,64 @@ export async function createProperty(propertyData) {
     },
   });
   const data = await response.json();
+  return data;
+}
+
+export async function fetchProperties(ownerId) {
+  let url = ownerId
+    ? `${apiBaseUrl}properties?ownerId=${ownerId}`
+    : `${apiBaseUrl}properties`;
+
+  const response = await fetch(url);
+
+  const data = await response.json();
+  return data;
+}
+
+export async function fetchWorkspaces(propertyId) {
+  console.log(1);
+  try {
+    const response = await fetch(
+      `${apiBaseUrl}workspaces?propertyId=${propertyId}`
+    );
+
+    if (!response.ok) {
+      throw new Error("Workspaces not found");
+    }
+
+    const data = await response.json();
+
+    console.log(data);
+    return data;
+  } catch (error) {
+    return {};
+  }
+}
+
+export async function getWorkspaceInfo(id) {
+  const apiResponse = await fetch(`${apiBaseUrl}workspaces?id=${id}`);
+  if (!apiResponse.ok) {
+    throw new Error("Api requested Failed.");
+  }
+  const workspaceData = await apiResponse.json();
+
+  return workspaceData[0];
+}
+
+export async function createBooking(bookingData) {
+  const response = await fetch(`${apiBaseUrl}bookings`, {
+    method: "POST",
+    body: JSON.stringify(bookingData),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to book workspace");
+  }
+
+  const data = await response.json();
+
   return data;
 }

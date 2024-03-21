@@ -94,7 +94,7 @@ nav ul li:last-of-type {
 }
 
 .add-button:hover {
-  filter: brightness(.9);
+  filter: brightness(0.9);
 }
 
 li a {
@@ -126,6 +126,38 @@ li a {
 
 .paragraph p {
   width: 60%;
+}
+
+/*login page*/
+
+.login-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(187, 194, 199);
+  border: 32px;
+  border-radius: 14px;
+  padding: 32px;
+  margin: auto;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+#logo-login {
+  align-items: center;
+  height: 114px;
+  text-align: center;
+  padding-bottom: 8px;
+}
+
+#login-form {
+  margin: 32px;
+}
+
+#login-form button {
+  margin-top: 32px;
+  width: 100%;
 }
 
 /*registration page*/
@@ -242,7 +274,6 @@ main {
   background: rgba(0, 0, 0, 0.2);
   padding: 16px;
   border: 1px solid var(--header-bg);
-  
 }
 
 #hero-section {
@@ -265,7 +296,8 @@ main {
   flex: 1;
   object-fit: cover;
 }
-.workspaces-section {
+.workspaces-section,
+.spaces-section {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;

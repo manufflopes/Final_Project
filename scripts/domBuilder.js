@@ -16,7 +16,7 @@ function createHeader(userData, assetsPath) {
                     <li>${
                       userData
                         ? userData
-                        : '<a class="login-button" href="./login">Login</a>'
+                        : '<a class="login-button" href="/pages/login">Login</a>'
                     }</li>
                 </ul>
             </nav>

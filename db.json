@@ -398,5 +398,49 @@
       "password": "Pa$$w0rd!",
       "role": "owner"
     }
+  ],
+  "bookings": [
+    {
+      "id": "1",
+      "booking-date-from": "2024-03-01",
+      "booking-date-to": "2024-03-31",
+      "workspaceId": "1",
+      "userId": "2a4b"
+    },
+    {
+      "id": "6841",
+      "booking-date-from": "2024-03-28",
+      "booking-date-to": "2024-04-03",
+      "workspaceId": "2",
+      "userId": "2a4b"
+    },
+    {
+      "id": "2d98",
+      "booking-date-from": "2024-03-01",
+      "booking-date-to": "2024-03-29",
+      "workspaceId": "1",
+      "userId": "2a4b"
+    },
+    {
+      "id": "c6ea",
+      "booking-date-from": "2024-03-27",
+      "booking-date-to": "2024-04-25",
+      "workspaceId": "1",
+      "userId": "2a4b"
+    },
+    {
+      "id": "284b",
+      "booking-date-from": "2024-03-22",
+      "booking-date-to": "2024-04-20",
+      "workspaceId": "1",
+      "userId": "2a4b"
+    },
+    {
+      "id": "30c3",
+      "booking-date-from": "2024-03-21",
+      "booking-date-to": "2024-04-19",
+      "workspaceId": "1",
+      "userId": "2a4b"
+    }
   ]
 }
