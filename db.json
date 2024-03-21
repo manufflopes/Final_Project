@@ -108,22 +108,124 @@
       "image": "image5.webp"
     },
     {
-      "id": "2cbe",
-      "buildingName": "Tje met",
-      "address": "wqwqew",
-      "neighborhood": "qweq",
-      "squareFeet": "qw",
+      "id": "a522",
+      "buildingName": "Arsenio Beach",
+      "address": "Elit eum nihil odio",
+      "neighborhood": "Fuga Laborum Sit p",
+      "squareFeet": "Nihil sit praesentiu",
+      "hasParkingGarage": false,
+      "hasPublicTransportNearBy": false,
+      "workspaceTypes": [
+        "desk"
+      ],
+      "image": "https://i.imgur.com/rYyzNV1.jpeg",
+      "ownerId": "4a2a"
+    },
+    {
+      "id": "ae2c",
+      "buildingName": "Timon Navarro",
+      "address": "Aspernatur sed enim ",
+      "neighborhood": "Cumque possimus ass",
+      "squareFeet": "Qui voluptas quia no",
+      "hasParkingGarage": false,
+      "hasPublicTransportNearBy": false,
+      "workspaceTypes": [
+        "meeting_room"
+      ],
+      "image": "https://i.imgur.com/bRYk3FM.jpeg",
+      "ownerId": "4a2a"
+    },
+    {
+      "id": "34e8",
+      "buildingName": "Carol Dennis",
+      "address": "Id atque obcaecati ",
+      "neighborhood": "Quam ut ipsa ea dol",
+      "squareFeet": "Illo facilis et expl",
       "hasParkingGarage": true,
       "hasPublicTransportNearBy": true,
       "workspaceTypes": [
         "meeting_room"
       ],
-      "image": ""
+      "image": "https://i.imgur.com/CnEQIg7.jpeg",
+      "ownerId": "4a2a"
+    },
+    {
+      "id": "ee87",
+      "buildingName": "Cally Charles",
+      "address": "Quaerat possimus ip",
+      "neighborhood": "Quidem quia ab omnis",
+      "squareFeet": "Rem soluta voluptate",
+      "hasParkingGarage": true,
+      "hasPublicTransportNearBy": false,
+      "workspaceTypes": [
+        "meeting_room",
+        "private_office"
+      ],
+      "image": "https://i.imgur.com/Eype7Ey.png",
+      "ownerId": "4a2a"
+    },
+    {
+      "id": "7146",
+      "buildingName": "Karly Wilkinson",
+      "address": "Quasi id sapiente qu",
+      "neighborhood": "Mollitia voluptatum ",
+      "squareFeet": "Reprehenderit dolor",
+      "hasParkingGarage": true,
+      "hasPublicTransportNearBy": false,
+      "workspaceTypes": [
+        "private_office"
+      ],
+      "image": "https://i.imgur.com/Sy6eakN.png",
+      "ownerId": "180c"
+    },
+    {
+      "id": "972d",
+      "buildingName": "Casey Moore",
+      "address": "Quia quia consequunt",
+      "neighborhood": "Quam dolore est ist",
+      "squareFeet": "In obcaecati Nam quo",
+      "hasParkingGarage": true,
+      "hasPublicTransportNearBy": false,
+      "workspaceTypes": [
+        "desk",
+        "meeting_room"
+      ],
+      "image": "https://i.imgur.com/yoIaKGK.jpeg",
+      "ownerId": "180c"
+    },
+    {
+      "id": "f1bb",
+      "buildingName": "Kimberly Duke",
+      "address": "Dolor autem aut ea e",
+      "neighborhood": "Consequatur Consequ",
+      "squareFeet": "Et aliquip est moles",
+      "hasParkingGarage": true,
+      "hasPublicTransportNearBy": true,
+      "workspaceTypes": [
+        "private_office"
+      ],
+      "image": "https://i.imgur.com/rKY766M.jpeg",
+      "ownerId": "180c"
+    },
+    {
+      "id": "7dcb",
+      "buildingName": "Fulton Gallagher",
+      "address": "Eu ut ipsum sed cum",
+      "neighborhood": "Fugiat debitis ut n",
+      "squareFeet": "Assumenda atque ut d",
+      "hasParkingGarage": true,
+      "hasPublicTransportNearBy": false,
+      "workspaceTypes": [
+        "desk",
+        "private_office"
+      ],
+      "image": "https://i.imgur.com/PKWU9co.png",
+      "ownerId": "180c"
     }
   ],
   "workspaces": [
     {
-      "id": 1,
+      "id": "1",
       "propertyId": 1,
       "name": "AP 901",
       "isSmokingAllowed": false,
@@ -135,7 +237,7 @@
       "price": 1680
     },
     {
-      "id": 2,
+      "id": "2",
       "propertyId": 1,
       "name": "AP 906",
       "smokingIsAllowed": false,
@@ -147,7 +249,7 @@
       "price": 2680
     },
     {
-      "id": 10,
+      "id": "10",
       "propertyId": 2,
       "name": "Meeting Room 1",
       "smokingIsAllowed": false,
@@ -159,7 +261,7 @@
       "price": 1000
     },
     {
-      "id": 11,
+      "id": "11",
       "propertyId": 2,
       "name": "Meeting Room 2",
       "smokingIsAllowed": false,
@@ -171,7 +273,7 @@
       "price": 800
     },
     {
-      "id": 12,
+      "id": "12",
       "propertyId": 2,
       "name": "Meeting Room 3",
       "smokingIsAllowed": false,
@@ -183,7 +285,7 @@
       "price": 900
     },
     {
-      "id": 13,
+      "id": "13",
       "propertyId": 2,
       "name": "Private Office 1",
       "smokingIsAllowed": false,
@@ -195,7 +297,7 @@
       "price": 600
     },
     {
-      "id": 14,
+      "id": "14",
       "propertyId": 2,
       "name": "Private Office 2",
       "smokingIsAllowed": false,
@@ -207,7 +309,7 @@
       "price": 500
     },
     {
-      "id": 15,
+      "id": "15",
       "propertyId": 2,
       "name": "Desk in Open Work Area 1",
       "smokingIsAllowed": false,
@@ -219,7 +321,7 @@
       "price": 100
     },
     {
-      "id": 16,
+      "id": "16",
       "propertyId": 2,
       "name": "Desk in Open Work Area 2",
       "smokingIsAllowed": false,
@@ -270,6 +372,30 @@
       "email": "refapa@mailinator.com",
       "phone": "+1 (232) 525-9593",
       "password": "Rerum nisi ratione d",
+      "role": "owner"
+    },
+    {
+      "id": "4a2a",
+      "name": "Thulio",
+      "email": "a@gmail.com",
+      "phone": "+1 3688865943",
+      "password": "123",
+      "role": "owner"
+    },
+    {
+      "id": "6663",
+      "name": "qerynuh",
+      "email": "duwepovof@mailinator.com",
+      "phone": "+1 (442) 656-5458",
+      "password": "Pa$$w0rd!",
+      "role": "coworker"
+    },
+    {
+      "id": "180c",
+      "name": "juhizifof",
+      "email": "hyhe@mailinator.com",
+      "phone": "+1 (801) 867-5592",
+      "password": "Pa$$w0rd!",
       "role": "owner"
     }
   ]

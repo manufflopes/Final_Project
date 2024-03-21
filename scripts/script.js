@@ -1,0 +1,283 @@
+import { userData } from "./session.js";
+
+const hasParkingGarage = (hasParkingGarage) => {
+  return hasParkingGarage
+    ? "<img src='../assets/svg/parking.svg' class='svg-icon'/>"
+    : "";
+};
+
+const hasPublicTransport = (hasPublicTransportNearBy) => {
+  return hasPublicTransportNearBy
+    ? "<img src='../assets/svg/bus.svg' class='svg-icon'/>"
+    : "";
+};
+
+const isSmokingAllowed = (isSmokingAllowed) => {
+  return isSmokingAllowed
+    ? "<img src='../assets/svg/smoking-allowed.svg' class='svg-icon'/>"
+    : "<img src='../assets/svg/smoking-not-allowed.svg' class='svg-icon'/>";
+};
+
+const propertyType = (propertyType) => {
+  const mappedPropertyType = {
+    meeting_room:
+      "<img src='../assets/svg/meeting-room.svg' class='svg-icon'/>",
+    private_office:
+      "<img src='../assets/svg/private-room.svg' class='svg-icon'/>",
+    desk: "<img src='../assets/svg/shared-space-desk.svg' class='svg-icon'/>",
+  };
+
+  return mappedPropertyType[propertyType] || "";
+};
+
+function addProperty(propertyData, sessionState) {
+  const property = document.createElement("div");
+  property.classList.add("workspace");
+
+  const imageSrc = propertyData.image.includes("http")
+    ? propertyData.image
+    : `../images/${propertyData.image}`;
+
+  if (sessionState?.role == "owner") {
+  }
+
+  property.innerHTML = `
+                    <div class="workspace-container">
+                      <h2 class="workspace-title">${
+                        propertyData.buildingName
+                      }</h2>
+                      <img class="workspace-image" src="${imageSrc}" />
+                      <div class="workspace-info">
+                        <div class="info-container">
+                          <label>Address:</label>
+                          <span>${propertyData.address}</span>
+                        </div>
+                        <div class="info-container">
+                          <label>Neighborhood:</label>
+                          <span>${propertyData.neighborhood}</span>
+                        </div>
+                        <div class="info-container square-feet">
+                          <label>Square Feet:</label>
+                          <span>${propertyData.squareFeet}</span>
+                        </div>
+                        ${
+                          propertyData.hasParkingGarage ||
+                          propertyData.hasPublicTransportNearBy
+                            ? `<div class="info-container">
+                        <label class="info-label">Facilities</label>
+                        <div class="facilities-container">
+                          <div class="icons-container">
+                          ${hasParkingGarage(propertyData.hasParkingGarage)}
+                          ${hasPublicTransport(
+                            propertyData.hasPublicTransportNearBy
+                          )}
+                          </div>
+                        </div>
+                      </div>`
+                            : ""
+                        }
+                        <div class="info-container workspace-types">
+                          <label class="info-label">Available Workspaces</label>
+                          <div class="icons-container">
+                            ${propertyData.workspaceTypes
+                              .map(propertyType)
+                              .join("")}
+                          </div>    
+                        </div>
+                      </div>
+                    </div>
+                    <a href="../pages/workspaces?propertyId=${
+                      propertyData.id
+                    }" class="check-button">View Details</a>
+                `;
+  return property;
+}
+
+function addWorkspace(workspaceData, sessionState) {
+  const workspace = document.createElement("div");
+  workspace.classList.add("workspace");
+
+  workspace.innerHTML = `
+                      <div class="workspace-container">
+                        <h2 class="workspace-title">${workspaceData.name}</h2>
+                        <img class="workspace-image" src="images/${
+                          workspaceData.image
+                        }" />
+                        <div class="workspace-info">
+                          <div class="info-container">
+                            <label>Price:</label>
+                            <span>
+                              ${new Intl.NumberFormat("en-US", {
+                                style: "currency",
+                                currency: "USD",
+                              }).format(workspaceData.price)}
+                            </span>
+                          </div>
+                          <div class="info-container">
+                            <label>Lease Term:</label>
+                            <span>
+                              ${
+                                workspaceData.leaseTerm
+                                  .charAt(0)
+                                  .toUpperCase() +
+                                workspaceData.leaseTerm.slice(1)
+                              }
+                            </span>
+                          </div>
+                          <div class="info-container">
+                            <label>Availability Date</label>
+                            <span>
+                              ${new Date(
+                                workspaceData.availabilityDate
+                              ).toLocaleDateString("en-CA")}
+                            </span>
+                          </div>
+                          <div class="info-container">
+                            <div class="icons-container">
+                              ${isSmokingAllowed(
+                                workspaceData.smokingIsAllowed
+                              )}
+                            </div>
+                          </div>
+                          <div class="info-container">
+                            <label class="info-label">Workspace Type</label>
+                            <div class="icons-container">
+                              ${propertyType(workspaceData.type)}
+                            </div>
+                          </div>
+                        </div>
+                      </div>`;
+
+  if (userInfo && userInfo?.role == "owner") {
+    workspace.innerHTML += `
+            <a href="./register-workspace.html?workspaceId=${workspaceData.id}" class="check-button">Edit</a>
+        `;
+  } else {
+    workspace.innerHTML += `
+        <a href="./booking.html?workspaceId=${workspaceData.id}" class="check-button">Book Now</a>
+    `;
+  }
+  return workspace;
+}
+
+export function addPageOperations(sessionState, operationType) {
+  const searchSection = document.querySelector("#search-section");
+
+  if (sessionState?.role == "owner") {
+    const operationsSection = document.createElement("section");
+    operationsSection.id = "operations-section";
+    operationsSection.innerHTML = `
+      <a href="../pages/${operationType}" class="base-button add-button">Add NEW</a>
+      `;
+    searchSection.after(operationsSection);
+  } else {
+    const heroSection = document.createElement("section");
+    heroSection.id = "hero-section";
+    heroSection.innerHTML = `
+                  <div class="app-description">
+                      <h2>Office Spaces for Rent</h2>
+                      <p>
+                          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                          Voluptates, accusantium suscipit facere delectus quo
+                          corrupti quia quod enim dicta et molestias adipisci
+                          velit ullam quae tempora! Odit repellendus velit
+                          distinctio!
+                      </p>
+                  </div>
+                  <img
+                      class="hero-image"
+                      src="../images/image2.webp"
+                      alt="Office image"
+                  />
+              `;
+
+    searchSection.after(heroSection);
+  }
+}
+
+async function fetchProperties(ownerId) {
+  console.log(ownerId);
+  let url = ownerId
+    ? `http://localhost:3000/properties?ownerId=${ownerId}`
+    : `http://localhost:3000/properties`;
+
+  const response = await fetch(url);
+
+  const data = await response.json();
+  return data;
+}
+
+async function fetchWorkspaces(propertyId) {
+  try {
+    const response = await fetch(
+      `http://localhost:3000/workspaces?propertyId=${propertyId}`
+    );
+
+    if (!response.ok) {
+      throw new Error("Workspaces not found");
+    }
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    return {};
+  }
+}
+
+document.addEventListener("DOMContentLoaded", async function () {
+  /* User Session Handler */
+
+  // ROUTES
+  if (["/pages/"].includes(location.pathname)) {
+    const workspaceSection = document.querySelector(".workspaces-section");
+    const userId = userData?.role == "coworker" ? null : userData?.userId;
+    addPageOperations(userData, "register-property");
+    const properties = await fetchProperties(userId);
+
+    for (let index = 0; index < properties.length; index++) {
+      workspaceSection.append(addProperty(properties[index]));
+    }
+  }
+
+  if (location.pathname == "/workspaces/") {
+    const workspaceSection = document.querySelector(".workspaces-section");
+
+    const params = new URLSearchParams(location.search);
+    const propertyId = params.get("propertyId");
+
+    if (propertyId) {
+      const spaces = await fetchWorkspaces(propertyId);
+
+      if (!spaces?.length) {
+        workspaceSection.innerHTML =
+          "<p>There are no workspaces available for this property</p>";
+        return;
+      }
+
+      spaces.forEach((workspace) =>
+        workspaceSection.append(addWorkspace(workspace))
+      );
+    } else {
+      console.log("Nenhuma propriedade selecionada");
+    }
+  }
+
+  if (location.pathname == "/register.html") {
+  }
+
+  if (location.pathname == "/register-property.html") {
+  }
+
+  if (location.pathname == "/login.html") {
+    const loginForm = document.getElementById("login-form");
+
+    loginForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const formData = Object.fromEntries(new FormData(event.target));
+
+      await loginUser(formData);
+    });
+  }
+});
