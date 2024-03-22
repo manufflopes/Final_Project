@@ -223,8 +223,10 @@ li a {
 /*registration page*/
 
 .page-title {
+  
   text-align: center;
   padding: 16px;
+
 }
 
 .form {}
@@ -300,8 +302,12 @@ select.space-to-fill {
 /*faq page*/
 
 .questions {
-  padding: 10px 20px;
-  margin: 16px;
+  
+  
+}
+.answers {
+  
+ 
 }
 
 /* Main */
