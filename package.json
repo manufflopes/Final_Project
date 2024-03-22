@@ -4,11 +4,11 @@
   "description": "",
   "main": "domBuilder.js",
   "scripts": {
-    "start": "npx json-server db.json"
+    "start": "node fake-server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "json-server": "^1.0.0-alpha.23"
+    "json-server": "^0.17.4"
   }
 }
