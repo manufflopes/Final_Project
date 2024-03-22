@@ -1,5 +1,6 @@
 import { userData } from "./session.js";
 import { fetchProperties } from "./api.js";
+import { setLoaderVisibility } from "./domBuilder.js";
 
 const hasParkingGarage = (hasParkingGarage) => {
   return hasParkingGarage
@@ -121,10 +122,13 @@ document.addEventListener("DOMContentLoaded", async function () {
     const workspaceSection = document.querySelector(".workspaces-section");
     const userId = userData?.role == "coworker" ? null : userData?.userId;
     addPageOperations(userData, "register-property");
+    setLoaderVisibility(true);
     const properties = await fetchProperties(userId);
 
     for (let index = 0; index < properties.length; index++) {
       workspaceSection.append(addProperty(properties[index]));
     }
+
+    setLoaderVisibility(false);
   }
 });

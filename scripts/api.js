@@ -18,7 +18,7 @@ export async function createUser(userData) {
   return data;
 }
 
-export async function loginUser(loginData) {
+export async function loginUser(loginData, callback) {
   //This URL MUST be replaced when requesting data from the API
 
   try {
@@ -43,6 +43,9 @@ export async function loginUser(loginData) {
 
     throw new Error("User not Found");
   } catch (error) {
+    if (callback) {
+      callback();
+    }
     console.log(error);
   }
 }

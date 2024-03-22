@@ -1,50 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Open Desk - Login</title>
-    <link rel="stylesheet" href="../style.css" />
-  </head>
 
-  <body>
-    <main>
-      <div class="login-page">
-        <img id="logo-login" src="../../images/OpenDesks.png" alt="logo" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open Desk - Login</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
 
-        <h1 class="page-tittle">Login</h1>
-        <form action="" method="post" id="login-form">
-          <div class="form-content">
-            <div class="input-container">
-              <label class="base-button" for="login">E-mail</label>
-              <input
-                type="email"
-                class="space-to-fill"
-                id="email"
-                name="email"
-                placeholder="Type your registered email"
-                required
-              />
-            </div>
+<body>
+  <main>
+    <div class="login-page">
+      <img id="logo-login" src="../../images/OpenDesks.png" alt="logo" />
+
+      <h1 class="page-tittle">Login</h1>
+      <form action="" method="post" id="login-form">
+        <div class="form-content">
+          <div class="input-container">
+            <label class="base-button" for="login">E-mail</label>
+            <input type="email" class="space-to-fill" id="email" name="email" placeholder="Type your registered email"
+              required />
           </div>
-          <div class="form-content">
-            <div class="input-container">
-              <label class="base-button" for="password">Property Name</label>
-              <input
-                type="password"
-                class="space-to-fill"
-                id="password"
-                name="password"
-                placeholder="Type your password"
-                required
-              />
-            </div>
+        </div>
+        <div class="form-content">
+          <div class="input-container">
+            <label class="base-button" for="password">Property Name</label>
+            <input type="password" class="space-to-fill" id="password" name="password" placeholder="Type your password"
+              required />
           </div>
-          <button type="submit" class="base-button">Login</button>
-        </form>
-      </div>
-    </main>
-    <script type="module" src="../../scripts/script.js"></script>
-    <script type="module" src="./login.js"></script>
-  </body>
+        </div>
+        <button type="submit" class="base-button">Login</button>
+      </form>
+    </div>
+  </main>
+  <script type="module" src="../../scripts/script.js"></script>
+  <script type="module" src="../../scripts/domBuilder.js"></script>
+  <script type="module" src="./login.js"></script>
+</body>
+
 </html>

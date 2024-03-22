@@ -1,11 +1,13 @@
 import { getWorkspaceInfo, createBooking } from "../../scripts/api.js";
 import { userData } from "../../scripts/session.js";
 import { baseUrl } from "../../scripts/config.js";
+import { setLoaderVisibility } from "../../scripts/domBuilder.js";
 
 document.addEventListener("DOMContentLoaded", async function () {
   const params = new URLSearchParams(location.search);
   const workspaceID = params.get("workspaceId");
 
+  setLoaderVisibility(true);
   const workspaceInfo = await getWorkspaceInfo(workspaceID);
 
   const workspaceBookingForm = document.createElement("form");
@@ -56,6 +58,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   const main = document.getElementsByTagName("main")[0];
   main.append(workspaceBookingForm);
+  setLoaderVisibility(false);
 
   const bookingDateInput = document.getElementById("booking-date-from");
   const bookingEndDateInput = document.getElementById("booking-date-to");
@@ -89,12 +92,14 @@ document.addEventListener("DOMContentLoaded", async function () {
     };
 
     try {
+      setLoaderVisibility(true);
       const bookingResponse = await createBooking(bookingData);
       console.log(bookingResponse);
       window.location.assign(
         `${baseUrl}confirmation/?bookingId=${bookingResponse.id}`
       );
     } catch (error) {
+      setLoaderVisibility(false);
       console.log(error);
       window.location.assign(`${baseUrl}booking-error/`);
     }

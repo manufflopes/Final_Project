@@ -1,6 +1,7 @@
 import { userData } from "../../scripts/session.js";
 import { addPageOperations, propertyType } from "../../scripts/script.js";
 import { fetchWorkspaces } from "../../scripts/api.js";
+import { setLoaderVisibility } from "../../scripts/domBuilder.js";
 
 function addWorkspace(workspaceData, sessionState) {
   const workspace = document.createElement("div");
@@ -87,6 +88,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   console.log(propertyId);
   if (propertyId) {
+    setLoaderVisibility(true);
     const spaces = await fetchWorkspaces(propertyId);
 
     console.log(spaces);
@@ -100,6 +102,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     spaces.forEach((workspace) =>
       workspaceSection.append(addWorkspace(workspace))
     );
+
+    setLoaderVisibility(false);
   } else {
     console.log("Nenhuma propriedade selecionada");
   }

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -18,7 +20,9 @@
 }
 
 body {
-  font-family: "poppins", sans-serif;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
   background-color: var(--main-background);
   display: flex;
   flex-direction: column;
@@ -100,7 +104,63 @@ nav ul li:last-of-type {
 li a {
   text-decoration: none;
 }
+
 /* Header End */
+
+/* Loading Element */
+#loading-element {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  color: var(--button-red);
+  font-weight: bold;
+  display:none;
+}
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#loading-element::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 48%;
+  top: 40%;
+  width: 40px;
+  height: 40px;
+  border-style: solid;
+  border-color: var(--button-red);
+  border-top-color: transparent;
+  border-width: 4px;
+  border-radius: 50%;
+  -webkit-animation: spin .8s linear infinite;
+  animation: spin .8s linear infinite;
+}
 
 /*About Us Page*/
 
@@ -167,14 +227,15 @@ li a {
   padding: 16px;
 }
 
-.form {
-}
+.form {}
+
 .form-content {
   display: flex;
   margin-bottom: 8px;
   /* margin-bottom: 16px; */
   gap: 16px;
 }
+
 .input-container {
   display: flex;
   gap: 16px;
@@ -186,6 +247,7 @@ li a {
   width: 150px;
   text-align: center;
 }
+
 .input-container input {
   flex: 1;
 }
@@ -203,9 +265,11 @@ li a {
 .hidden {
   visibility: hidden;
 }
+
 select.space-to-fill {
   max-width: 25%;
 }
+
 .space-to-fill {
   flex: 1;
   border: 1px solid var(--header-bg);
@@ -250,6 +314,7 @@ main {
   flex-direction: column;
   gap: 16px;
 }
+
 #search-section {
   /* margin-bottom: 16px; */
 }
@@ -296,6 +361,7 @@ main {
   flex: 1;
   object-fit: cover;
 }
+
 .workspaces-section,
 .spaces-section {
   display: grid;
@@ -304,6 +370,7 @@ main {
   margin-bottom: 24px;
   grid-auto-rows: 1fr;
 }
+
 .workspace {
   display: flex;
   flex-direction: column;
@@ -338,6 +405,7 @@ main {
   overflow: hidden;
   line-height: 40px;
 }
+
 .workspace-info {
   background-color: white;
   padding: 16px;
@@ -349,6 +417,7 @@ main {
 main h4 {
   margin: 24px 0;
 }
+
 .info-container {
   margin-bottom: 4px;
 }
@@ -439,9 +508,11 @@ label.info-label::after {
   text-decoration: none;
   text-align: center;
 }
+
 .register-now {
   display: flex;
 }
+
 .register-button {
   background-color: var(--button-red);
   flex: 0 0 50%;
@@ -490,6 +561,7 @@ footer {
   gap: 16px;
   margin-left: auto;
 }
+
 .our-customers h2 {
   font-size: inherit;
 }
@@ -529,4 +601,5 @@ footer {
   font-weight: bolder;
   border-radius: 16px;
 }
+
 /* Footer End */

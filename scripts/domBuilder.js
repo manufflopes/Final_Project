@@ -86,8 +86,27 @@ function showRegistrationLink(sessionState) {
   return div;
 }
 
+function createLoadingElement() {
+  const div = document.createElement("div");
+  div.id = "loading-element";
+  div.innerHTML = `Loading...`;
+  return div;
+}
+
+export function setLoaderVisibility(setVisible) {
+  const loader = document.getElementById("loading-element");
+  if (loader) {
+    loader.style.display = setVisible ? "flex" : "none";
+  }
+}
+
 document.addEventListener("DOMContentLoaded", async function () {
   const domBody = document.body;
+  domBody.append(createLoadingElement());
+
+  if (location.pathname === "/pages/login/") {
+    return;
+  }
 
   const main = document.getElementsByTagName("main")[0];
 
@@ -95,6 +114,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   const newHeader = createHeader(userData?.name, assetsLocation);
   domBody.prepend(newHeader);
+
+  domBody.append(createLoadingElement());
 
   const newFooter = createFooter(assetsLocation);
   domBody.append(newFooter);
