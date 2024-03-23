@@ -476,6 +476,13 @@
       "workspaceId": "1",
       "userId": "2a4b",
       "id": "nBjYbRQ"
+    },
+    {
+      "booking-date-from": "2024-03-01",
+      "booking-date-to": "2024-03-09",
+      "workspaceId": "11",
+      "userId": "2a4b",
+      "id": "JnjVVk4"
     }
   ]
 }
