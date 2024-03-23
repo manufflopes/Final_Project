@@ -121,3 +121,14 @@ export async function createBooking(bookingData) {
 
   return data;
 }
+
+
+export async function getBookingInfo(id) {
+  const apiResponse = await fetch(`${apiBaseUrl}bookings?id=${id}`);
+  if (!apiResponse.ok) {
+    throw new Error("Api requested Failed.");
+  }
+  const bookingData = await apiResponse.json();
+
+  return bookingData[0];
+}

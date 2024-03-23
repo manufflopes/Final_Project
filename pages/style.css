@@ -229,7 +229,7 @@ li a {
 
 }
 
-.form {}
+/* .form {} */
 
 .form-content {
   display: flex;
@@ -301,14 +301,14 @@ select.space-to-fill {
 
 /*faq page*/
 
-.questions {
+/* .questions {
   
   
 }
 .answers {
   
  
-}
+} */
 
 /* Main */
 main {
@@ -321,9 +321,9 @@ main {
   gap: 16px;
 }
 
-#search-section {
-  /* margin-bottom: 16px; */
-}
+ /* #search-section {
+ margin-bottom: 16px; 
+}  */
 
 #search-section form {
   display: flex;
