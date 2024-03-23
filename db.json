@@ -221,6 +221,20 @@
       ],
       "image": "https://i.imgur.com/PKWU9co.png",
       "ownerId": "180c"
+    },
+    {
+      "buildingName": "Naomi Stanley",
+      "address": "Dolor consectetur in",
+      "neighborhood": "Aliqua Pariatur De",
+      "squareFeet": "Et qui amet assumen",
+      "hasParkingGarage": true,
+      "hasPublicTransportNearBy": true,
+      "workspaceTypes": [
+        "meeting_room"
+      ],
+      "image": "https://i.imgur.com/5A4uruI.png",
+      "ownerId": "9e5e",
+      "id": "crBvqo-"
     }
   ],
   "workspaces": [
@@ -441,6 +455,27 @@
       "booking-date-to": "2024-04-19",
       "workspaceId": "1",
       "userId": "2a4b"
+    },
+    {
+      "booking-date-from": "2024-03-23",
+      "booking-date-to": "2024-04-21",
+      "workspaceId": "1",
+      "userId": "2a4b",
+      "id": "zW-Q4v3"
+    },
+    {
+      "booking-date-from": "2024-03-23",
+      "booking-date-to": "2024-04-21",
+      "workspaceId": "1",
+      "userId": "2a4b",
+      "id": "SHYAPyY"
+    },
+    {
+      "booking-date-from": "2024-03-22",
+      "booking-date-to": "2024-04-20",
+      "workspaceId": "1",
+      "userId": "2a4b",
+      "id": "nBjYbRQ"
     }
   ]
 }
