@@ -2,6 +2,9 @@ import { getWorkspaceInfo, createBooking } from "../../scripts/api.js";
 import { userData } from "../../scripts/session.js";
 import { baseUrl } from "../../scripts/config.js";
 import { setLoaderVisibility } from "../../scripts/domBuilder.js";
+import{
+  parseWorkspaceType
+} from "../../scripts/script.js"
 
 document.addEventListener("DOMContentLoaded", async function () {
   const params = new URLSearchParams(location.search);
@@ -17,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         <div class="form-content">
             <div class="input-container">
                 <label class="base-button" for="buildingName"
-                    >Workspace Name</label
+                    >Name</label
                 >
                 <strong>${workspaceInfo.name}</strong>
             </div>
@@ -33,9 +36,23 @@ document.addEventListener("DOMContentLoaded", async function () {
         <div class="form-content">
             <div class="input-container">
                 <label class="base-button" for="buildingName"
-                    >Workspace Type</label
+                    >Type</label
                 >
-                <strong>${workspaceInfo.type}</strong>
+                <strong>${parseWorkspaceType(workspaceInfo.type)}</strong>
+            </div>
+            <div class="input-container">
+                <label class="base-button" for="buildingName"
+                    >Price</label
+                >
+                <strong>${new Intl.NumberFormat("en-us", {
+                  style:"currency", currency:"USD"
+                }).format(workspaceInfo.price)}</strong>
+            </div>
+            <div class="input-container">
+                <label class="base-button" for="buildingName"
+                    >Lease Term</label
+                >
+                <strong class="lease-term">${workspaceInfo.leaseTerm}</strong>
             </div>
         </div>       
         <img src="../../images/${workspaceInfo.image}" />

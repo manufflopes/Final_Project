@@ -8,27 +8,9 @@ import {
 import { baseUrl, apiBaseUrl } from "../../scripts/config.js";
 import { userData } from "../../scripts/session.js";
 import { setLoaderVisibility } from "../../scripts/domBuilder.js";
+import{parseWorkspaceType} from "../../scripts/script.js"
 
-function parseWorkspaceType(type) {
-  let typename;
-  switch (type) {
-    case "desk":
-      typename = "Desk in a Workspace area";
-      break;
 
-    case "meeting_room":
-      typename = "Meeting Room";
-      break;
-
-    case "private_office":
-      typename = "Private Office Room";
-      break;
-    default:
-      typename = "Not valid";
-      break;
-  }
-  return typename;
-}
 
 function createWorkspaceTypesSelector(types) {
   const div = document.createElement("div");

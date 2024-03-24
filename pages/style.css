@@ -483,10 +483,13 @@ main {
   display: flex;
   flex-direction: row-reverse;
   gap: 16px;
+  justify-content: flex-end;
 }
 
 #search-section form .base-button {
   min-width: 15vw;
+  margin-right: auto;
+  height: fit-content;
 }
 
 #search-section form input {
@@ -495,6 +498,21 @@ main {
   padding: 10px 20px;
 }
 
+.filters-container{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.filter-container{
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  
+}
+
+.filter-container input:nth-child(n+2){
+  margin-left: 16px;
+}
 #operations-section {
   background: rgba(0, 0, 0, 0.2);
   padding: 16px;
@@ -786,3 +804,7 @@ footer {
 }
 
 /* Footer End */
+
+.lease-term{
+  text-transform: capitalize;
+}

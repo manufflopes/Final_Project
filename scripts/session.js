@@ -20,12 +20,12 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     if (
       [
-        "/pages/register-property",
-        "/pages/register-workspace",
-        "/pages/booking",
+        "/pages/register-property/",
+        "/pages/register-workspace/",
+        "/pages/booking/",
       ].includes(location.pathname)
     ) {
-      window.location.assign(`${baseUrl}/pages/login`);
+      window.location.assign(`${baseUrl}login?callback=${location.href}`);
       return;
     }
   }

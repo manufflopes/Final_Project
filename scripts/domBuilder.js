@@ -32,7 +32,7 @@ function createHeader(userData, assetsPath) {
                       <h2 class="user-name">${userData}</h2>
                     </div>
                     <hr />
-                    <a href="/pages/booking" class="sub-menu-link">
+                    <a href="/pages/my-bookings" class="sub-menu-link">
                       <img src="${assetsPath}/assets/setting.png" />
                       <p>My Bookings</p>
                       <span>></span>

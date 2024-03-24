@@ -112,34 +112,29 @@
       "address": "Elit eum nihil odio",
       "neighborhood": "Fuga Laborum Sit p",
       "squareFeet": "",
-      "hasParkingGarage": false,
-      "hasPublicTransportNearBy": false,
+      "hasParkingGarage": true,
+      "hasPublicTransportNearBy": true,
       "workspaceTypes": [
-        "desk",
-        "meeting_room",
-        "private_office"
+        "desk"
       ],
-      "image": "https://i.imgur.com/Grjpk7l.png",
+      "image": "https://i.imgur.com/OndsNga.png",
       "propertyId": "a522",
       "ownerId": "4a2a",
       "id": "a522"
     },
     {
-      "buildingName": "Atualizado",
-      "address": "Rua Nova",
-      "neighborhood": "Povao",
-      "squareFeet": "2000",
-      "hasParkingGarage": true,
-      "hasPublicTransportNearBy": true,
+      "id": "ae2c",
+      "buildingName": "Timon Navarro",
+      "address": "Aspernatur sed enim ",
+      "neighborhood": "Cumque possimus ass",
+      "squareFeet": "Qui voluptas quia no",
+      "hasParkingGarage": false,
+      "hasPublicTransportNearBy": false,
       "workspaceTypes": [
-        "desk",
-        "meeting_room",
-        "private_office"
+        "meeting_room"
       ],
-      "image": "https://i.imgur.com/5hYfKHc.jpeg",
-      "propertyId": "ae2c",
-      "ownerId": "4a2a",
-      "id": "ae2c"
+      "image": "https://i.imgur.com/bRYk3FM.jpeg",
+      "ownerId": "4a2a"
     },
     {
       "id": "34e8",
@@ -229,61 +224,141 @@
       "ownerId": "180c"
     },
     {
-      "buildingName": "Novo",
-      "address": "Será",
-      "neighborhood": "de Prima",
-      "squareFeet": "2100",
+      "buildingName": "Naomi Stanley",
+      "address": "Dolor consectetur in",
+      "neighborhood": "Aliqua Pariatur De",
+      "squareFeet": "Et qui amet assumen",
       "hasParkingGarage": true,
       "hasPublicTransportNearBy": true,
       "workspaceTypes": [
-        "desk",
-        "private_office"
+        "meeting_room"
       ],
-      "image": "https://i.imgur.com/OvBO59M.png",
-      "propertyId": "9xuuXjA",
-      "ownerId": "4a2a",
-      "id": "9xuuXjA"
+      "image": "https://i.imgur.com/5A4uruI.png",
+      "ownerId": "9e5e",
+      "id": "crBvqo-"
     }
   ],
   "workspaces": [
     {
-      "type": "desk",
+      "id": "1",
+      "propertyId": 1,
+      "name": "AP 901",
+      "isSmokingAllowed": false,
+      "places": 2,
+      "image": "image3.webp",
+      "availabilityDate": "2021-10-01",
       "leaseTerm": "month",
-      "name": "Katell Kramer",
-      "places": "200",
-      "price": "1000",
-      "isSmokingAllowed": true,
-      "image": "https://i.imgur.com/ZA74Wbt.png",
-      "propertyId": "a522",
-      "workspaceId": "5",
-      "ownerId": "4a2a",
-      "id": 5
-    },
-    {
       "type": "desk",
-      "leaseTerm": "day",
-      "name": "Rama Rowe",
-      "places": "63",
-      "price": "311",
-      "isSmokingAllowed": true,
-      "image": "https://i.imgur.com/c83EWji.png",
-      "propertyId": "a522",
-      "workspaceId": null,
-      "ownerId": "4a2a",
-      "id": 6
+      "price": 1680
     },
     {
+      "id": "2",
+      "propertyId": 1,
+      "name": "AP 906",
+      "smokingIsAllowed": false,
+      "places": 6,
+      "image": "image2.webp",
+      "availabilityDate": "2021-10-01",
+      "leaseTerm": "week",
       "type": "meeting_room",
+      "price": 2680
+    },
+    {
+      "id": "10",
+      "propertyId": 2,
+      "name": "Meeting Room 1",
+      "smokingIsAllowed": false,
+      "places": 10,
+      "image": "image2.webp",
+      "availabilityDate": "2021-10-01",
+      "leaseTerm": "day",
+      "type": "meeting_room",
+      "price": 1000
+    },
+    {
+      "id": "11",
+      "propertyId": 2,
+      "name": "Meeting Room 2",
+      "smokingIsAllowed": false,
+      "places": 6,
+      "image": "image5.webp",
+      "availabilityDate": "2021-10-01",
+      "leaseTerm": "day",
+      "type": "meeting_room",
+      "price": 800
+    },
+    {
+      "id": "12",
+      "propertyId": 2,
+      "name": "Meeting Room 3",
+      "smokingIsAllowed": false,
+      "places": 8,
+      "image": "image4.webp",
+      "availabilityDate": "2021-10-01",
+      "leaseTerm": "day",
+      "type": "meeting_room",
+      "price": 900
+    },
+    {
+      "id": "13",
+      "propertyId": 2,
+      "name": "Private Office 1",
+      "smokingIsAllowed": false,
+      "places": 4,
+      "image": "image3.webp",
+      "availabilityDate": "2021-10-01",
+      "leaseTerm": "day",
+      "type": "private_office",
+      "price": 600
+    },
+    {
+      "id": "14",
+      "propertyId": 2,
+      "name": "Private Office 2",
+      "smokingIsAllowed": false,
+      "places": 3,
+      "image": "image2.webp",
+      "availabilityDate": "2021-10-01",
+      "leaseTerm": "day",
+      "type": "private_office",
+      "price": 500
+    },
+    {
+      "id": "15",
+      "propertyId": 2,
+      "name": "Desk in Open Work Area 1",
+      "smokingIsAllowed": false,
+      "places": 1,
+      "image": "image5.webp",
+      "availabilityDate": "2021-10-01",
+      "leaseTerm": "day",
+      "type": "desk",
+      "price": 100
+    },
+    {
+      "id": "16",
+      "propertyId": 2,
+      "name": "Desk in Open Work Area 2",
+      "smokingIsAllowed": false,
+      "places": 1,
+      "image": "image4.webp",
+      "availabilityDate": "2021-10-01",
+      "leaseTerm": "day",
+      "type": "desk",
+      "price": 100
+    },
+    {
+      "type": "desk",
       "leaseTerm": "month",
-      "name": "Deanna Carlson",
-      "places": "6",
-      "price": "885",
+      "name": "Cadman Keith",
+      "places": "21",
+      "price": "292",
       "isSmokingAllowed": true,
-      "image": "https://i.imgur.com/tTJfqyh.png",
+      "image": "https://i.imgur.com/nTKkcVD.png",
       "propertyId": "a522",
-      "workspaceId": null,
+      "workspaceId": "j7nJtYJ",
       "ownerId": "4a2a",
-      "id": 7
+      "id": "j7nJtYJ"
     }
   ],
   "users": [
@@ -329,7 +404,7 @@
     },
     {
       "id": "4a2a",
-      "name": "Thulio Guirelle Horta",
+      "name": "Thulio",
       "email": "a@gmail.com",
       "phone": "+1 3688865943",
       "password": "123",
@@ -464,6 +539,125 @@
       "workspaceId": "1",
       "userId": "2a4b",
       "id": "YwMRUFP"
+    },
+    {
+      "booking-date-from": "2024-02-28",
+      "booking-date-to": "2024-02-29",
+      "workspaceId": "10",
+      "userId": "2a4b",
+      "id": "UySrnmo"
+    },
+    {
+      "booking-date-from": "2024-03-12",
+      "booking-date-to": "2024-03-13",
+      "workspaceId": "10",
+      "userId": "2a4b",
+      "id": "sxUgCzS"
+    },
+    {
+      "booking-date-from": "2024-03-01",
+      "booking-date-to": "2024-03-02",
+      "workspaceId": "10",
+      "userId": "2a4b",
+      "id": "Xx0LI-W"
+    },
+    {
+      "booking-date-from": "2024-04-03",
+      "booking-date-to": "2024-04-04",
+      "workspaceId": "11",
+      "userId": "2a4b",
+      "id": "FynkAyG"
+    },
+    {
+      "booking-date-from": "2024-04-04",
+      "booking-date-to": "2024-04-05",
+      "workspaceId": "11",
+      "userId": "2a4b",
+      "id": "jNrTEeQ"
+    },
+    {
+      "booking-date-from": "2024-04-04",
+      "booking-date-to": "2024-04-05",
+      "workspaceId": "11",
+      "userId": "2a4b",
+      "id": "c8iJbY9"
+    },
+    {
+      "booking-date-from": "2024-04-04",
+      "booking-date-to": "2024-04-05",
+      "workspaceId": "11",
+      "userId": "2a4b",
+      "id": "_6M8oWh"
+    },
+    {
+      "booking-date-from": "2024-04-03",
+      "booking-date-to": "2024-04-04",
+      "workspaceId": "12",
+      "userId": "2a4b",
+      "id": "f_5rTN5"
+    },
+    {
+      "booking-date-from": "2024-04-06",
+      "booking-date-to": "2024-04-07",
+      "workspaceId": "14",
+      "userId": "2a4b",
+      "id": "YMkNeuR"
+    },
+    {
+      "booking-date-from": "2024-03-26",
+      "booking-date-to": "2024-03-27",
+      "workspaceId": "14",
+      "userId": "2a4b",
+      "id": "NkKrYbW"
+    },
+    {
+      "booking-date-from": "2024-03-26",
+      "booking-date-to": "2024-03-27",
+      "workspaceId": "14",
+      "userId": "2a4b",
+      "id": "eGxtrA2"
+    },
+    {
+      "booking-date-from": "2024-04-03",
+      "booking-date-to": "2024-04-04",
+      "workspaceId": "11",
+      "userId": "2a4b",
+      "id": "vXfOUpb"
+    },
+    {
+      "booking-date-from": "",
+      "booking-date-to": "",
+      "workspaceId": "11",
+      "userId": "2a4b",
+      "id": "QYEP_7Y"
+    },
+    {
+      "booking-date-from": "",
+      "booking-date-to": "",
+      "workspaceId": "11",
+      "userId": "2a4b",
+      "id": "GdWEXpC"
+    },
+    {
+      "booking-date-from": "",
+      "booking-date-to": "",
+      "workspaceId": "11",
+      "userId": "2a4b",
+      "id": "dPyy24m"
+    },
+    {
+      "booking-date-from": "2024-02-27",
+      "booking-date-to": "2024-02-28",
+      "workspaceId": "11",
+      "userId": "2a4b",
+      "id": "Hi-pUGl"
+    },
+    {
+      "booking-date-from": "2024-03-27",
+      "booking-date-to": "2024-04-02",
+      "workspaceId": "2",
+      "userId": "2a4b",
+      "id": "HP4jdkV"
     }
   ]
 }

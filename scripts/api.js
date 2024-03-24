@@ -84,10 +84,19 @@ export async function updateProperty(propertyData) {
   return data;
 }
 
-export async function fetchProperties(ownerId) {
+export async function fetchProperties(ownerId, filters) {
   let url = ownerId
     ? `${apiBaseUrl}properties?ownerId=${ownerId}`
     : `${apiBaseUrl}properties`;
+   console.log(filters);
+    if(filters){
+      url = new URL(url)
+      Object.entries(filters).forEach(function([key, value]){
+        console.log(key, value);
+        url.searchParams.set(key,Boolean(Number(value)));
+      });
+      
+    }
 
   const response = await fetch(url);
 
@@ -247,4 +256,18 @@ export async function getPropertyInfo(id) {
   } catch (error) {
     console.log(error);
   }
+}
+
+export async function getMyBookings(userId) {
+  let url = `${apiBaseUrl}bookings?userId=${userId}`;
+
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error("Something went wrong while fetching property");
+  }
+
+  const data = await response.json();
+
+  return data;
 }

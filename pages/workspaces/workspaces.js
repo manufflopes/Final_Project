@@ -74,15 +74,11 @@ function addWorkspace(workspaceData, userSessionData) {
                         </div>
                       </div>`;
 
-  // if (sessionState && sessionState?.role == "owner") {
-  //   workspace.innerHTML += `
-  //           <a href="/register-workspace/workspaceId=${workspaceData.id}" class="check-button">Edit</a>
-  //       `;
-  // } else {
-  //   workspace.innerHTML += `
-  //       <a href="/pages/booking/?workspaceId=${workspaceData.id}" class="check-button">Book Now</a>
-  //   `;
-  // }
+  if (!isTheOwner) {
+    workspace.innerHTML += `
+        <a href="/pages/booking/?workspaceId=${workspaceData.id}" class="check-button">Book Now</a>
+    `;
+  }
   return workspace;
 }
 

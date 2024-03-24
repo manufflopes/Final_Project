@@ -1,43 +1,42 @@
 
-import { getWorkspaceInfo, getBookingInfo } from "../../scripts/api.js";
+import { getMyBookings } from "../../scripts/api.js";
+import{setLoaderVisibility} from "../../scripts/domBuilder.js"
+import{userData} from "../../scripts/session.js"
 
 
 
 document.addEventListener("DOMContentLoaded", async function () {
-    const params = new URLSearchParams(location.search);
-    const bookingID = params.get("bookingId");
+    setLoaderVisibility(true)
+    
 
    
 
-  const bookingInfo = await getBookingInfo(bookingID);
- const workspaceInfo = await getWorkspaceInfo(bookingInfo.workspaceId)
+  
  
   
- const workspaceBookingConfirmation = document.createElement("div");
-  workspaceBookingConfirmation.id = "workspace-booking-confirmation";
+ const myBookings = document.createElement("div");
+ myBookings.id = "my-bookings";
+const bookings = await getMyBookings(userData.userId)
+if(!bookings.length){
+return
+}
 
-  workspaceBookingConfirmation.innerHTML = `
-        <h2>My reservations: 
-        </h2>
 
-        <p>${workspaceInfo.name}</p>
+ myBookings.innerHTML = bookings.map(booking => {
+    return `
         <div>
-            <img src="../../images/${workspaceInfo.image}" /></div>
-        <div>
-            <p>
-                The cowork that you lease for  a ${workspaceInfo.leaseTerm} is a ${workspaceInfo.type} with ${workspaceInfo.places} place(s).
-            </p>
-            <p>The lease will start on ${bookingInfo["booking-date-from"]} and end on ${bookingInfo["booking-date-from"]}.</p>
-            <p>The price for the rent is ${workspaceInfo.price}. </p>
-            <p>You'll receive an e-mail with all details and directions for payment.</p>
+            <strong>Reference: </strong>${booking.id}
+            <strong>Date: </strong>${booking["booking-date-from"]}
         </div>
-        `;
+    `
+ }).join("")
 
 
         const main = document.getElementsByTagName("main")[0];
-        main.append(workspaceBookingConfirmation);
+        main.append(myBookings);
 
 
+        setLoaderVisibility(false)
 })
     
 
@@ -45,6 +44,5 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
 
-w
 
 
