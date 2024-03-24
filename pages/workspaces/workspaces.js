@@ -2,6 +2,7 @@ import { userData } from "../../scripts/session.js";
 import { addPageOperations, propertyType } from "../../scripts/script.js";
 import { fetchWorkspaces } from "../../scripts/api.js";
 import { setLoaderVisibility } from "../../scripts/domBuilder.js";
+import { baseUrl } from "../../scripts/config.js";
 
 function addWorkspace(workspaceData, userSessionData) {
   const workspace = document.createElement("div");
@@ -76,7 +77,7 @@ function addWorkspace(workspaceData, userSessionData) {
 
   if (!isTheOwner) {
     workspace.innerHTML += `
-        <a href="/pages/booking/?workspaceId=${workspaceData.id}" class="check-button">Book Now</a>
+        <a href="${baseUrl}booking/?workspaceId=${workspaceData.id}" class="check-button">Book Now</a>
     `;
   }
   return workspace;
@@ -122,7 +123,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       icon.addEventListener("click", function () {
         const workspaceId = icon.dataset.workspaceId;
         window.location.assign(
-          `/pages/register-workspace/?workspaceId=${workspaceId}`
+          `${baseUrl}register-workspace/?workspaceId=${workspaceId}`
         );
       });
     });
