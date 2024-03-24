@@ -2,6 +2,7 @@ import { userData } from "../../scripts/session.js";
 import { addPageOperations, propertyType } from "../../scripts/script.js";
 import { fetchWorkspaces } from "../../scripts/api.js";
 import { setLoaderVisibility } from "../../scripts/domBuilder.js";
+import { baseUrl } from "../../scripts/config.js";
 
 function addWorkspace(workspaceData, userSessionData) {
   const workspace = document.createElement("div");
@@ -50,11 +51,14 @@ function addWorkspace(workspaceData, userSessionData) {
                             </span>
                           </div>
                           <div class="info-container">
-                            <label>Availability Date</label>
-                            <span>
-                              ${new Date(
+                            <label>Availability Date:</label>
+                            <span class="availability-date">
+                              ${
+                                /*new Date(
                                 workspaceData.availabilityDate
-                              ).toLocaleDateString("en-CA")}
+                              ).toLocaleDateString("en-CA")*/
+                                "Available Now"
+                              }
                             </span>
                           </div>
                           <div class="info-container">
@@ -76,14 +80,13 @@ function addWorkspace(workspaceData, userSessionData) {
 
   if (!isTheOwner) {
     workspace.innerHTML += `
-        <a href="/pages/booking/?workspaceId=${workspaceData.id}" class="check-button">Book Now</a>
+        <a href="${baseUrl}booking/?workspaceId=${workspaceData.id}" class="check-button">Book Now</a>
     `;
   }
   return workspace;
 }
 
 const isSmokingAllowed = (isSmokingAllowed) => {
-  console.log(isSmokingAllowed);
   return isSmokingAllowed
     ? "<img src='../../assets/svg/smoking-allowed.svg' class='svg-icon'/>"
     : "<img src='../../assets/svg/smoking-not-allowed.svg' class='svg-icon'/>";
@@ -95,14 +98,15 @@ document.addEventListener("DOMContentLoaded", async function () {
   const params = new URLSearchParams(location.search);
   const propertyId = params.get("propertyId");
 
-  addPageOperations(userData, "register-workspace/?propertyId=" + propertyId);
+  addPageOperations(
+    userData,
+    "register-workspace/?propertyId=" + propertyId,
+    "../.."
+  );
 
-  console.log(propertyId);
   if (propertyId) {
     setLoaderVisibility(true);
     const spaces = await fetchWorkspaces(propertyId);
-
-    console.log("spaces", spaces);
 
     if (!spaces?.length) {
       const noContentSection = document.querySelector(".no-content-available");
@@ -122,7 +126,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       icon.addEventListener("click", function () {
         const workspaceId = icon.dataset.workspaceId;
         window.location.assign(
-          `/pages/register-workspace/?workspaceId=${workspaceId}`
+          `${baseUrl}register-workspace/?workspaceId=${workspaceId}`
         );
       });
     });

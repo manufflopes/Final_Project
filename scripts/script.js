@@ -1,6 +1,7 @@
 import { userData } from "./session.js";
 import { fetchProperties } from "./api.js";
 import { setLoaderVisibility } from "./domBuilder.js";
+import { rootDir } from "./config.js";
 
 const hasParkingGarage = (hasParkingGarage) => {
   return hasParkingGarage
@@ -15,7 +16,6 @@ const hasPublicTransport = (hasPublicTransportNearBy) => {
 };
 
 export const propertyType = (propertyType, assetLocation = "..") => {
-  console.log(assetLocation);
   const mappedPropertyType = {
     meeting_room: `<img src='${assetLocation}/assets/svg/meeting-room.svg' class='svg-icon'/>`,
     private_office: `<img src='${assetLocation}/assets/svg/private-room.svg' class='svg-icon'/>`,
@@ -108,33 +108,37 @@ function addProperty(propertyData, userSessionData) {
           </div>
         </div>
       </div>
-      <a href="/pages/workspaces/?propertyId=${
-        propertyData.id
-      }" class="check-button">View Details</a>
+      <a href="${rootDir}workspaces/?propertyId=${
+    propertyData.id
+  }" class="check-button">View Details</a>
   `;
   return property;
 }
 
-export function addPageOperations(sessionState, operationType) {
-  const searchSection = document.querySelector("#search-section"); 
+export function addPageOperations(
+  sessionState,
+  operationType,
+  assetsLocation = ".."
+) {
+  const searchSection = document.querySelector("#search-section");
   const sectionExists = document.querySelector(".dynamic-menu");
 
-  if(sectionExists){
-    return
+  if (sectionExists) {
+    return;
   }
 
   if (sessionState?.role == "owner") {
-    const operationsSection = document.createElement("section")
+    const operationsSection = document.createElement("section");
     operationsSection.id = "operations-section";
-    operationsSection.classList.add("dynamic-menu")
+    operationsSection.classList.add("dynamic-menu");
     operationsSection.innerHTML = `
-      <a href="/pages/${operationType}" class="base-button add-button">Add NEW</a>
+      <a href="${rootDir}${operationType}" class="base-button add-button">Add NEW</a>
       `;
     searchSection.after(operationsSection);
   } else {
     const heroSection = document.createElement("section");
     heroSection.id = "hero-section";
-    heroSection.classList.add("dynamic-menu")
+    heroSection.classList.add("dynamic-menu");
     heroSection.innerHTML = `
                   <div class="app-description">
                       <h2>Office Spaces for Rent</h2>
@@ -148,7 +152,7 @@ export function addPageOperations(sessionState, operationType) {
                   </div>
                   <img
                       class="hero-image"
-                      src="../../images/image2.webp"
+                      src="${assetsLocation}/images/image2.webp"
                       alt="Office image"
                   />
               `;
@@ -156,13 +160,22 @@ export function addPageOperations(sessionState, operationType) {
     searchSection.after(heroSection);
   }
 }
-async function showData (filters){
+
+async function showData(filters) {
   const workspaceSection = document.querySelector(".workspaces-section");
-  workspaceSection.innerHTML=""
+  workspaceSection.innerHTML = "";
   const userId = userData?.role == "coworker" ? null : userData?.userId;
   addPageOperations(userData, "register-property");
   setLoaderVisibility(true);
   const properties = await fetchProperties(userId, filters);
+
+  if (!properties?.length) {
+    const noContentSection = document.querySelector(".no-content-available");
+    noContentSection.innerHTML =
+      "<p class='none-available'>There are not properties registered!</p>";
+    setLoaderVisibility(false);
+    return;
+  }
 
   for (let index = 0; index < properties.length; index++) {
     workspaceSection.append(addProperty(properties[index], userData));
@@ -176,29 +189,25 @@ async function showData (filters){
     icon.addEventListener("click", function () {
       const propertyId = icon.dataset.propertyId;
       window.location.assign(
-        `../pages/register-property/?propertyId=${propertyId}`
+        `${rootDir}register-property/?propertyId=${propertyId}`
       );
     });
   });
 }
+
 document.addEventListener("DOMContentLoaded", async function () {
-  // ROUTES
+  const searchForm = document.getElementById("search-section");
+  let filters;
+  if (searchForm) {
+    searchForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const formData = Object.fromEntries(new FormData(event.target));
+      filters = formData;
+      showData(filters);
+    });
+  }
 
-const searchForm = document.getElementById("search-section")
-          let filters;
-          if(searchForm){
-            searchForm.addEventListener("submit", (event)=>{
-              event.preventDefault()
-              const formData = Object.fromEntries(new FormData(event.target));
-              filters = formData
-              console.log(filters);
-              showData(filters)
-            })
-          }
-
-  if (location.pathname == "/pages/") {
-    console.log("texto")
-    showData()
-
+  if (location.pathname == rootDir) {
+    showData();
   }
 });

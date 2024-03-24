@@ -1,4 +1,4 @@
-import { baseUrl } from "./config.js";
+import { baseUrl, rootDir } from "./config.js";
 
 let userData;
 
@@ -13,16 +13,16 @@ document.addEventListener("DOMContentLoaded", function () {
   if (userSession !== null) {
     userData = JSON.parse(userSession);
 
-    if (["/pages/login"].includes(location.pathname)) {
+    if ([`${rootDir}login`].includes(location.pathname)) {
       window.location.assign(baseUrl);
       return;
     }
   } else {
     if (
       [
-        "/pages/register-property/",
-        "/pages/register-workspace/",
-        "/pages/booking/",
+        `${rootDir}register-property/`,
+        `${rootDir}register-workspace/`,
+        `${rootDir}booking/`,
       ].includes(location.pathname)
     ) {
       window.location.assign(`${baseUrl}login?callback=${location.href}`);

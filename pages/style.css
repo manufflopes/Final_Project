@@ -425,13 +425,15 @@ select.space-to-fill {
   cursor: pointer;
 }
 
-#user-registration-form {
-  padding: 16px;
+#user-registration-form, #user-contact-us-form, 
+#property-registration-form, #workspace-registration-form, 
+#workspace-booking-form {
   display: flex;
   flex-direction: column;
 }
 
-#user-registration-form button {
+
+button.form-submit, #user-registration-form button {
   align-self: flex-end;
   min-width: 200px;
 }
@@ -672,6 +674,10 @@ main {
   object-fit: cover;
 }
 
+.large-img {
+  height: 300px;
+}
+
 .workspace-title {
   position: relative;
   padding-inline: 8px;
@@ -910,4 +916,54 @@ footer {
 
 .lease-term{
   text-transform: capitalize;
+}
+
+.property-name-title {
+  color: var(--button-red)
+}
+
+input[type=date] {
+  padding: 10px 20px;
+  font-family: inherit;
+}
+
+.my-booking-button {
+  background-color: var(--button-green);
+  padding: 10px 20px;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-align: center;
+  border-radius: 8px;
+  font-size: larger;
+  margin-top: 16px;
+
+}
+
+.confirmation-message {
+  display: flex;
+  justify-content: center;
+  margin: 16px auto;
+  font-size: larger;
+  color: var(--button-red);
+}
+
+.availability-date {
+  color: var(--button-red);
+  font-weight: bold;
+}
+
+.booking-status {
+  color: var(--button-green);
+  font-weight: bold;
+}
+
+#my-bookings {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.gap-1 {
+  gap: 1rem;
 }
