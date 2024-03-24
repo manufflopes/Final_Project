@@ -145,13 +145,13 @@ document.addEventListener("DOMContentLoaded", async function () {
   const domBody = document.body;
   domBody.append(createLoadingElement());
 
-  if (location.pathname === "/pages/login/") {
+  if (location.pathname === "/Final_Project/pages/login/") {
     return;
   }
 
   const main = document.getElementsByTagName("main")[0];
 
-  const assetsLocation = location.pathname === "/pages/" ? ".." : "../..";
+  const assetsLocation = location.pathname === "/Final_Project/pages/" ? ".." : "../..";
 
   const newHeader = createHeader(userData?.name, assetsLocation);
   domBody.prepend(newHeader);
@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   const registrationLink = showRegistrationLink(userData);
 
-  if (!["/pages/", "/pages/login"].includes(location.pathname)) {
+  if (!["/Final_Project/pages/", "/Final_Project/pages/login"].includes(location.pathname)) {
     main.prepend(addGoBackButton());
   }
 
