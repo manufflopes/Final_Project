@@ -108,32 +108,38 @@
       "image": "image5.webp"
     },
     {
-      "id": "a522",
       "buildingName": "Arsenio Beach",
       "address": "Elit eum nihil odio",
       "neighborhood": "Fuga Laborum Sit p",
-      "squareFeet": "Nihil sit praesentiu",
+      "squareFeet": "",
       "hasParkingGarage": false,
       "hasPublicTransportNearBy": false,
       "workspaceTypes": [
-        "desk"
+        "desk",
+        "meeting_room",
+        "private_office"
       ],
-      "image": "https://i.imgur.com/rYyzNV1.jpeg",
-      "ownerId": "4a2a"
+      "image": "https://i.imgur.com/Grjpk7l.png",
+      "propertyId": "a522",
+      "ownerId": "4a2a",
+      "id": "a522"
     },
     {
-      "id": "ae2c",
-      "buildingName": "Timon Navarro",
-      "address": "Aspernatur sed enim ",
-      "neighborhood": "Cumque possimus ass",
-      "squareFeet": "Qui voluptas quia no",
-      "hasParkingGarage": false,
-      "hasPublicTransportNearBy": false,
+      "buildingName": "Atualizado",
+      "address": "Rua Nova",
+      "neighborhood": "Povao",
+      "squareFeet": "2000",
+      "hasParkingGarage": true,
+      "hasPublicTransportNearBy": true,
       "workspaceTypes": [
-        "meeting_room"
+        "desk",
+        "meeting_room",
+        "private_office"
       ],
-      "image": "https://i.imgur.com/bRYk3FM.jpeg",
-      "ownerId": "4a2a"
+      "image": "https://i.imgur.com/5hYfKHc.jpeg",
+      "propertyId": "ae2c",
+      "ownerId": "4a2a",
+      "id": "ae2c"
     },
     {
       "id": "34e8",
@@ -223,128 +229,61 @@
       "ownerId": "180c"
     },
     {
-      "buildingName": "Naomi Stanley",
-      "address": "Dolor consectetur in",
-      "neighborhood": "Aliqua Pariatur De",
-      "squareFeet": "Et qui amet assumen",
+      "buildingName": "Novo",
+      "address": "Será",
+      "neighborhood": "de Prima",
+      "squareFeet": "2100",
       "hasParkingGarage": true,
       "hasPublicTransportNearBy": true,
       "workspaceTypes": [
-        "meeting_room"
+        "desk",
+        "private_office"
       ],
-      "image": "https://i.imgur.com/5A4uruI.png",
-      "ownerId": "9e5e",
-      "id": "crBvqo-"
+      "image": "https://i.imgur.com/OvBO59M.png",
+      "propertyId": "9xuuXjA",
+      "ownerId": "4a2a",
+      "id": "9xuuXjA"
     }
   ],
   "workspaces": [
     {
-      "id": "1",
-      "propertyId": 1,
-      "name": "AP 901",
-      "isSmokingAllowed": false,
-      "places": 2,
-      "image": "image3.webp",
-      "availabilityDate": "2021-10-01",
+      "type": "desk",
       "leaseTerm": "month",
+      "name": "Katell Kramer",
+      "places": "200",
+      "price": "1000",
+      "isSmokingAllowed": true,
+      "image": "https://i.imgur.com/ZA74Wbt.png",
+      "propertyId": "a522",
+      "workspaceId": "5",
+      "ownerId": "4a2a",
+      "id": 5
+    },
+    {
       "type": "desk",
-      "price": 1680
+      "leaseTerm": "day",
+      "name": "Rama Rowe",
+      "places": "63",
+      "price": "311",
+      "isSmokingAllowed": true,
+      "image": "https://i.imgur.com/c83EWji.png",
+      "propertyId": "a522",
+      "workspaceId": null,
+      "ownerId": "4a2a",
+      "id": 6
     },
     {
-      "id": "2",
-      "propertyId": 1,
-      "name": "AP 906",
-      "smokingIsAllowed": false,
-      "places": 6,
-      "image": "image2.webp",
-      "availabilityDate": "2021-10-01",
-      "leaseTerm": "week",
       "type": "meeting_room",
-      "price": 2680
-    },
-    {
-      "id": "10",
-      "propertyId": 2,
-      "name": "Meeting Room 1",
-      "smokingIsAllowed": false,
-      "places": 10,
-      "image": "image2.webp",
-      "availabilityDate": "2021-10-01",
-      "leaseTerm": "day",
-      "type": "meeting_room",
-      "price": 1000
-    },
-    {
-      "id": "11",
-      "propertyId": 2,
-      "name": "Meeting Room 2",
-      "smokingIsAllowed": false,
-      "places": 6,
-      "image": "image5.webp",
-      "availabilityDate": "2021-10-01",
-      "leaseTerm": "day",
-      "type": "meeting_room",
-      "price": 800
-    },
-    {
-      "id": "12",
-      "propertyId": 2,
-      "name": "Meeting Room 3",
-      "smokingIsAllowed": false,
-      "places": 8,
-      "image": "image4.webp",
-      "availabilityDate": "2021-10-01",
-      "leaseTerm": "day",
-      "type": "meeting_room",
-      "price": 900
-    },
-    {
-      "id": "13",
-      "propertyId": 2,
-      "name": "Private Office 1",
-      "smokingIsAllowed": false,
-      "places": 4,
-      "image": "image3.webp",
-      "availabilityDate": "2021-10-01",
-      "leaseTerm": "day",
-      "type": "private_office",
-      "price": 600
-    },
-    {
-      "id": "14",
-      "propertyId": 2,
-      "name": "Private Office 2",
-      "smokingIsAllowed": false,
-      "places": 3,
-      "image": "image2.webp",
-      "availabilityDate": "2021-10-01",
-      "leaseTerm": "day",
-      "type": "private_office",
-      "price": 500
-    },
-    {
-      "id": "15",
-      "propertyId": 2,
-      "name": "Desk in Open Work Area 1",
-      "smokingIsAllowed": false,
-      "places": 1,
-      "image": "image5.webp",
-      "availabilityDate": "2021-10-01",
-      "leaseTerm": "day",
-      "type": "desk",
-      "price": 100
-    },
-    {
-      "id": "16",
-      "propertyId": 2,
-      "name": "Desk in Open Work Area 2",
-      "smokingIsAllowed": false,
-      "places": 1,
-      "image": "image4.webp",
-      "availabilityDate": "2021-10-01",
-      "leaseTerm": "day",
-      "type": "desk",
-      "price": 100
+      "leaseTerm": "month",
+      "name": "Deanna Carlson",
+      "places": "6",
+      "price": "885",
+      "isSmokingAllowed": true,
+      "image": "https://i.imgur.com/tTJfqyh.png",
+      "propertyId": "a522",
+      "workspaceId": null,
+      "ownerId": "4a2a",
+      "id": 7
     }
   ],
   "users": [
@@ -390,7 +329,7 @@
     },
     {
       "id": "4a2a",
-      "name": "Thulio",
+      "name": "Thulio Guirelle Horta",
       "email": "a@gmail.com",
       "phone": "+1 3688865943",
       "password": "123",

@@ -63,6 +63,27 @@ export async function createProperty(propertyData) {
   return data;
 }
 
+export async function updateProperty(propertyData) {
+  const response = await fetch(
+    `${apiBaseUrl}properties/${propertyData.propertyId}`,
+    {
+      method: "PUT",
+      body: JSON.stringify(propertyData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to update property");
+  }
+
+  const data = await response.json();
+
+  return data;
+}
+
 export async function fetchProperties(ownerId) {
   let url = ownerId
     ? `${apiBaseUrl}properties?ownerId=${ownerId}`
@@ -72,6 +93,20 @@ export async function fetchProperties(ownerId) {
 
   const data = await response.json();
   return data;
+}
+
+export async function getPropertyById(propertyId, ownerId) {
+  let url = `${apiBaseUrl}properties?id=${propertyId}&ownerId=${ownerId}`;
+
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error("Something went wrong while fetching property");
+  }
+
+  const data = await response.json();
+
+  return data[0];
 }
 
 export async function fetchWorkspaces(propertyId) {
@@ -94,8 +129,45 @@ export async function fetchWorkspaces(propertyId) {
   }
 }
 
-export async function getWorkspaceInfo(id) {
-  const apiResponse = await fetch(`${apiBaseUrl}workspaces?id=${id}`);
+export async function createWorkspace(workspaceData) {
+  const response = await fetch(`${apiBaseUrl}workspaces`, {
+    method: "POST",
+    body: JSON.stringify(workspaceData),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await response.json();
+  return data;
+}
+
+export async function updateWorkspace(workspaceData) {
+  const response = await fetch(
+    `${apiBaseUrl}workspaces/${workspaceData.workspaceId}`,
+    {
+      method: "PUT",
+      body: JSON.stringify(workspaceData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to update property");
+  }
+
+  const data = await response.json();
+
+  return data;
+}
+
+export async function getWorkspaceInfo(id, ownerId = undefined) {
+  const url = ownerId
+    ? `${apiBaseUrl}workspaces?id=${id}&ownerId=${ownerId}`
+    : `${apiBaseUrl}workspaces?id=${id}`;
+
+  const apiResponse = await fetch(url);
   if (!apiResponse.ok) {
     throw new Error("Api requested Failed.");
   }
@@ -122,7 +194,6 @@ export async function createBooking(bookingData) {
   return data;
 }
 
-
 export async function getBookingInfo(id) {
   const apiResponse = await fetch(`${apiBaseUrl}bookings?id=${id}`);
   if (!apiResponse.ok) {
@@ -131,4 +202,49 @@ export async function getBookingInfo(id) {
   const bookingData = await apiResponse.json();
 
   return bookingData[0];
+}
+
+export async function uploadImage(file) {
+  const fileExtension = file.name.toLocaleLowerCase().split(".").pop();
+
+  if (!["png", "jpg", "jpeg"].includes(fileExtension)) {
+    throw new Error('Only "png", "jpg" and "jpeg" images are allowed.');
+  }
+
+  const formData = new FormData();
+  formData.append("image", file);
+
+  try {
+    const response = await fetch("https://api.imgur.com/3/image", {
+      method: "POST",
+      body: formData,
+      headers: {
+        Authorization: "Client-ID 72accd0cd22bdf8",
+      },
+    });
+
+    const { success, data } = await response.json();
+
+    if (!success) {
+      throw new Error("Image not uploaded");
+    }
+
+    return data.link;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getPropertyInfo(id) {
+  try {
+    const response = await fetch(`${apiBaseUrl}properties/${id}`);
+    if (!response.ok) {
+      throw new Error("Property not found !");
+    }
+
+    const propertyData = await response.json();
+    return propertyData;
+  } catch (error) {
+    console.log(error);
+  }
 }

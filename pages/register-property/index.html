@@ -12,32 +12,33 @@
     <main>
         <h1 class="page-title">Property Registration</h1>
 
-        <h4>Fill in the form below with the information requested:</h4>
+        <h4>Fill in the form below with the property information:</h4>
 
         <form id="property-registration-form" enctype="multipart/form-data">
+            <img class="property-image-preview hidden">
             <div class="form-content">
                 <div class="input-container">
                     <label class="base-button" for="buildingName">Property Name</label>
                     <input type="text" class="space-to-fill" id="buildingName" name="buildingName"
-                        placeholder="Type the name of the Property" />
+                        placeholder="Type the name of the Property" required />
                 </div>
             </div>
             <div class="form-content">
                 <div class="input-container">
                     <label class="base-button" for="address">Address</label>
                     <input type="text" class="space-to-fill" id="address" name="address"
-                        placeholder="Type the address of the Property" />
+                        placeholder="Type the address of the Property" required />
                 </div>
             </div>
             <div class="form-content">
                 <div class="input-container">
                     <label class="base-button" for="neighborhood">Neighborhood</label>
                     <input type="text" class="space-to-fill" id="neighborhood" name="neighborhood"
-                        placeholder="Describe the neighborhood of the Property" />
+                        placeholder="Describe the neighborhood of the Property" required />
                 </div>
                 <div class="input-container">
                     <label class="base-button" for="squareFeet">Square feet</label>
-                    <input type="text" class="space-to-fill" id="squareFeet" name="squareFeet"
+                    <input type="number" class="space-to-fill" id="squareFeet" name="squareFeet"
                         placeholder="Put the size of the Property in square feet" />
                 </div>
             </div>
@@ -46,11 +47,11 @@
                 <div class="input-container">
                     <label class="base-button">Parking</label>
                     <div>
-                        <input type="radio" name="hasParkingGarage" id="parking_yes" value="1" />
+                        <input type="radio" name="hasParkingGarage" id="parking_yes" value="1" required />
                         <label class="double-choice" for="parking_yes">Yes</label>
                     </div>
                     <div>
-                        <input type="radio" name="hasParkingGarage" id="parking_no" value="0" />
+                        <input type="radio" name="hasParkingGarage" id="parking_no" value="0" required />
                         <label class="double-choice" for="parking_no">No</label>
                     </div>
                 </div>
@@ -59,13 +60,13 @@
                 <div class="input-container">
                     <label class="base-button">Public Transport</label>
                     <div>
-                        <input type="radio" name="hasPublicTransportNearBy" id="hasPublicTransportNearBy_yes"
-                            value="1" />
+                        <input type="radio" name="hasPublicTransportNearBy" id="hasPublicTransportNearBy_yes" value="1"
+                            required />
                         <label class="double-choice" for="hasPublicTransportNearBy_yes">Yes</label>
                     </div>
                     <div>
-                        <input type="radio" name="hasPublicTransportNearBy" id="hasPublicTransportNearBy_no"
-                            value="0" />
+                        <input type="radio" name="hasPublicTransportNearBy" id="hasPublicTransportNearBy_no" value="0"
+                            required />
                         <label class="double-choice" for="hasPublicTransportNearBy_no">No</label>
                     </div>
                 </div>
@@ -80,14 +81,14 @@
                         <label class="double-choice" for="type_desk">Desk in a Workspace area</label>
                     </div>
                     <div>
-                        <input type="checkbox" class="space-to-fill" id="type_meeting" name="workspaceTypes"
+                        <input type="checkbox" class="space-to-fill" id="type_meeting_room" name="workspaceTypes"
                             value="meeting_room" />
-                        <label class="double-choice" for="type_meeting">Meeting Room</label>
+                        <label class="double-choice" for="type_meeting_room">Meeting Room</label>
                     </div>
                     <div>
-                        <input type="checkbox" class="space-to-fill" id="type_private" name="workspaceTypes"
+                        <input type="checkbox" class="space-to-fill" id="type_private_office" name="workspaceTypes"
                             value="private_office" />
-                        <label class="double-choice" for="type_private">Private Office Room</label>
+                        <label class="double-choice" for="type_private_office">Private Office Room</label>
                     </div>
                 </div>
             </div>
@@ -98,11 +99,10 @@
                         Select an Image for the Property</span>
 
                     <img class="upload-btn-image" src="../../assets/svg/upload.svg" alt="Upload Image" />
-                    <input type="file" id="upload-image-input" name="image" class="hidden"
-                        placeholder="Put the size of the Property in square feet" accept=".jpg,.jpeg,.png" />
+                    <input type="file" id="upload-image-input" name="image" class="hidden" accept=".jpg,.jpeg,.png" />
                 </div>
             </div>
-
+            <input type="hidden" name="propertyId">
             <button id="send-button" class="base-button" type="submit">
                 Save
             </button>

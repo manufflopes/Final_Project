@@ -1,44 +1,18 @@
-import { createProperty } from "../../scripts/api.js";
+import {
+  createProperty,
+  updateProperty,
+  getPropertyById,
+  uploadImage,
+} from "../../scripts/api.js";
 import { baseUrl } from "../../scripts/config.js";
 import { userData } from "../../scripts/session.js";
-
-async function uploadImage(file) {
-  const fileExtension = file.name.toLocaleLowerCase().split(".").pop();
-
-  if (!["png", "jpg", "jpeg"].includes(fileExtension)) {
-    throw new Error('Only "png", "jpg" and "jpeg" images are allowed.');
-  }
-
-  const formData = new FormData();
-  formData.append("image", file);
-
-  try {
-    const response = await fetch("https://api.imgur.com/3/image", {
-      method: "POST",
-      body: formData,
-      headers: {
-        Authorization: "Client-ID 72accd0cd22bdf8",
-      },
-    });
-
-    const { success, data } = await response.json();
-
-    console.log(success, data);
-
-    if (!success) {
-      throw new Error("Image not uploaded");
-    }
-
-    return data.link;
-  } catch (error) {
-    console.log(error);
-  }
-}
+import { setLoaderVisibility } from "../../scripts/domBuilder.js";
 
 document.addEventListener("DOMContentLoaded", async function () {
   /* upload image trick */
   const uploadImageBtn = document.querySelector(".upload-btn-image");
   const uploadFileInput = document.querySelector("#upload-image-input");
+  const imagePreview = document.querySelector(".property-image-preview");
 
   if (uploadImageBtn) {
     uploadImageBtn.addEventListener("click", function () {
@@ -48,6 +22,18 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   if (uploadFileInput) {
     uploadFileInput.addEventListener("change", function () {
+      if (this.files.length) {
+        const reader = new FileReader();
+        reader.onload = function () {
+          imagePreview.src = reader.result;
+          imagePreview.classList.remove("hidden");
+        };
+        reader.readAsDataURL(this.files[0]);
+      } else {
+        imagePreview.src = "";
+        imagePreview.classList.add("hidden");
+      }
+
       document.querySelector("#uploaded-file-name").textContent =
         this.files[0]?.name || "Select an Image for the Property";
     });
@@ -58,7 +44,55 @@ document.addEventListener("DOMContentLoaded", async function () {
     "property-registration-form"
   );
 
+  const propertyId = new URLSearchParams(window.location.search).get(
+    "propertyId"
+  );
+
+  if (propertyId) {
+    setLoaderVisibility(true);
+    const property = await getPropertyById(propertyId, userData.userId);
+
+    if (!property) {
+      window.location.assign(`${baseUrl}/404.html`);
+
+      return;
+    }
+
+    const imagePreview = document.querySelector(".property-image-preview");
+    imagePreview.src = property.image;
+    imagePreview.alt = property.buildingName;
+    imagePreview.classList.remove("hidden");
+
+    propertyRegistrationForm.prepend(imagePreview);
+
+    propertyRegistrationForm.elements.buildingName.value =
+      property.buildingName;
+    propertyRegistrationForm.elements.address.value = property.address;
+    propertyRegistrationForm.elements.neighborhood.value =
+      property.neighborhood;
+    propertyRegistrationForm.elements.squareFeet.value = property.squareFeet;
+    propertyRegistrationForm.elements.propertyId.value = property.id;
+
+    if (property.hasParkingGarage) {
+      propertyRegistrationForm.elements.parking_yes.checked = true;
+    } else {
+      propertyRegistrationForm.elements.parking_no.checked = true;
+    }
+
+    if (property.hasPublicTransportNearBy) {
+      propertyRegistrationForm.elements.hasPublicTransportNearBy_yes.checked = true;
+    } else {
+      propertyRegistrationForm.elements.hasPublicTransportNearBy_no.checked = true;
+    }
+
+    property.workspaceTypes.forEach((type) => {
+      propertyRegistrationForm.elements[`type_${type}`].checked = true;
+    });
+    setLoaderVisibility(false);
+  }
+
   propertyRegistrationForm.addEventListener("submit", async function (event) {
+    setLoaderVisibility(true);
     event.preventDefault();
 
     const formData = Object.fromEntries(new FormData(event.target));
@@ -66,11 +100,31 @@ document.addEventListener("DOMContentLoaded", async function () {
       ...document.querySelectorAll("input[name=workspaceTypes]:checked"),
     ];
 
-    try {
-      const imageUrl = await uploadImage(formData.image);
+    let propertyExists;
+    if (formData.propertyId) {
+      const property = await getPropertyById(
+        formData.propertyId,
+        userData.userId
+      );
 
-      if (!imageUrl) {
-        throw new Error("Image not uploaded");
+      if (!property) {
+        window.location.assign(`${baseUrl}/404.html`);
+
+        return;
+      }
+
+      propertyExists = property;
+    }
+
+    try {
+      let imageUrl = "";
+
+      if (formData.image.size > 0) {
+        imageUrl = await uploadImage(formData.image);
+
+        if (!imageUrl) {
+          throw new Error("Image not uploaded");
+        }
       }
 
       const newProperty = {
@@ -79,17 +133,21 @@ document.addEventListener("DOMContentLoaded", async function () {
         hasPublicTransportNearBy: Boolean(
           Number(formData.hasPublicTransportNearBy)
         ),
-        image: imageUrl,
+        image: imageUrl || propertyExists.image,
         workspaceTypes: selectedPropertyTypes.map((btn) => btn.value),
         ownerId: userData.userId,
+        propertyId,
       };
 
-      console.log(newProperty);
-
-      await createProperty(newProperty);
+      if (propertyExists) {
+        await updateProperty(newProperty);
+      } else {
+        await createProperty(newProperty);
+      }
       window.location.assign(baseUrl);
     } catch (error) {
       console.log(error);
+      setLoaderVisibility(false);
     }
   });
 });

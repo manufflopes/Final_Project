@@ -1,4 +1,10 @@
-import { userData } from "./session.js";
+import { userData, logoutUser } from "./session.js";
+
+function toggleUserPanel() {
+  console.log("toggleUserPanel");
+  const userPanel = document.querySelector(".user-sub-menu-container");
+  userPanel.classList.toggle("open");
+}
 
 function createHeader(userData, assetsPath) {
   const headerTag = document.createElement("header");
@@ -15,10 +21,31 @@ function createHeader(userData, assetsPath) {
                     <li><a class="base-button" href="/pages/contact-us">Contact Us</a></li>
                     <li>${
                       userData
-                        ? userData
+                        ? `<img id="user-avatar" class="user-avatar" src="${assetsPath}/images/avatar/user.png"/>`
                         : '<a class="login-button" href="/pages/login">Login</a>'
                     }</li>
                 </ul>
+                <div class="user-sub-menu-container">
+                  <div class="user-sub-menu">
+                    <div class="user-info">
+                      <img src="${assetsPath}/images/avatar/user.png" alt="User Avatar" />
+                      <h2 class="user-name">${userData}</h2>
+                    </div>
+                    <hr />
+                    <a href="/pages/booking" class="sub-menu-link">
+                      <img src="${assetsPath}/assets/setting.png" />
+                      <p>My Bookings</p>
+                      <span>></span>
+                    </a>
+                    <button id="logout-button" href="/pages/logout" class="sub-menu-link">
+                      <img src="${assetsPath}/assets/logout.png" />
+                      <p>Logout</p>
+                      <span>></span>
+                    </button>
+                </ul>
+                </div>
+                 
+                </div>
             </nav>
         </div>
         `;
@@ -63,6 +90,20 @@ function createFooter(assetsPath) {
     `;
 
   return footerTag;
+}
+
+function addGoBackButton() {
+  const a = document.createElement("a");
+  a.classList.add("go-back");
+  a.href = "javascript:history.back()";
+  a.innerHTML = `
+    <svg class="" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+    </svg>
+    Go Back
+  `;
+
+  return a;
 }
 
 function showRegistrationLink(sessionState) {
@@ -122,5 +163,19 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   const registrationLink = showRegistrationLink(userData);
 
+  if (!["/pages/", "/pages/login"].includes(location.pathname)) {
+    main.prepend(addGoBackButton());
+  }
+
   main.append(registrationLink);
+
+  const userAvatar = document.getElementById("user-avatar");
+  if (userAvatar) {
+    userAvatar.addEventListener("click", toggleUserPanel);
+  }
+
+  const logoutButton = document.getElementById("logout-button");
+  if (logoutButton) {
+    logoutButton.addEventListener("click", logoutUser);
+  }
 });

@@ -25,9 +25,13 @@ export const propertyType = (propertyType, assetLocation = "..") => {
   return mappedPropertyType[propertyType] || "";
 };
 
-function addProperty(propertyData, sessionState) {
+function addProperty(propertyData, userSessionData) {
   const property = document.createElement("div");
   property.classList.add("workspace");
+
+  const isTheOwner =
+    userSessionData?.role == "owner" &&
+    userSessionData?.userId == propertyData.ownerId;
 
   const imageSrc = propertyData.image.includes("http")
     ? propertyData.image
@@ -35,7 +39,16 @@ function addProperty(propertyData, sessionState) {
 
   property.innerHTML = `
       <div class="workspace-container">
-        <h2 class="workspace-title">${propertyData.buildingName}</h2>
+        <h2 class="workspace-title">
+          ${propertyData.buildingName}
+          ${
+            isTheOwner
+              ? `<span class="manage" data-property-id="${propertyData.id}">
+          <img src="../assets/setting.png" class="manage-icon" />
+        </span>`
+              : ""
+          }
+        </h2>
         <img class="workspace-image" src="${imageSrc}" />
         <div class="workspace-info">
           <div class="info-container">
@@ -88,7 +101,7 @@ export function addPageOperations(sessionState, operationType) {
     const operationsSection = document.createElement("section");
     operationsSection.id = "operations-section";
     operationsSection.innerHTML = `
-      <a href="../pages/${operationType}" class="base-button add-button">Add NEW</a>
+      <a href="/pages/${operationType}" class="base-button add-button">Add NEW</a>
       `;
     searchSection.after(operationsSection);
   } else {
@@ -107,7 +120,7 @@ export function addPageOperations(sessionState, operationType) {
                   </div>
                   <img
                       class="hero-image"
-                      src="../images/image2.webp"
+                      src="../../images/image2.webp"
                       alt="Office image"
                   />
               `;
@@ -126,9 +139,20 @@ document.addEventListener("DOMContentLoaded", async function () {
     const properties = await fetchProperties(userId);
 
     for (let index = 0; index < properties.length; index++) {
-      workspaceSection.append(addProperty(properties[index]));
+      workspaceSection.append(addProperty(properties[index], userData));
     }
 
     setLoaderVisibility(false);
+
+    const manageIcons = document.querySelectorAll(".manage");
+
+    manageIcons.forEach((icon) => {
+      icon.addEventListener("click", function () {
+        const propertyId = icon.dataset.propertyId;
+        window.location.assign(
+          `../pages/register-property/?propertyId=${propertyId}`
+        );
+      });
+    });
   }
 });

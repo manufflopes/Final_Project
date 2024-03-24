@@ -61,6 +61,10 @@ header {
   flex: 1;
 }
 
+nav {
+  position: relative;
+}
+
 nav ul {
   display: flex;
   flex-wrap: wrap;
@@ -74,6 +78,100 @@ nav ul li {
 
 nav ul li:last-of-type {
   margin-left: auto;
+}
+
+.user-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.user-sub-menu-container {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 250px;
+  border: 1px solid rgba(180, 184, 171, 0.6);
+  max-height: 0px;
+  overflow: hidden;
+  transition: max-height 0.3s;
+}
+
+.user-sub-menu-container.open {
+  max-height: 500px;
+}
+
+.user-sub-menu {
+  background-color: white;
+  padding: 16px;
+}
+
+.user-sub-menu hr {
+  border: 0;
+  height: 1px;
+  background-color: rgba(180, 184, 171, 0.6);
+  width: 100%;
+  margin: 16px 0 8px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center
+}
+
+.user-info img {
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 16px;
+}
+
+.user-info h2 {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.sub-menu-link, button.sub-menu-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--font-color);
+  margin: 12px 0;
+}
+
+button.sub-menu-link  {
+  background: white !important;
+  font-family: "Poppins", sans-serif;
+  width: 100%;
+  text-align: start;
+  font-size: 16px;
+}
+
+button.sub-menu-link p, .sub-menu-link p {
+  width: 100%;
+}
+
+.sub-menu-link img {
+  margin-right: 16px;
+  width: 40px;
+  background: var(--header-bg);
+  padding: 8px;
+  border-radius: 50%;
+}
+
+button.sub-menu-link span, .sub-menu-link  span {
+  font-size: 22px;
+  transition: transform 0.3s;
+}
+
+.sub-menu-link:hover span {
+  transform: translateX(8px);
+}
+
+.sub-menu-link:hover p {
+  font-weight: bold;
 }
 
 .base-button {
@@ -117,7 +215,6 @@ li a {
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 9999;
-  /* display: flex; */
   align-items: center;
   justify-content: center;
   color: var(--button-red);
@@ -162,6 +259,34 @@ li a {
   animation: spin .8s linear infinite;
 }
 
+.go-back {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
+  transition-duration: 0.3s;
+  font-size: 0.875rem;
+    line-height: 1.25rem;
+    padding: 0.5rem 1.25rem;
+    color: var(--font-color);
+  background-color: white;
+  border-radius: 0.5rem;
+  border: 1px solid black;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  width: fit-content;
+  text-decoration: none;
+}
+
+.go-back:hover{
+  background-color: var(--font-color);
+  color: white;
+}
+
+.go-back svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
 /*About Us Page*/
 
 .about-us-container {
@@ -195,7 +320,7 @@ li a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgb(187, 194, 199);
+  background-color: rgba(180, 184, 171, 0.6);
   border: 32px;
   border-radius: 14px;
   padding: 32px;
@@ -220,6 +345,11 @@ li a {
   width: 100%;
 }
 
+.new-customer {
+  text-align: center;
+  margin-bottom: 32px;
+  margin-top: -32px;
+}
 /*registration page*/
 
 .page-title {
@@ -236,6 +366,17 @@ li a {
   margin-bottom: 8px;
   /* margin-bottom: 16px; */
   gap: 16px;
+}
+
+.property-image-preview {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  margin-bottom: 16px;
+}
+
+.property-image-preview.hidden {
+  height: 0px;
 }
 
 .input-container {
@@ -297,6 +438,19 @@ select.space-to-fill {
 
 .user-registration-form button:hover {
   filter: brightness(1.5);
+}
+
+.no-content-available {
+  flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.none-available {
+  font-size: 32px;
+  width: 100%;
+  grid-column: 1 / 5;
+  text-align: center;
 }
 
 /*faq page*/
@@ -373,7 +527,7 @@ main {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
-  margin-bottom: 24px;
+  /* margin-bottom: 24px;    BO*/
   grid-auto-rows: 1fr;
 }
 
@@ -398,6 +552,7 @@ main {
 }
 
 .workspace-title {
+  position: relative;
   padding-inline: 8px;
   font-size: 20px;
   font-weight: bold;
@@ -410,6 +565,28 @@ main {
   -webkit-box-orient: vertical;
   overflow: hidden;
   line-height: 40px;
+}
+
+.workspace-title .manage {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: rgba(180, 184, 171, 0.6);
+  padding: 4px 8px;
+  font-size: 12px;
+  text-transform: uppercase;
+  display: flex;
+  height: calc(100% - 2px);
+  align-items: center;
+  border: 1px solid var(--header-bg);
+}
+
+.workspace-title .manage:hover {
+  background: rgba(180, 184, 171, 0.8);
+}
+
+.manage img {
+  height: 24px;
 }
 
 .workspace-info {

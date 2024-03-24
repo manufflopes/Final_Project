@@ -2,6 +2,11 @@ import { baseUrl } from "./config.js";
 
 let userData;
 
+function logoutUser() {
+  sessionStorage.removeItem("open-desks@user");
+  window.location.assign(baseUrl);
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   const userSession = sessionStorage.getItem("open-desks@user");
 
@@ -26,4 +31,4 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-export { userData };
+export { userData, logoutUser };
