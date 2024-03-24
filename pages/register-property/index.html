@@ -39,10 +39,9 @@
                 <div class="input-container">
                     <label class="base-button" for="squareFeet">Square feet</label>
                     <input type="number" class="space-to-fill" id="squareFeet" name="squareFeet"
-                        placeholder="Put the size of the Property in square feet" />
+                        placeholder="Type the size of the area in square feet" required />
                 </div>
             </div>
-            <!-- <div class="property-amenities"> -->
             <div class="form-content">
                 <div class="input-container">
                     <label class="base-button">Parking</label>
@@ -55,8 +54,6 @@
                         <label class="double-choice" for="parking_no">No</label>
                     </div>
                 </div>
-                <!-- </div> -->
-                <!-- <div class="form-content"> -->
                 <div class="input-container">
                     <label class="base-button">Public Transport</label>
                     <div>
@@ -71,23 +68,22 @@
                     </div>
                 </div>
             </div>
-            <!-- </div> -->
             <div class="form-content">
                 <div class="input-container">
                     <label class="base-button">Workspace Type</label>
                     <div>
-                        <input type="checkbox" class="space-to-fill" id="type_desk" name="workspaceTypes"
-                            value="desk" />
+                        <input type="checkbox" class="space-to-fill" id="type_desk" name="workspaceTypes" value="desk"
+                            required />
                         <label class="double-choice" for="type_desk">Desk in a Workspace area</label>
                     </div>
                     <div>
                         <input type="checkbox" class="space-to-fill" id="type_meeting_room" name="workspaceTypes"
-                            value="meeting_room" />
+                            value="meeting_room" required />
                         <label class="double-choice" for="type_meeting_room">Meeting Room</label>
                     </div>
                     <div>
                         <input type="checkbox" class="space-to-fill" id="type_private_office" name="workspaceTypes"
-                            value="private_office" />
+                            value="private_office" required />
                         <label class="double-choice" for="type_private_office">Private Office Room</label>
                     </div>
                 </div>
@@ -103,7 +99,7 @@
                 </div>
             </div>
             <input type="hidden" name="propertyId">
-            <button id="send-button" class="base-button" type="submit">
+            <button id="send-button" class="base-button form-submit" type="submit">
                 Save
             </button>
         </form>

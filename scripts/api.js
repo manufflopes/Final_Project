@@ -18,7 +18,7 @@ export async function createUser(userData) {
   return data;
 }
 
-export async function loginUser(loginData, callback) {
+export async function loginUser(loginData, callback, redirectUrl) {
   //This URL MUST be replaced when requesting data from the API
 
   try {
@@ -37,6 +37,12 @@ export async function loginUser(loginData, callback) {
           userId: userData[0].id,
         })
       );
+
+      if (redirectUrl) {
+        window.location.assign(redirectUrl);
+        return;
+      }
+
       window.location.assign(baseUrl);
       return;
     }
@@ -51,7 +57,6 @@ export async function loginUser(loginData, callback) {
 }
 
 export async function createProperty(propertyData) {
-  console.log(propertyData);
   const response = await fetch(`${apiBaseUrl}properties`, {
     method: "POST",
     body: JSON.stringify(propertyData),
@@ -88,15 +93,13 @@ export async function fetchProperties(ownerId, filters) {
   let url = ownerId
     ? `${apiBaseUrl}properties?ownerId=${ownerId}`
     : `${apiBaseUrl}properties`;
-   console.log(filters);
-    if(filters){
-      url = new URL(url)
-      Object.entries(filters).forEach(function([key, value]){
-        console.log(key, value);
-        url.searchParams.set(key,Boolean(Number(value)));
-      });
-      
-    }
+
+  if (filters) {
+    url = new URL(url);
+    Object.entries(filters).forEach(function ([key, value]) {
+      url.searchParams.set(key, Boolean(Number(value)));
+    });
+  }
 
   const response = await fetch(url);
 
@@ -119,7 +122,6 @@ export async function getPropertyById(propertyId, ownerId) {
 }
 
 export async function fetchWorkspaces(propertyId) {
-  console.log(1);
   try {
     const response = await fetch(
       `${apiBaseUrl}workspaces?propertyId=${propertyId}`
@@ -131,7 +133,6 @@ export async function fetchWorkspaces(propertyId) {
 
     const data = await response.json();
 
-    console.log(data);
     return data;
   } catch (error) {
     return {};

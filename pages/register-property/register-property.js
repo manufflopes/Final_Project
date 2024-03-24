@@ -88,6 +88,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     property.workspaceTypes.forEach((type) => {
       propertyRegistrationForm.elements[`type_${type}`].checked = true;
     });
+
+    propertyRegistrationForm.elements.workspaceTypes.forEach((el) =>
+      el.removeAttribute("required")
+    );
     setLoaderVisibility(false);
   }
 
@@ -96,6 +100,12 @@ document.addEventListener("DOMContentLoaded", async function () {
     event.preventDefault();
 
     const formData = Object.fromEntries(new FormData(event.target));
+    if (!formData.image.size && !propertyId) {
+      alert("Please select an image for the property");
+      setLoaderVisibility(false);
+      return;
+    }
+
     const selectedPropertyTypes = [
       ...document.querySelectorAll("input[name=workspaceTypes]:checked"),
     ];
@@ -149,5 +159,26 @@ document.addEventListener("DOMContentLoaded", async function () {
       console.log(error);
       setLoaderVisibility(false);
     }
+  });
+
+  const checkboxes = document.querySelectorAll("input[name=workspaceTypes]");
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", function () {
+      const selectedPropertyTypes = [
+        ...document.querySelectorAll("input[name=workspaceTypes]:checked"),
+      ];
+
+      if (selectedPropertyTypes.length) {
+        //remove required from all checkboxes if at least one is checked
+        checkboxes.forEach((checkbox) => {
+          checkbox.removeAttribute("required");
+        });
+      } else {
+        //add required to all checkboxes if none is checked
+        checkboxes.forEach((checkbox) => {
+          checkbox.setAttribute("required", "");
+        });
+      }
+    });
   });
 });

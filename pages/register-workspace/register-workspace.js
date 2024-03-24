@@ -8,9 +8,7 @@ import {
 import { baseUrl, apiBaseUrl } from "../../scripts/config.js";
 import { userData } from "../../scripts/session.js";
 import { setLoaderVisibility } from "../../scripts/domBuilder.js";
-import{parseWorkspaceType} from "../../scripts/script.js"
-
-
+import { parseWorkspaceType } from "../../scripts/script.js";
 
 function createWorkspaceTypesSelector(types) {
   const div = document.createElement("div");
@@ -24,8 +22,9 @@ function createWorkspaceTypesSelector(types) {
               class="space-to-fill"
               name="type"
               id="type"
+              required
           >
-            <option disabled selected>
+            <option disabled selected value="">
                 Select a type
             </option>
           ${types
@@ -54,8 +53,8 @@ function createWorkspaceForm(availableWorkspaceTypes, propertyId) {
     <div class="form-content">
       <div class="input-container">
         <label class="base-button" for="lease-term">Lease term</label>
-        <select class="space-to-fill" name="leaseTerm" id="lease-term">
-            <option disabled selected>Select an option</option>
+        <select class="space-to-fill" name="leaseTerm" id="lease-term" required>
+            <option disabled selected value="">Select an option</option>
             <option value="day">Daily</option>
             <option value="week">Weekly</option>
             <option value="month">Monthly</option>
@@ -66,18 +65,18 @@ function createWorkspaceForm(availableWorkspaceTypes, propertyId) {
       <div class="input-container">
         <label class="base-button" for="name">Name</label>
         <input type="text" class="space-to-fill" id="name" name="name"
-              placeholder="Add the workspace name" />
+              placeholder="Add the workspace name" required />
       </div>
     </div>    
     <div class="form-content">
       <div class="input-container">
         <label class="base-button" for="places">Places available</label>
         <input type="number" class="space-to-fill" id="places" name="places"
-              placeholder="Add the total spaces available" />
+              placeholder="Add the total spaces available" required/>
       </div>
       <div class="input-container">
         <label class="base-button" for="price">Price</label>
-        <input type="number" class="space-to-fill" id="price" name="price" />
+        <input type="number" class="space-to-fill" id="price" name="price" required />
       </div>
     </div>
     <div class="form-content">
@@ -104,7 +103,7 @@ function createWorkspaceForm(availableWorkspaceTypes, propertyId) {
     </div>
     <input type="hidden" name="propertyId" value="${propertyId}">
     <input type="hidden" name="workspaceId">
-    <button id="send-button" class="base-button" type="submit">
+    <button id="send-button" class="base-button form-submit" type="submit">
         Save
     </button>
     `;
@@ -125,7 +124,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     propertyData = await getPropertyInfo(propertyId);
 
     const pageTitle = document.getElementsByClassName("page-title")[0];
-    pageTitle.innerHTML = `Add Workspace to <span class="property-name-title">${propertyData.buildingName}</span>`;
+    pageTitle.innerHTML = `Add Workspace to <span class="property-name-title">${propertyData.buildingName}</span> property`;
   } else if (workspaceId) {
     workspaceData = await getWorkspaceInfo(workspaceId, userData.userId);
 
@@ -209,8 +208,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     const formData = Object.fromEntries(new FormData(event.target));
 
-    console.log(formData);
-
     let workspaceExists;
     if (formData.workspaceId) {
       const workspace = await getWorkspaceInfo(
@@ -226,6 +223,13 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       workspaceExists = workspace;
     }
+
+    if (!formData.image.size && !workspaceExists) {
+      alert("Please select an image for the workspace");
+      setLoaderVisibility(false);
+      return;
+    }
+
     try {
       let imageUrl = "";
 
@@ -245,8 +249,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         workspaceId,
       };
 
-      console.log("new", newWorkspace);
-
       if (workspaceExists) {
         await updateWorkspace(newWorkspace);
       } else {
@@ -259,27 +261,5 @@ document.addEventListener("DOMContentLoaded", async function () {
     } catch (error) {
       setLoaderVisibility(false);
     }
-
-    // const propertyData = await getPropertyById(propertyId);
-
-    // data.propertyId = propertyId;
-    // data.propertyName = propertyData.name;
-    // data.propertyAddress = propertyData.address;
-    // data.propertyCity = propertyData.city;
-    // data.propertyCountry = propertyData.country;
-    // data.propertyZip = propertyData.zip;
-
-    // data.ownerId = userData.id;
-    // data.ownerName = userData.name;
-    // data.ownerEmail = userData.email;
-
-    // setLoaderVisibility(true);
-    // try {
-    //   await createWorkspace(data);
-    //   setLoaderVisibility(false);
-    //   // location.href = `${baseUrl}property-detail/property-detail.html?id=${propertyId}`;
-    // } catch (error) {
-    //   console.log(error);
-    // }
   });
 });

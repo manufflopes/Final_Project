@@ -1,7 +1,7 @@
 import { userData, logoutUser } from "./session.js";
+import { rootDir } from "./config.js";
 
 function toggleUserPanel() {
-  console.log("toggleUserPanel");
   const userPanel = document.querySelector(".user-sub-menu-container");
   userPanel.classList.toggle("open");
 }
@@ -10,19 +10,19 @@ function createHeader(userData, assetsPath) {
   const headerTag = document.createElement("header");
   headerTag.innerHTML = `
         <div class="container header-container">
-            <a href="/pages">
+            <a href="${rootDir}">
                 <img class="logo" src="${assetsPath}/images/OpenDesks.png" alt="logo" />
             </a>
             <nav>
                 <ul>
-                    <li><a class="base-button" href="/pages/about-us">About Us</a></li>
-                    <li><a class="base-button" href="/pages/sign-up">Sign up</a></li>
-                    <li><a class="base-button" href="/pages/faq">FAQ</a></li>
-                    <li><a class="base-button" href="/pages/contact-us">Contact Us</a></li>
+                    <li><a class="base-button" href="${rootDir}about-us">About Us</a></li>
+                    <li><a class="base-button" href="${rootDir}sign-up">Sign up</a></li>
+                    <li><a class="base-button" href="${rootDir}faq">FAQ</a></li>
+                    <li><a class="base-button" href="${rootDir}contact-us">Contact Us</a></li>
                     <li>${
                       userData
                         ? `<img id="user-avatar" class="user-avatar" src="${assetsPath}/images/avatar/user.png"/>`
-                        : '<a class="login-button" href="/pages/login">Login</a>'
+                        : `<a class="login-button" href="${rootDir}login">Login</a>`
                     }</li>
                 </ul>
                 <div class="user-sub-menu-container">
@@ -32,12 +32,12 @@ function createHeader(userData, assetsPath) {
                       <h2 class="user-name">${userData}</h2>
                     </div>
                     <hr />
-                    <a href="/pages/my-bookings" class="sub-menu-link">
+                    <a href="${rootDir}my-bookings" class="sub-menu-link">
                       <img src="${assetsPath}/assets/setting.png" />
                       <p>My Bookings</p>
                       <span>></span>
                     </a>
-                    <button id="logout-button" href="/pages/logout" class="sub-menu-link">
+                    <button id="logout-button" href="${rootDir}/logout" class="sub-menu-link">
                       <img src="${assetsPath}/assets/logout.png" />
                       <p>Logout</p>
                       <span>></span>
@@ -65,10 +65,10 @@ function createFooter(assetsPath) {
                 <nav>
                     <ul>
                         <li>
-                            <a class="footer-link" href="/pages/about-us">About Us</a>
+                            <a class="footer-link" href="${rootDir}about-us">About Us</a>
                         </li>
                         <li>
-                            <a class="footer-link" href="/pages/contact-us">Contact Us</a>
+                            <a class="footer-link" href="${rootDir}contact-us">Contact Us</a>
                         </li>
                     </ul>
                 </nav>
@@ -107,9 +107,8 @@ function addGoBackButton() {
 }
 
 function showRegistrationLink(sessionState) {
-  console.log(location.pathname);
   if (
-    ["/", "/pages/sign-up", "/pages/booking", "/pages/register"].includes(
+    [`${rootDir}login/`, `${rootDir}booking/`, `${rootDir}sign-up/`].includes(
       location.pathname
     )
   ) {
@@ -122,7 +121,7 @@ function showRegistrationLink(sessionState) {
 
   const div = document.createElement("div");
   div.classList.add("register-now");
-  div.innerHTML = `<a href="../pages/sign-up" class="register-button">Register Now</button>`;
+  div.innerHTML = `<a href="${rootDir}sign-up" class="register-button">Register Now</button>`;
 
   return div;
 }
@@ -145,13 +144,13 @@ document.addEventListener("DOMContentLoaded", async function () {
   const domBody = document.body;
   domBody.append(createLoadingElement());
 
-  if (location.pathname === "/Final_Project/pages/login/") {
+  if (location.pathname === `${rootDir}login/`) {
     return;
   }
 
   const main = document.getElementsByTagName("main")[0];
 
-  const assetsLocation = location.pathname === "/Final_Project/pages/" ? ".." : "../..";
+  const assetsLocation = location.pathname === rootDir ? ".." : "../..";
 
   const newHeader = createHeader(userData?.name, assetsLocation);
   domBody.prepend(newHeader);
@@ -163,7 +162,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   const registrationLink = showRegistrationLink(userData);
 
-  if (!["/Final_Project/pages/", "/Final_Project/pages/login"].includes(location.pathname)) {
+  if (![`${rootDir}`, `${rootDir}login`].includes(location.pathname)) {
     main.prepend(addGoBackButton());
   }
 

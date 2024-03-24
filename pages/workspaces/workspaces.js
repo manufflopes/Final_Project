@@ -83,7 +83,6 @@ function addWorkspace(workspaceData, userSessionData) {
 }
 
 const isSmokingAllowed = (isSmokingAllowed) => {
-  console.log(isSmokingAllowed);
   return isSmokingAllowed
     ? "<img src='../../assets/svg/smoking-allowed.svg' class='svg-icon'/>"
     : "<img src='../../assets/svg/smoking-not-allowed.svg' class='svg-icon'/>";
@@ -95,14 +94,15 @@ document.addEventListener("DOMContentLoaded", async function () {
   const params = new URLSearchParams(location.search);
   const propertyId = params.get("propertyId");
 
-  addPageOperations(userData, "register-workspace/?propertyId=" + propertyId);
+  addPageOperations(
+    userData,
+    "register-workspace/?propertyId=" + propertyId,
+    "../.."
+  );
 
-  console.log(propertyId);
   if (propertyId) {
     setLoaderVisibility(true);
     const spaces = await fetchWorkspaces(propertyId);
-
-    console.log("spaces", spaces);
 
     if (!spaces?.length) {
       const noContentSection = document.querySelector(".no-content-available");
