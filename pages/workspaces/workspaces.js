@@ -51,11 +51,14 @@ function addWorkspace(workspaceData, userSessionData) {
                             </span>
                           </div>
                           <div class="info-container">
-                            <label>Availability Date</label>
-                            <span>
-                              ${new Date(
+                            <label>Availability Date:</label>
+                            <span class="availability-date">
+                              ${
+                                /*new Date(
                                 workspaceData.availabilityDate
-                              ).toLocaleDateString("en-CA")}
+                              ).toLocaleDateString("en-CA")*/
+                                "Available Now"
+                              }
                             </span>
                           </div>
                           <div class="info-container">

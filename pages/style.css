@@ -844,3 +844,23 @@ input[type=date] {
   font-size: larger;
   color: var(--button-red);
 }
+
+.availability-date {
+  color: var(--button-red);
+  font-weight: bold;
+}
+
+.booking-status {
+  color: var(--button-green);
+  font-weight: bold;
+}
+
+#my-bookings {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.gap-1 {
+  gap: 1rem;
+}
