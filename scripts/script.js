@@ -173,6 +173,8 @@ async function showData(filters) {
   if (!properties?.length) {
     noContentSection.innerHTML =
       "<p class='none-available'>There are not properties registered!</p>";
+    noContentSection.style.display = "grid";
+
     setLoaderVisibility(false);
     return;
   }

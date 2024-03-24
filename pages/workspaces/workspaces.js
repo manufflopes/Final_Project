@@ -113,6 +113,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (!spaces?.length) {
       noContentSection.innerHTML =
         "<p class='none-available'>There are not workspaces available for this property</p>";
+      noContentSection.style.display = "grid";
+
       setLoaderVisibility(false);
       return;
     }

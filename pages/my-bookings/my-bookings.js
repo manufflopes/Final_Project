@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   if (!bookings.length) {
     noContentSection.innerHTML =
       "<p class='none-available'>You don't have any booking yet!</p>";
+    noContentSection.style.display = "grid";
+
     setLoaderVisibility(false);
 
     return;

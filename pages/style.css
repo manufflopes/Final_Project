@@ -133,7 +133,8 @@ nav ul li:last-of-type {
   font-weight: bold;
 }
 
-.sub-menu-link, button.sub-menu-link {
+.sub-menu-link,
+button.sub-menu-link {
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -141,7 +142,7 @@ nav ul li:last-of-type {
   margin: 12px 0;
 }
 
-button.sub-menu-link  {
+button.sub-menu-link {
   background: white !important;
   font-family: "Poppins", sans-serif;
   width: 100%;
@@ -149,7 +150,8 @@ button.sub-menu-link  {
   font-size: 16px;
 }
 
-button.sub-menu-link p, .sub-menu-link p {
+button.sub-menu-link p,
+.sub-menu-link p {
   width: 100%;
 }
 
@@ -161,7 +163,8 @@ button.sub-menu-link p, .sub-menu-link p {
   border-radius: 50%;
 }
 
-button.sub-menu-link span, .sub-menu-link  span {
+button.sub-menu-link span,
+.sub-menu-link span {
   font-size: 22px;
   transition: transform 0.3s;
 }
@@ -219,7 +222,7 @@ li a {
   justify-content: center;
   color: var(--button-red);
   font-weight: bold;
-  display:none;
+  display: none;
 }
 
 @-webkit-keyframes spin {
@@ -263,9 +266,9 @@ li a {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
   transition-duration: 0.3s;
   font-size: 0.875rem;
-    line-height: 1.25rem;
-    padding: 0.5rem 1.25rem;
-    color: var(--font-color);
+  line-height: 1.25rem;
+  padding: 0.5rem 1.25rem;
+  color: var(--font-color);
   background-color: white;
   border-radius: 0.5rem;
   border: 1px solid black;
@@ -278,7 +281,7 @@ li a {
   text-decoration: none;
 }
 
-.go-back:hover{
+.go-back:hover {
   background-color: var(--font-color);
   color: white;
 }
@@ -287,6 +290,7 @@ li a {
   width: 1.25rem;
   height: 1.25rem;
 }
+
 /*About Us Page*/
 
 .about-us-container {
@@ -350,10 +354,11 @@ li a {
   margin-bottom: 32px;
   margin-top: -32px;
 }
+
 /*registration page*/
 
 .page-title {
-  
+
   text-align: center;
   padding: 16px;
 
@@ -425,15 +430,18 @@ select.space-to-fill {
   cursor: pointer;
 }
 
-#user-registration-form, #user-contact-us-form, 
-#property-registration-form, #workspace-registration-form, 
+#user-registration-form,
+#user-contact-us-form,
+#property-registration-form,
+#workspace-registration-form,
 #workspace-booking-form {
   display: flex;
   flex-direction: column;
 }
 
 
-button.form-submit, #user-registration-form button {
+button.form-submit,
+#user-registration-form button {
   align-self: flex-end;
   min-width: 200px;
 }
@@ -444,8 +452,8 @@ button.form-submit, #user-registration-form button {
 
 .no-content-available {
   flex: 1;
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .none-available {
@@ -453,27 +461,30 @@ button.form-submit, #user-registration-form button {
   width: 100%;
   grid-column: 1 / 5;
   text-align: center;
+  overflow: unset;
 }
 
 /*faq page*/
 
-h2{
+h2 {
   font-size: 18px;
 }
-ul{
+
+ul {
   list-style: none;
   padding: 0;
   margin: 0;
 
 }
-.accordion-faq{
+
+.accordion-faq {
   position: relative;
   padding-bottom: 4px;
   padding-top: 18px;
-  border-top: 1px solid #dce7eb;   
+  border-top: 1px solid #dce7eb;
 }
 
-ul li input[type="checkbox"]{
+ul li input[type="checkbox"] {
   position: absolute;
   cursor: pointer;
   width: 100%;
@@ -481,82 +492,99 @@ ul li input[type="checkbox"]{
   z-index: 1;
   opacity: 0;
 }
-ul li i{
+
+ul li i {
   position: absolute;
-  transform: translate(-6px,0);
+  transform: translate(-6px, 0);
   margin-top: 16px;
   right: 0;
-} 
-ul li input[type=checkbox]:checked ~ p {
-margin-top: 0;
-max-height: 0;
-opacity: 0;
-transform: translateX(-50%);
 }
 
-ul li input[type="checkbox"]:checked~i::before{
-  transform: translate(2px,0) rotate(45deg);
+ul li input[type=checkbox]:checked~p {
+  margin-top: 0;
+  max-height: 0;
+  opacity: 0;
+  transform: translateX(-50%);
 }
-ul li input[type="checkbox"]:checked~i::after{
-  transform: translate(-2px,0) rotate(-45deg);
+
+ul li input[type="checkbox"]:checked~i::before {
+  transform: translate(2px, 0) rotate(45deg);
 }
-ul li i::before,ul li i::after{
+
+ul li input[type="checkbox"]:checked~i::after {
+  transform: translate(-2px, 0) rotate(-45deg);
+}
+
+ul li i::before,
+ul li i::after {
   content: "";
   position: absolute;
   background: #333;
   width: 3px;
   height: 9px;
 }
-ul li i::before{
-  transform: translate(-2px,0)rotate(45deg);
+
+ul li i::before {
+  transform: translate(-2px, 0)rotate(45deg);
 }
+
 ul li i:after {
-transform: translate(2px, 0) rotate(-45deg);
+  transform: translate(2px, 0) rotate(-45deg);
 }
-p{
-font-size: 16px;
-color: rgba(48,69,92,0.8);
-line-height: 26px;
-letter-spacing: 1px;
-position: relative;
-padding: 0 11px;
-max-height: 800px;
-margin-top: 14px;
-opacity: 1;
-transform: translate(0,0);
-overflow: hidden;     
+
+p {
+  font-size: 16px;
+  color: rgba(48, 69, 92, 0.8);
+  line-height: 26px;
+  letter-spacing: 1px;
+  position: relative;
+  padding: 0 11px;
+  max-height: 800px;
+  margin-top: 14px;
+  opacity: 1;
+  transform: translate(0, 0);
+  overflow: hidden;
 }
-.transition, p, ul li i:before, ul li i:after {
-transition: all 0.25s ease-in-out;
+
+.transition,
+p,
+ul li i:before,
+ul li i:after {
+  transition: all 0.25s ease-in-out;
 
 }
 
 ul li:last-of-type {
-padding-bottom: 0;
+  padding-bottom: 0;
 }
 
 @keyframes flipdown {
-0% {
-  opacity: 0;
-  transform-origin: top center;
-  transform: rotateX(-90deg);
-}
-5% {
-  opacity: 1;
-}
-80% {
-  transform: rotateX(8deg);
-}
-83% {
-  transform: rotateX(6deg);
-}
-92% {
-  transform: rotateX(-3deg);
-}
-100% {
-  transform-origin: top center;
-  transform: rotateX(0deg);
-}
+  0% {
+    opacity: 0;
+    transform-origin: top center;
+    transform: rotateX(-90deg);
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  80% {
+    transform: rotateX(8deg);
+  }
+
+  83% {
+    transform: rotateX(6deg);
+  }
+
+  92% {
+    transform: rotateX(-3deg);
+  }
+
+  100% {
+    transform-origin: top center;
+    transform: rotateX(0deg);
+  }
 }
 
 
@@ -580,7 +608,7 @@ main {
   gap: 16px;
 }
 
- /* #search-section {
+/* #search-section {
  margin-bottom: 16px; 
 }  */
 
@@ -603,21 +631,23 @@ main {
   padding: 10px 20px;
 }
 
-.filters-container{
+.filters-container {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
-.filter-container{
+
+.filter-container {
   display: flex;
   gap: 16px;
   justify-content: space-between;
-  
+
 }
 
-.filter-container input:nth-child(n+2){
+.filter-container input:nth-child(n+2) {
   margin-left: 16px;
 }
+
 #operations-section {
   background: rgba(0, 0, 0, 0.2);
   padding: 16px;
@@ -914,7 +944,7 @@ footer {
 
 /* Footer End */
 
-.lease-term{
+.lease-term {
   text-transform: capitalize;
 }
 
