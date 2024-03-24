@@ -108,13 +108,16 @@ document.addEventListener("DOMContentLoaded", async function () {
     setLoaderVisibility(true);
     const spaces = await fetchWorkspaces(propertyId);
 
+    const noContentSection = document.querySelector(".no-content-available");
+
     if (!spaces?.length) {
-      const noContentSection = document.querySelector(".no-content-available");
       noContentSection.innerHTML =
         "<p class='none-available'>There are not workspaces available for this property</p>";
       setLoaderVisibility(false);
       return;
     }
+
+    noContentSection.style.display = "none";
 
     spaces.forEach((workspace) =>
       workspaceSection.append(addWorkspace(workspace, userData))

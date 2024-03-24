@@ -169,13 +169,15 @@ async function showData(filters) {
   setLoaderVisibility(true);
   const properties = await fetchProperties(userId, filters);
 
+  const noContentSection = document.querySelector(".no-content-available");
   if (!properties?.length) {
-    const noContentSection = document.querySelector(".no-content-available");
     noContentSection.innerHTML =
       "<p class='none-available'>There are not properties registered!</p>";
     setLoaderVisibility(false);
     return;
   }
+
+  noContentSection.style.display = "none";
 
   for (let index = 0; index < properties.length; index++) {
     workspaceSection.append(addProperty(properties[index], userData));
