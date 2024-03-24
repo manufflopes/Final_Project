@@ -1,6 +1,7 @@
 import { userData } from "./session.js";
 import { fetchProperties } from "./api.js";
 import { setLoaderVisibility } from "./domBuilder.js";
+import { rootDir } from "./config.js";
 
 const hasParkingGarage = (hasParkingGarage) => {
   return hasParkingGarage
@@ -116,17 +117,17 @@ function addProperty(propertyData, userSessionData) {
 }
 
 export function addPageOperations(sessionState, operationType) {
-  const searchSection = document.querySelector("#search-section"); 
+  const searchSection = document.querySelector("#search-section");
   const sectionExists = document.querySelector(".dynamic-menu");
 
-  if(sectionExists){
-    return
+  if (sectionExists) {
+    return;
   }
 
   if (sessionState?.role == "owner") {
-    const operationsSection = document.createElement("section")
+    const operationsSection = document.createElement("section");
     operationsSection.id = "operations-section";
-    operationsSection.classList.add("dynamic-menu")
+    operationsSection.classList.add("dynamic-menu");
     operationsSection.innerHTML = `
       <a href="/pages/${operationType}" class="base-button add-button">Add NEW</a>
       `;
@@ -134,7 +135,7 @@ export function addPageOperations(sessionState, operationType) {
   } else {
     const heroSection = document.createElement("section");
     heroSection.id = "hero-section";
-    heroSection.classList.add("dynamic-menu")
+    heroSection.classList.add("dynamic-menu");
     heroSection.innerHTML = `
                   <div class="app-description">
                       <h2>Office Spaces for Rent</h2>
@@ -156,9 +157,9 @@ export function addPageOperations(sessionState, operationType) {
     searchSection.after(heroSection);
   }
 }
-async function showData (filters){
+async function showData(filters) {
   const workspaceSection = document.querySelector(".workspaces-section");
-  workspaceSection.innerHTML=""
+  workspaceSection.innerHTML = "";
   const userId = userData?.role == "coworker" ? null : userData?.userId;
   addPageOperations(userData, "register-property");
   setLoaderVisibility(true);
@@ -184,21 +185,19 @@ async function showData (filters){
 document.addEventListener("DOMContentLoaded", async function () {
   // ROUTES
 
-const searchForm = document.getElementById("search-section")
-          let filters;
-          if(searchForm){
-            searchForm.addEventListener("submit", (event)=>{
-              event.preventDefault()
-              const formData = Object.fromEntries(new FormData(event.target));
-              filters = formData
-              console.log(filters);
-              showData(filters)
-            })
-          }
+  const searchForm = document.getElementById("search-section");
+  let filters;
+  if (searchForm) {
+    searchForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const formData = Object.fromEntries(new FormData(event.target));
+      filters = formData;
+      console.log(filters);
+      showData(filters);
+    });
+  }
 
-  if (location.pathname == "/pages/") {
-    console.log("texto")
-    showData()
-
+  if (location.pathname == rootDir) {
+    showData();
   }
 });
