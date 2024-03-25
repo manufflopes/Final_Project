@@ -1,6 +1,182 @@
 {
-  "properties": [],
-  "workspaces": [],
-  "users": [],
+  "properties": [
+    {
+      "buildingName": "Flower Building",
+      "address": "1435, 24th Avenue, Calgary",
+      "neighborhood": "Downtown",
+      "squareFeet": "450",
+      "hasParkingGarage": true,
+      "hasPublicTransportNearBy": true,
+      "workspaceTypes": [
+        "desk",
+        "meeting_room"
+      ],
+      "image": "https://i.imgur.com/1ktN31b.jpeg",
+      "propertyId": null,
+      "ownerId": 1,
+      "id": 1
+    },
+    {
+      "buildingName": "Bell Ochoa",
+      "address": "143, 28th Avenue, Calgary",
+      "neighborhood": "Downtown",
+      "squareFeet": "750",
+      "hasParkingGarage": false,
+      "hasPublicTransportNearBy": false,
+      "workspaceTypes": [
+        "meeting_room",
+        "private_office"
+      ],
+      "image": "https://i.imgur.com/3VYuilo.jpeg",
+      "propertyId": null,
+      "ownerId": 3,
+      "id": 2
+    },
+    {
+      "buildingName": "Magee Rivers",
+      "address": "193, 11th Avenue, Calgary ",
+      "neighborhood": "Downtown",
+      "squareFeet": "120",
+      "hasParkingGarage": true,
+      "hasPublicTransportNearBy": true,
+      "workspaceTypes": [
+        "meeting_room"
+      ],
+      "image": "https://i.imgur.com/EpOV0FY.jpeg",
+      "propertyId": null,
+      "ownerId": 3,
+      "id": 3
+    }
+  ],
+
+
+
+  "workspaces": [
+    {
+      "type": "desk",
+      "leaseTerm": "day",
+      "name": "Summer Desk",
+      "places": "4",
+      "price": "500",
+      "isSmokingAllowed": true,
+      "image": "https://i.imgur.com/s3rjDGq.jpeg",
+      "propertyId": "1",
+      "workspaceId": null,
+      "ownerId": 1,
+      "id": 1
+    },
+    {
+      "type": "meeting_room",
+      "leaseTerm": "week",
+      "name": "Winter Room",
+      "places": "2",
+      "price": "900",
+      "isSmokingAllowed": false,
+      "image": "https://i.imgur.com/6iC4xsW.jpeg",
+      "propertyId": "1",
+      "workspaceId": null,
+      "ownerId": 1,
+      "id": 2
+    },
+    {
+      "type": "private_office",
+      "leaseTerm": "week",
+      "name": "Delilah Beasley",
+      "places": "14",
+      "price": "599",
+      "isSmokingAllowed": true,
+      "image": "https://i.imgur.com/YRTtoI0.jpeg",
+      "propertyId": "2",
+      "workspaceId": null,
+      "ownerId": 3,
+      "id": 3
+    },
+    {
+      "type": "meeting_room",
+      "leaseTerm": "month",
+      "name": "Justine Logan",
+      "places": "15",
+      "price": "751",
+      "isSmokingAllowed": false,
+      "image": "https://i.imgur.com/kDN6xXk.jpeg",
+      "propertyId": "2",
+      "workspaceId": null,
+      "ownerId": 3,
+      "id": 4
+    },
+    {
+      "type": "meeting_room",
+      "leaseTerm": "month",
+      "name": "Charity Carpenter",
+      "places": "4",
+      "price": "756",
+      "isSmokingAllowed": false,
+      "image": "https://i.imgur.com/BvYg4jV.jpeg",
+      "propertyId": "2",
+      "workspaceId": null,
+      "ownerId": 3,
+      "id": 5
+    },
+    {
+      "type": "meeting_room",
+      "leaseTerm": "month",
+      "name": "Risa Hernandez",
+      "places": "8",
+      "price": "565",
+      "isSmokingAllowed": false,
+      "image": "https://i.imgur.com/zCFvOeJ.jpeg",
+      "propertyId": "3",
+      "workspaceId": null,
+      "ownerId": 3,
+      "id": 6
+    },
+    {
+      "type": "meeting_room",
+      "leaseTerm": "week",
+      "name": "Libby Mason",
+      "places": "10",
+      "price": "37",
+      "isSmokingAllowed": false,
+      "image": "https://i.imgur.com/0hhWDAR.jpeg",
+      "propertyId": "3",
+      "workspaceId": null,
+      "ownerId": 3,
+      "id": 7
+    }
+  ],
+  "users": [
+    {
+      "name": "Angelina Maria",
+      "email": "angelina@owner.com",
+      "phone": "+1 (488) 769-7435",
+      "password": "teste123",
+      "role": "owner",
+      "id": 1
+    },
+    {
+      "name": "Ivete Sangalo",
+      "email": "ivete@user.com",
+      "phone": "+1 (328) 628-7425",
+      "password": "teste123",
+      "role": "coworker",
+      "id": 2
+    },
+    {
+      "name": "Brad Pitt",
+      "email": "brad@owner.com",
+      "phone": "+1 (584) 206-8664",
+      "password": "teste123",
+      "role": "owner",
+      "id": 3
+    },
+    {
+      "name": "Ryan Gosling",
+      "email": "ryan@user.com",
+      "phone": "+1 (328) 446-2584",
+      "password": "teste123",
+      "role": "coworker",
+      "id": 4
+    }
+  ],
   "bookings": []
 }
