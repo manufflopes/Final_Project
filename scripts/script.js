@@ -1,60 +1,60 @@
-import { userData } from "./session.js";
-import { fetchProperties } from "./api.js";
-import { setLoaderVisibility } from "./domBuilder.js";
-import { rootDir } from "./config.js";
+import { userData } from './session.js';
+import { fetchProperties } from './api.js';
+import { setLoaderVisibility } from './domBuilder.js';
+import { rootDir } from './config.js';
 
 const hasParkingGarage = (hasParkingGarage) => {
   return hasParkingGarage
     ? "<img src='../assets/svg/parking.svg' class='svg-icon'/>"
-    : "";
+    : '';
 };
 
 const hasPublicTransport = (hasPublicTransportNearBy) => {
   return hasPublicTransportNearBy
     ? "<img src='../assets/svg/bus.svg' class='svg-icon'/>"
-    : "";
+    : '';
 };
 
-export const propertyType = (propertyType, assetLocation = "..") => {
+export const propertyType = (propertyType, assetLocation = '..') => {
   const mappedPropertyType = {
     meeting_room: `<img src='${assetLocation}/assets/svg/meeting-room.svg' class='svg-icon'/>`,
     private_office: `<img src='${assetLocation}/assets/svg/private-room.svg' class='svg-icon'/>`,
     desk: `<img src='${assetLocation}/assets/svg/shared-space-desk.svg' class='svg-icon'/>`,
   };
 
-  return mappedPropertyType[propertyType] || "";
+  return mappedPropertyType[propertyType] || '';
 };
 
 export function parseWorkspaceType(type) {
   let typename;
   switch (type) {
-    case "desk":
-      typename = "Desk in a Workspace area";
+    case 'desk':
+      typename = 'Desk in a Workspace area';
       break;
 
-    case "meeting_room":
-      typename = "Meeting Room";
+    case 'meeting_room':
+      typename = 'Meeting Room';
       break;
 
-    case "private_office":
-      typename = "Private Office Room";
+    case 'private_office':
+      typename = 'Private Office Room';
       break;
     default:
-      typename = "Not valid";
+      typename = 'Not valid';
       break;
   }
   return typename;
 }
 
 function addProperty(propertyData, userSessionData) {
-  const property = document.createElement("div");
-  property.classList.add("workspace");
+  const property = document.createElement('div');
+  property.classList.add('workspace');
 
   const isTheOwner =
-    userSessionData?.role == "owner" &&
+    userSessionData?.role == 'owner' &&
     userSessionData?.userId == propertyData.ownerId;
 
-  const imageSrc = propertyData.image.includes("http")
+  const imageSrc = propertyData.image.includes('http')
     ? propertyData.image
     : `../images/${propertyData.image}`;
 
@@ -67,7 +67,7 @@ function addProperty(propertyData, userSessionData) {
               ? `<span class="manage" data-property-id="${propertyData.id}">
           <img src="../assets/setting.png" class="manage-icon" />
         </span>`
-              : ""
+              : ''
           }
         </h2>
         <img class="workspace-image" src="${imageSrc}" />
@@ -96,14 +96,14 @@ function addProperty(propertyData, userSessionData) {
             </div>
           </div>
         </div>`
-              : ""
+              : ''
           }
           <div class="info-container workspace-types">
             <label class="info-label">Available Workspaces</label>
             <div class="icons-container">
               ${propertyData.workspaceTypes
                 .map((type) => propertyType(type))
-                .join("")}
+                .join('')}
             </div>    
           </div>
         </div>
@@ -118,27 +118,27 @@ function addProperty(propertyData, userSessionData) {
 export function addPageOperations(
   sessionState,
   operationType,
-  assetsLocation = ".."
+  assetsLocation = '..'
 ) {
-  const searchSection = document.querySelector("#search-section");
-  const sectionExists = document.querySelector(".dynamic-menu");
+  const searchSection = document.querySelector('#search-section');
+  const sectionExists = document.querySelector('.dynamic-menu');
 
   if (sectionExists) {
     return;
   }
 
-  if (sessionState?.role == "owner") {
-    const operationsSection = document.createElement("section");
-    operationsSection.id = "operations-section";
-    operationsSection.classList.add("dynamic-menu");
+  if (sessionState?.role == 'owner') {
+    const operationsSection = document.createElement('section');
+    operationsSection.id = 'operations-section';
+    operationsSection.classList.add('dynamic-menu');
     operationsSection.innerHTML = `
       <a href="${rootDir}${operationType}" class="base-button add-button">Add NEW</a>
       `;
     searchSection.after(operationsSection);
   } else {
-    const heroSection = document.createElement("section");
-    heroSection.id = "hero-section";
-    heroSection.classList.add("dynamic-menu");
+    const heroSection = document.createElement('section');
+    heroSection.id = 'hero-section';
+    heroSection.classList.add('dynamic-menu');
     heroSection.innerHTML = `
                   <div class="app-description">
                       <h2>Office Spaces for Rent</h2>
@@ -162,24 +162,24 @@ export function addPageOperations(
 }
 
 async function showData(filters) {
-  const workspaceSection = document.querySelector(".workspaces-section");
-  workspaceSection.innerHTML = "";
-  const userId = userData?.role == "coworker" ? null : userData?.userId;
-  addPageOperations(userData, "register-property");
+  const workspaceSection = document.querySelector('.workspaces-section');
+  workspaceSection.innerHTML = '';
+  const userId = userData?.role == 'coworker' ? null : userData?.userId;
+  addPageOperations(userData, 'register-property');
   setLoaderVisibility(true);
   const properties = await fetchProperties(userId, filters);
 
-  const noContentSection = document.querySelector(".no-content-available");
+  const noContentSection = document.querySelector('.no-content-available');
   if (!properties?.length) {
     noContentSection.innerHTML =
       "<p class='none-available'>There are not properties registered!</p>";
-    noContentSection.style.display = "grid";
+    noContentSection.style.display = 'grid';
 
     setLoaderVisibility(false);
     return;
   }
 
-  noContentSection.style.display = "none";
+  noContentSection.style.display = 'none';
 
   for (let index = 0; index < properties.length; index++) {
     workspaceSection.append(addProperty(properties[index], userData));
@@ -187,10 +187,10 @@ async function showData(filters) {
 
   setLoaderVisibility(false);
 
-  const manageIcons = document.querySelectorAll(".manage");
+  const manageIcons = document.querySelectorAll('.manage');
 
   manageIcons.forEach((icon) => {
-    icon.addEventListener("click", function () {
+    icon.addEventListener('click', function () {
       const propertyId = icon.dataset.propertyId;
       window.location.assign(
         `${rootDir}register-property/?propertyId=${propertyId}`
@@ -199,11 +199,11 @@ async function showData(filters) {
   });
 }
 
-document.addEventListener("DOMContentLoaded", async function () {
-  const searchForm = document.getElementById("search-section");
+document.addEventListener('DOMContentLoaded', async function () {
+  const searchForm = document.getElementById('search-section');
   let filters;
   if (searchForm) {
-    searchForm.addEventListener("submit", (event) => {
+    searchForm.addEventListener('submit', (event) => {
       event.preventDefault();
       const formData = Object.fromEntries(new FormData(event.target));
       filters = formData;
@@ -211,7 +211,5 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
   }
 
-  if (location.pathname == rootDir) {
-    showData();
-  }
+  showData();
 });

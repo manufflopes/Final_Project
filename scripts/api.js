@@ -66,7 +66,7 @@ export async function loginUser(loginData, callback, redirectUrl) {
 }
 
 export async function createProperty(propertyData) {
-  const response = await fetch(`${apiBaseUrl}properties`, {
+  const response = await fetch(`${apiBaseUrl}/properties`, {
     method: 'POST',
     body: JSON.stringify(propertyData),
     headers: {
@@ -79,7 +79,7 @@ export async function createProperty(propertyData) {
 
 export async function updateProperty(propertyData) {
   const response = await fetch(
-    `${apiBaseUrl}properties/${propertyData.propertyId}`,
+    `${apiBaseUrl}/properties/${propertyData.propertyId}`,
     {
       method: 'PUT',
       body: JSON.stringify(propertyData),
@@ -100,8 +100,8 @@ export async function updateProperty(propertyData) {
 
 export async function fetchProperties(ownerId, filters) {
   let url = ownerId
-    ? `${apiBaseUrl}properties?ownerId=${ownerId}`
-    : `${apiBaseUrl}properties`;
+    ? `${apiBaseUrl}/properties?ownerId=${ownerId}`
+    : `${apiBaseUrl}/properties`;
 
   if (filters) {
     url = new URL(url);
@@ -117,7 +117,7 @@ export async function fetchProperties(ownerId, filters) {
 }
 
 export async function getPropertyById(propertyId, ownerId) {
-  let url = `${apiBaseUrl}properties?id=${propertyId}&ownerId=${ownerId}`;
+  let url = `${apiBaseUrl}/properties?id=${propertyId}&ownerId=${ownerId}`;
 
   const response = await fetch(url);
 
@@ -133,7 +133,7 @@ export async function getPropertyById(propertyId, ownerId) {
 export async function fetchWorkspaces(propertyId) {
   try {
     const response = await fetch(
-      `${apiBaseUrl}workspaces?propertyId=${propertyId}`
+      `${apiBaseUrl}/workspaces?propertyId=${propertyId}`
     );
 
     if (!response.ok) {
@@ -149,7 +149,7 @@ export async function fetchWorkspaces(propertyId) {
 }
 
 export async function createWorkspace(workspaceData) {
-  const response = await fetch(`${apiBaseUrl}workspaces`, {
+  const response = await fetch(`${apiBaseUrl}/workspaces`, {
     method: 'POST',
     body: JSON.stringify(workspaceData),
     headers: {
@@ -162,7 +162,7 @@ export async function createWorkspace(workspaceData) {
 
 export async function updateWorkspace(workspaceData) {
   const response = await fetch(
-    `${apiBaseUrl}workspaces/${workspaceData.workspaceId}`,
+    `${apiBaseUrl}/workspaces/${workspaceData.workspaceId}`,
     {
       method: 'PUT',
       body: JSON.stringify(workspaceData),
@@ -183,8 +183,8 @@ export async function updateWorkspace(workspaceData) {
 
 export async function getWorkspaceInfo(id, ownerId = undefined) {
   const url = ownerId
-    ? `${apiBaseUrl}workspaces?id=${id}&ownerId=${ownerId}`
-    : `${apiBaseUrl}workspaces?id=${id}`;
+    ? `${apiBaseUrl}/workspaces?id=${id}&ownerId=${ownerId}`
+    : `${apiBaseUrl}/workspaces?id=${id}`;
 
   const apiResponse = await fetch(url);
   if (!apiResponse.ok) {
@@ -196,7 +196,7 @@ export async function getWorkspaceInfo(id, ownerId = undefined) {
 }
 
 export async function createBooking(bookingData) {
-  const response = await fetch(`${apiBaseUrl}bookings`, {
+  const response = await fetch(`${apiBaseUrl}/bookings`, {
     method: 'POST',
     body: JSON.stringify(bookingData),
     headers: {
@@ -269,7 +269,7 @@ export async function getPropertyInfo(id) {
 }
 
 export async function getMyBookings(userId) {
-  let url = `${apiBaseUrl}bookings?userId=${userId}`;
+  let url = `${apiBaseUrl}/bookings?userId=${userId}`;
 
   const response = await fetch(url);
 
