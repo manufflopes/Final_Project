@@ -1,20 +1,20 @@
-import { getWorkspaceInfo, createBooking } from "../../scripts/api.js";
-import { userData } from "../../scripts/session.js";
-import { baseUrl } from "../../scripts/config.js";
-import { setLoaderVisibility } from "../../scripts/domBuilder.js";
-import { parseWorkspaceType } from "../../scripts/script.js";
+import { getWorkspaceInfo, createBooking } from '../../scripts/api.js';
+import { userData } from '../../scripts/session.js';
+import { baseUrl } from '../../scripts/config.js';
+import { setLoaderVisibility } from '../../scripts/domBuilder.js';
+import { parseWorkspaceType } from '../../scripts/script.js';
 
-document.addEventListener("DOMContentLoaded", async function () {
+document.addEventListener('DOMContentLoaded', async function () {
   const params = new URLSearchParams(location.search);
-  const workspaceID = params.get("workspaceId");
+  const workspaceID = params.get('workspaceId');
 
   setLoaderVisibility(true);
   const workspaceInfo = await getWorkspaceInfo(workspaceID);
 
-  const workspaceBookingForm = document.createElement("form");
-  workspaceBookingForm.id = "workspace-booking-form";
+  const workspaceBookingForm = document.createElement('form');
+  workspaceBookingForm.id = 'workspace-booking-form';
 
-  const imageSrc = workspaceInfo.image.includes("http")
+  const imageSrc = workspaceInfo.image.includes('http')
     ? workspaceInfo.image
     : `../../images/${workspaceInfo.image}`;
 
@@ -47,9 +47,9 @@ document.addEventListener("DOMContentLoaded", async function () {
             <label class="base-button" for="buildingName"
                 >Price</label
             >
-            <strong>${new Intl.NumberFormat("en-us", {
-              style: "currency",
-              currency: "USD",
+            <strong>${new Intl.NumberFormat('en-us', {
+              style: 'currency',
+              currency: 'USD',
             }).format(workspaceInfo.price)}</strong>
           </div>
           <div class="input-container">
@@ -66,9 +66,9 @@ document.addEventListener("DOMContentLoaded", async function () {
                     >Booking Date</label
                 >
                 From:
-                <input type="date" id="booking-date-from" name="booking-date-from" required>
+                <input type="date" id="startDate" name="startDate" required>
                 To:
-                <input type="date" id="booking-date-to" name="booking-date-to">
+                <input type="date" id="endDate" name="endDate" readonly>
             </div>
         </div>
         <input type="hidden" name="workspaceId" value="${workspaceInfo.id}"/> 
@@ -77,51 +77,45 @@ document.addEventListener("DOMContentLoaded", async function () {
         </button>
     `;
 
-  const main = document.getElementsByTagName("main")[0];
+  const main = document.getElementsByTagName('main')[0];
   main.append(workspaceBookingForm);
   setLoaderVisibility(false);
 
-  const bookingDateInput = document.getElementById("booking-date-from");
-  const bookingEndDateInput = document.getElementById("booking-date-to");
+  const bookingDateInput = document.getElementById('startDate');
+  const bookingEndDateInput = document.getElementById('endDate');
 
   let days = 1;
 
-  if (workspaceInfo.leaseTerm == "week") {
+  if (workspaceInfo.leaseTerm == 'week') {
     days = 6;
-  } else if (workspaceInfo.leaseTerm == "month") {
+  } else if (workspaceInfo.leaseTerm == 'month') {
     days = 29;
   }
 
-  bookingDateInput.addEventListener("change", function () {
+  bookingDateInput.addEventListener('change', function () {
     const selectedDate = new Date(this.value);
     const endDate = new Date(
       selectedDate.setDate(selectedDate.getDate() + days)
     );
 
-    bookingEndDateInput.value = endDate.toISOString().split("T")[0];
+    bookingEndDateInput.value = endDate.toISOString().split('T')[0];
     // bookingEndDateInput.disabled = true;
   });
 
-  workspaceBookingForm.addEventListener("submit", async function (event) {
+  workspaceBookingForm.addEventListener('submit', async function (event) {
     event.preventDefault();
 
     const formData = Object.fromEntries(new FormData(event.target));
 
     const bookingData = {
       ...formData,
-      userId: userData.userId,
     };
-
-    try {
-      setLoaderVisibility(true);
-      const bookingResponse = await createBooking(bookingData);
-      window.location.assign(
-        `${baseUrl}confirmation/?bookingId=${bookingResponse.id}`
-      );
-    } catch (error) {
-      setLoaderVisibility(false);
-      console.log(error);
-      window.location.assign(`${baseUrl}booking-error/`);
-    }
+    console.log(
+      `${baseUrl}confirmation/?workspaceId=${formData.workspaceId}&endDate=${formData.endDate}&startDate=${formData.startDate}`
+    );
+    // setLoaderVisibility(true);
+    window.location.assign(
+      `${baseUrl}confirmation/?workspaceId=${formData.workspaceId}&endDate=${formData.endDate}&startDate=${formData.startDate}`
+    );
   });
 });

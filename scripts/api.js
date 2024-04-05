@@ -37,13 +37,14 @@ export async function loginUser(loginData, callback, redirectUrl) {
 
     const userData = await response.json();
 
-    if (userData.length) {
+    if (!userData.error) {
+      console.log(userData);
       sessionStorage.setItem(
         'open-desks@user',
         JSON.stringify({
-          name: userData[0].name,
-          role: userData[0].role,
-          userId: userData[0].id,
+          name: userData.data.user.name,
+          role: userData.data.user.role,
+          userId: userData.data.user._id,
         })
       );
 
@@ -72,6 +73,7 @@ export async function createProperty(propertyData) {
     headers: {
       'Content-Type': 'application/json',
     },
+    credentials: 'include',
   });
   const data = await response.json();
   return data;
@@ -81,11 +83,12 @@ export async function updateProperty(propertyData) {
   const response = await fetch(
     `${apiBaseUrl}/properties/${propertyData.propertyId}`,
     {
-      method: 'PUT',
+      method: 'PATCH',
       body: JSON.stringify(propertyData),
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include',
     }
   );
 
@@ -110,30 +113,38 @@ export async function fetchProperties(ownerId, filters) {
     });
   }
 
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    credentials: 'include',
+  });
 
   const data = await response.json();
-  return data;
+  return data.data.properties;
 }
 
 export async function getPropertyById(propertyId, ownerId) {
-  let url = `${apiBaseUrl}/properties?id=${propertyId}&ownerId=${ownerId}`;
+  let url = `${apiBaseUrl}/properties/${propertyId}`;
 
   const response = await fetch(url);
+  debugger;
+  console.log(response);
 
   if (!response.ok) {
     throw new Error('Something went wrong while fetching property');
   }
 
   const data = await response.json();
+  console.log(data);
 
-  return data[0];
+  return data.data.property;
 }
 
 export async function fetchWorkspaces(propertyId) {
   try {
     const response = await fetch(
-      `${apiBaseUrl}/workspaces?propertyId=${propertyId}`
+      `${apiBaseUrl}/workspaces?propertyId=${propertyId}`,
+      {
+        credentials: 'include',
+      }
     );
 
     if (!response.ok) {
@@ -142,7 +153,7 @@ export async function fetchWorkspaces(propertyId) {
 
     const data = await response.json();
 
-    return data;
+    return data.data.workspace;
   } catch (error) {
     return {};
   }
@@ -155,6 +166,7 @@ export async function createWorkspace(workspaceData) {
     headers: {
       'Content-Type': 'application/json',
     },
+    credentials: 'include',
   });
   const data = await response.json();
   return data;
@@ -164,11 +176,12 @@ export async function updateWorkspace(workspaceData) {
   const response = await fetch(
     `${apiBaseUrl}/workspaces/${workspaceData.workspaceId}`,
     {
-      method: 'PUT',
+      method: 'PATCH',
       body: JSON.stringify(workspaceData),
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include',
     }
   );
 
@@ -183,34 +196,37 @@ export async function updateWorkspace(workspaceData) {
 
 export async function getWorkspaceInfo(id, ownerId = undefined) {
   const url = ownerId
-    ? `${apiBaseUrl}/workspaces?id=${id}&ownerId=${ownerId}`
-    : `${apiBaseUrl}/workspaces?id=${id}`;
+    ? `${apiBaseUrl}/workspaces/${id}?ownerId=${ownerId}`
+    : `${apiBaseUrl}/workspaces/${id}`;
 
-  const apiResponse = await fetch(url);
+  const apiResponse = await fetch(url, {
+    credentials: 'include',
+  });
   if (!apiResponse.ok) {
     throw new Error('Api requested Failed.');
   }
   const workspaceData = await apiResponse.json();
 
-  return workspaceData[0];
+  return workspaceData.data.workspace;
 }
 
-export async function createBooking(bookingData) {
-  const response = await fetch(`${apiBaseUrl}/bookings`, {
+export async function createBooking(bookingData, workspaceId) {
+  const response = await fetch(`${apiBaseUrl}/workspaces/${workspaceId}/rent`, {
     method: 'POST',
     body: JSON.stringify(bookingData),
     headers: {
       'Content-Type': 'application/json',
     },
+    credentials: 'include',
   });
+  debugger;
 
   if (!response.ok) {
     throw new Error('Failed to book workspace');
   }
 
   const data = await response.json();
-
-  return data;
+  return data.data;
 }
 
 export async function getBookingInfo(id) {
@@ -256,13 +272,13 @@ export async function uploadImage(file) {
 
 export async function getPropertyInfo(id) {
   try {
-    const response = await fetch(`${apiBaseUrl}properties/${id}`);
+    const response = await fetch(`${apiBaseUrl}/properties/${id}`);
     if (!response.ok) {
       throw new Error('Property not found !');
     }
 
     const propertyData = await response.json();
-    return propertyData;
+    return propertyData.data.property;
   } catch (error) {
     console.log(error);
   }

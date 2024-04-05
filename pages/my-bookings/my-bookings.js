@@ -1,37 +1,31 @@
-import { getMyBookings } from "../../scripts/api.js";
-import { setLoaderVisibility } from "../../scripts/domBuilder.js";
-import { userData } from "../../scripts/session.js";
+import { getMyBookings } from '../../scripts/api.js';
+import { setLoaderVisibility } from '../../scripts/domBuilder.js';
+import { userData } from '../../scripts/session.js';
 
-document.addEventListener("DOMContentLoaded", async function () {
+document.addEventListener('DOMContentLoaded', async function () {
   setLoaderVisibility(true);
 
-  const myBookings = document.createElement("div");
-  myBookings.id = "my-bookings";
-  myBookings.classList.add("gap-1");
+  const myBookings = document.createElement('div');
+  myBookings.id = 'my-bookings';
+  myBookings.classList.add('gap-1');
 
   const bookings = await getMyBookings(userData.userId);
 
-  const noContentSection = document.querySelector(".no-content-available");
+  const noContentSection = document.querySelector('.no-content-available');
   if (!bookings.length) {
     noContentSection.innerHTML =
       "<p class='none-available'>You don't have any booking yet!</p>";
-    noContentSection.style.display = "grid";
+    noContentSection.style.display = 'grid';
 
     setLoaderVisibility(false);
 
     return;
   }
 
-  noContentSection.style.display = "none";
+  noContentSection.style.display = 'none';
 
   myBookings.innerHTML = bookings
     .map((booking) => {
-      //   return `
-      //     <div>
-      //         <strong>Reference: </strong>${booking.id}
-      //         <strong>Date: </strong>${booking["booking-date-from"]}
-      //     </div>
-      // `;
       return `<div class="workspace-container">
                         <h2 class="workspace-title">
                           Booking reference ${booking.id}
@@ -41,12 +35,10 @@ document.addEventListener("DOMContentLoaded", async function () {
                             <div>
                                 <label>Date:</label>
                                 <span>
-                                    ${new Intl.DateTimeFormat("en-US", {
-                                      dateStyle: "full",
-                                      timeStyle: "short",
-                                    }).format(
-                                      new Date(booking["booking-date-from"])
-                                    )}
+                                    ${new Intl.DateTimeFormat('en-US', {
+                                      dateStyle: 'full',
+                                      timeStyle: 'short',
+                                    }).format(new Date(booking['startDate']))}
                                 </span>
                             </div>
                             <div>
@@ -59,9 +51,9 @@ document.addEventListener("DOMContentLoaded", async function () {
                         </div>
                       </div>`;
     })
-    .join("");
+    .join('');
 
-  const main = document.getElementsByTagName("main")[0];
+  const main = document.getElementsByTagName('main')[0];
   main.append(myBookings);
 
   setLoaderVisibility(false);

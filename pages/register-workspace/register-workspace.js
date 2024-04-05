@@ -4,15 +4,15 @@ import {
   createWorkspace,
   getWorkspaceInfo,
   updateWorkspace,
-} from "../../scripts/api.js";
-import { baseUrl, apiBaseUrl } from "../../scripts/config.js";
-import { userData } from "../../scripts/session.js";
-import { setLoaderVisibility } from "../../scripts/domBuilder.js";
-import { parseWorkspaceType } from "../../scripts/script.js";
+} from '../../scripts/api.js';
+import { baseUrl, apiBaseUrl } from '../../scripts/config.js';
+import { userData } from '../../scripts/session.js';
+import { setLoaderVisibility } from '../../scripts/domBuilder.js';
+import { parseWorkspaceType } from '../../scripts/script.js';
 
 function createWorkspaceTypesSelector(types) {
-  const div = document.createElement("div");
-  div.classList.add("form-content");
+  const div = document.createElement('div');
+  div.classList.add('form-content');
   div.innerHTML = `
         <div class="input-container">
           <label class="base-button" for="type">
@@ -31,7 +31,7 @@ function createWorkspaceTypesSelector(types) {
             .map(function (type) {
               return `<option value="${type}">${parseWorkspaceType(type)}</option>`;
             })
-            .join("")}        
+            .join('')}        
           </select>
         </div>
     `;
@@ -40,8 +40,8 @@ function createWorkspaceTypesSelector(types) {
 }
 
 function createWorkspaceForm(availableWorkspaceTypes, propertyId) {
-  const form = document.createElement("form");
-  form.id = "workspace-registration-form";
+  const form = document.createElement('form');
+  form.id = 'workspace-registration-form';
 
   form.innerHTML = `<img class="property-image-preview hidden">`;
 
@@ -111,19 +111,19 @@ function createWorkspaceForm(availableWorkspaceTypes, propertyId) {
   return form;
 }
 
-document.addEventListener("DOMContentLoaded", async function () {
+document.addEventListener('DOMContentLoaded', async function () {
   const urlParams = new URLSearchParams(location.search);
-  const propertyId = urlParams.get("propertyId");
-  const workspaceId = urlParams.get("workspaceId");
+  const propertyId = urlParams.get('propertyId');
+  const workspaceId = urlParams.get('workspaceId');
 
-  const main = document.getElementsByTagName("main")[0];
+  const main = document.getElementsByTagName('main')[0];
 
   let propertyData;
   let workspaceData;
   if (propertyId) {
     propertyData = await getPropertyInfo(propertyId);
 
-    const pageTitle = document.getElementsByClassName("page-title")[0];
+    const pageTitle = document.getElementsByClassName('page-title')[0];
     pageTitle.innerHTML = `Add Workspace to <span class="property-name-title">${propertyData.buildingName}</span> property`;
   } else if (workspaceId) {
     workspaceData = await getWorkspaceInfo(workspaceId, userData.userId);
@@ -146,12 +146,12 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   if (workspaceData) {
     const workspaceRegistrationForm = document.getElementById(
-      "workspace-registration-form"
+      'workspace-registration-form'
     );
-    const imagePreview = document.querySelector(".property-image-preview");
+    const imagePreview = document.querySelector('.property-image-preview');
     imagePreview.src = workspaceData.image;
     imagePreview.alt = workspaceData.name;
-    imagePreview.classList.remove("hidden");
+    imagePreview.classList.remove('hidden');
 
     workspaceRegistrationForm.elements.name.value = workspaceData.name;
     workspaceRegistrationForm.elements.places.value = workspaceData.places;
@@ -172,37 +172,37 @@ document.addEventListener("DOMContentLoaded", async function () {
     setLoaderVisibility(false);
   }
 
-  const uploadImageBtn = document.querySelector(".upload-btn-image");
-  const uploadFileInput = document.querySelector("#upload-image-input");
-  const imagePreview = document.querySelector(".property-image-preview");
+  const uploadImageBtn = document.querySelector('.upload-btn-image');
+  const uploadFileInput = document.querySelector('#upload-image-input');
+  const imagePreview = document.querySelector('.property-image-preview');
 
   if (uploadImageBtn) {
-    uploadImageBtn.addEventListener("click", function () {
+    uploadImageBtn.addEventListener('click', function () {
       uploadFileInput.click();
     });
   }
 
   if (uploadFileInput) {
-    uploadFileInput.addEventListener("change", function () {
+    uploadFileInput.addEventListener('change', function () {
       if (this.files.length) {
         const reader = new FileReader();
         reader.onload = function () {
           imagePreview.src = reader.result;
-          imagePreview.classList.remove("hidden");
+          imagePreview.classList.remove('hidden');
         };
         reader.readAsDataURL(this.files[0]);
       } else {
-        imagePreview.src = "";
-        imagePreview.classList.add("hidden");
+        imagePreview.src = '';
+        imagePreview.classList.add('hidden');
       }
 
-      document.querySelector("#uploaded-file-name").textContent =
-        this.files[0]?.name || "Select an Image for the Workspace";
+      document.querySelector('#uploaded-file-name').textContent =
+        this.files[0]?.name || 'Select an Image for the Workspace';
     });
   }
 
-  const form = document.getElementById("workspace-registration-form");
-  form.addEventListener("submit", async function (event) {
+  const form = document.getElementById('workspace-registration-form');
+  form.addEventListener('submit', async function (event) {
     setLoaderVisibility(true);
     event.preventDefault();
 
@@ -225,19 +225,19 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     if (!formData.image.size && !workspaceExists) {
-      alert("Please select an image for the workspace");
+      alert('Please select an image for the workspace');
       setLoaderVisibility(false);
       return;
     }
 
     try {
-      let imageUrl = "";
+      let imageUrl = '';
 
       if (formData.image.size > 0) {
         imageUrl = await uploadImage(formData.image);
 
         if (!imageUrl) {
-          throw new Error("Image not uploaded");
+          throw new Error('Image not uploaded');
         }
       }
 
