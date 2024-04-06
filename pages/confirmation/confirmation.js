@@ -35,6 +35,19 @@ document.addEventListener('DOMContentLoaded', async function () {
   //   : `../../images/${workspaceInfo.image}`;
   const imageSrc = '';
 
+  // Options for the toLocaleDateString function to display a long date format
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+
+  // Convert to local date string with specified options
+  const humanStartDate = new Date(bookingResponse.startDate).toLocaleDateString(
+    'en-US',
+    options
+  );
+  const humanEndDate = new Date(bookingResponse.endDate).toLocaleDateString(
+    'en-US',
+    options
+  );
+
   workspaceBookingConfirmation.innerHTML = `
         <h2>Your booking is confirmed!</h2>
         <img class="property-image-preview" src="${imageSrc}" />
@@ -52,8 +65,8 @@ document.addEventListener('DOMContentLoaded', async function () {
               style: 'currency',
               currency: 'USD',
             }).format(bookingResponse.price)}</p>
-            <p><strong>Start Date:</strong> ${bookingResponse.startDate}</p>
-            <p><strong>End Date:</strong> ${bookingResponse.endDate}</p>
+            <p><strong>Start Date:</strong> ${humanStartDate}</p>
+            <p><strong>End Date:</strong> ${humanEndDate}</p>
             <p class="confirmation-message">You'll receive an e-mail with all details and directions for payment.</p>
         </div>
                 

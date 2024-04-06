@@ -20,7 +20,7 @@
 }
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 400;
   font-style: normal;
   background-color: var(--main-background);
@@ -118,7 +118,7 @@ nav ul li:last-of-type {
 
 .user-info {
   display: flex;
-  align-items: center
+  align-items: center;
 }
 
 .user-info img {
@@ -144,7 +144,7 @@ button.sub-menu-link {
 
 button.sub-menu-link {
   background: white !important;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   width: 100%;
   text-align: start;
   font-size: 16px;
@@ -258,12 +258,13 @@ li a {
   border-top-color: transparent;
   border-width: 4px;
   border-radius: 50%;
-  -webkit-animation: spin .8s linear infinite;
-  animation: spin .8s linear infinite;
+  -webkit-animation: spin 0.8s linear infinite;
+  animation: spin 0.8s linear infinite;
 }
 
 .go-back {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, -webkit-text-decoration-color;
   transition-duration: 0.3s;
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -358,10 +359,8 @@ li a {
 /*registration page*/
 
 .page-title {
-
   text-align: center;
   padding: 16px;
-
 }
 
 /* .form {} */
@@ -439,7 +438,6 @@ select.space-to-fill {
   flex-direction: column;
 }
 
-
 button.form-submit,
 #user-registration-form button {
   align-self: flex-end;
@@ -474,7 +472,6 @@ ul {
   list-style: none;
   padding: 0;
   margin: 0;
-
 }
 
 .accordion-faq {
@@ -484,7 +481,7 @@ ul {
   border-top: 1px solid #dce7eb;
 }
 
-ul li input[type="checkbox"] {
+ul li input[type='checkbox'] {
   position: absolute;
   cursor: pointer;
   width: 100%;
@@ -500,24 +497,24 @@ ul li i {
   right: 0;
 }
 
-ul li input[type=checkbox]:checked~p {
+ul li input[type='checkbox']:checked ~ p {
   margin-top: 0;
   max-height: 0;
   opacity: 0;
   transform: translateX(-50%);
 }
 
-ul li input[type="checkbox"]:checked~i::before {
+ul li input[type='checkbox']:checked ~ i::before {
   transform: translate(2px, 0) rotate(45deg);
 }
 
-ul li input[type="checkbox"]:checked~i::after {
+ul li input[type='checkbox']:checked ~ i::after {
   transform: translate(-2px, 0) rotate(-45deg);
 }
 
 ul li i::before,
 ul li i::after {
-  content: "";
+  content: '';
   position: absolute;
   background: #333;
   width: 3px;
@@ -525,7 +522,7 @@ ul li i::after {
 }
 
 ul li i::before {
-  transform: translate(-2px, 0)rotate(45deg);
+  transform: translate(-2px, 0) rotate(45deg);
 }
 
 ul li i:after {
@@ -551,7 +548,6 @@ p,
 ul li i:before,
 ul li i:after {
   transition: all 0.25s ease-in-out;
-
 }
 
 ul li:last-of-type {
@@ -586,7 +582,6 @@ ul li:last-of-type {
     transform: rotateX(0deg);
   }
 }
-
 
 /* .questions {
   
@@ -641,10 +636,9 @@ main {
   display: flex;
   gap: 16px;
   justify-content: space-between;
-
 }
 
-.filter-container input:nth-child(n+2) {
+.filter-container input:nth-child(n + 2) {
   margin-left: 16px;
 }
 
@@ -783,7 +777,7 @@ label.info-label {
 
 label.info-label::before,
 label.info-label::after {
-  content: "";
+  content: '';
   height: 1px;
   width: 50px;
   margin-left: 8px;
@@ -911,7 +905,7 @@ footer {
 }
 
 .separator::before {
-  content: "";
+  content: '';
   border: 1px solid rgba(255, 255, 255, 0.3);
   margin-right: 16px;
 }
@@ -949,10 +943,10 @@ footer {
 }
 
 .property-name-title {
-  color: var(--button-red)
+  color: var(--button-red);
 }
 
-input[type=date] {
+.date {
   padding: 10px 20px;
   font-family: inherit;
 }
@@ -967,7 +961,6 @@ input[type=date] {
   border-radius: 8px;
   font-size: larger;
   margin-top: 16px;
-
 }
 
 .confirmation-message {

@@ -125,8 +125,6 @@ export async function getPropertyById(propertyId, ownerId) {
   let url = `${apiBaseUrl}/properties/${propertyId}`;
 
   const response = await fetch(url);
-  debugger;
-  console.log(response);
 
   if (!response.ok) {
     throw new Error('Something went wrong while fetching property');
@@ -219,7 +217,6 @@ export async function createBooking(bookingData, workspaceId) {
     },
     credentials: 'include',
   });
-  debugger;
 
   if (!response.ok) {
     throw new Error('Failed to book workspace');
@@ -284,10 +281,12 @@ export async function getPropertyInfo(id) {
   }
 }
 
-export async function getMyBookings(userId) {
-  let url = `${apiBaseUrl}/bookings?userId=${userId}`;
+export async function getMyBookings() {
+  let url = `${apiBaseUrl}/users/my-bookings`;
 
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    credentials: 'include',
+  });
 
   if (!response.ok) {
     throw new Error('Something went wrong while fetching property');
@@ -295,5 +294,5 @@ export async function getMyBookings(userId) {
 
   const data = await response.json();
 
-  return data;
+  return data.data;
 }

@@ -1,6 +1,5 @@
 import { getMyBookings } from '../../scripts/api.js';
 import { setLoaderVisibility } from '../../scripts/domBuilder.js';
-import { userData } from '../../scripts/session.js';
 
 document.addEventListener('DOMContentLoaded', async function () {
   setLoaderVisibility(true);
@@ -9,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   myBookings.id = 'my-bookings';
   myBookings.classList.add('gap-1');
 
-  const bookings = await getMyBookings(userData.userId);
+  const bookings = await getMyBookings();
 
   const noContentSection = document.querySelector('.no-content-available');
   if (!bookings.length) {
@@ -26,6 +25,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
   myBookings.innerHTML = bookings
     .map((booking) => {
+      if (!booking.startDate) return '';
       return `<div class="workspace-container">
                         <h2 class="workspace-title">
                           Booking reference ${booking.id}
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                                     ${new Intl.DateTimeFormat('en-US', {
                                       dateStyle: 'full',
                                       timeStyle: 'short',
-                                    }).format(new Date(booking['startDate']))}
+                                    }).format(new Date(booking.startDate))}
                                 </span>
                             </div>
                             <div>

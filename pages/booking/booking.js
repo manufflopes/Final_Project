@@ -4,6 +4,8 @@ import { baseUrl } from '../../scripts/config.js';
 import { setLoaderVisibility } from '../../scripts/domBuilder.js';
 import { parseWorkspaceType } from '../../scripts/script.js';
 
+let unavailableDates = [];
+
 document.addEventListener('DOMContentLoaded', async function () {
   const params = new URLSearchParams(location.search);
   const workspaceID = params.get('workspaceId');
@@ -13,6 +15,13 @@ document.addEventListener('DOMContentLoaded', async function () {
 
   const workspaceBookingForm = document.createElement('form');
   workspaceBookingForm.id = 'workspace-booking-form';
+
+  unavailableDates = workspaceInfo.unavailableDates;
+
+  function disableDates(date) {
+    const dateString = jQuery.datepicker.formatDate('yy-mm-dd', date);
+    return [unavailableDates.indexOf(dateString) == -1];
+  }
 
   const imageSrc = workspaceInfo.image.includes('http')
     ? workspaceInfo.image
@@ -66,12 +75,12 @@ document.addEventListener('DOMContentLoaded', async function () {
                     >Booking Date</label
                 >
                 From:
-                <input type="date" id="startDate" name="startDate" required>
+                <input type="text" class="date" id="startDate" name="startDate" required>
                 To:
-                <input type="date" id="endDate" name="endDate" readonly>
+                <input type="text" class="date" id="endDate" name="endDate" readonly>
             </div>
         </div>
-        <input type="hidden" name="workspaceId" value="${workspaceInfo.id}"/> 
+        <input type="hidden" name="workspaceId" value="${workspaceID}"/> 
         <button id="send-button" class="base-button form-submit" type="submit">
             Book Now
         </button>
@@ -81,9 +90,6 @@ document.addEventListener('DOMContentLoaded', async function () {
   main.append(workspaceBookingForm);
   setLoaderVisibility(false);
 
-  const bookingDateInput = document.getElementById('startDate');
-  const bookingEndDateInput = document.getElementById('endDate');
-
   let days = 1;
 
   if (workspaceInfo.leaseTerm == 'week') {
@@ -91,15 +97,17 @@ document.addEventListener('DOMContentLoaded', async function () {
   } else if (workspaceInfo.leaseTerm == 'month') {
     days = 29;
   }
-
-  bookingDateInput.addEventListener('change', function () {
-    const selectedDate = new Date(this.value);
-    const endDate = new Date(
-      selectedDate.setDate(selectedDate.getDate() + days)
-    );
-
-    bookingEndDateInput.value = endDate.toISOString().split('T')[0];
-    // bookingEndDateInput.disabled = true;
+  const bookingEndDateInput = document.getElementById('endDate');
+  $('#startDate').datepicker({
+    dateFormat: 'yy-mm-dd',
+    beforeShowDay: disableDates,
+    onSelect: function (selected) {
+      const selectedDate = new Date(this.value);
+      const endDate = new Date(
+        selectedDate.setDate(selectedDate.getDate() + days)
+      );
+      bookingEndDateInput.value = endDate.toISOString().split('T')[0];
+    },
   });
 
   workspaceBookingForm.addEventListener('submit', async function (event) {
