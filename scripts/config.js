@@ -6,4 +6,4 @@
 //PRD
 export const rootDir = '/Final_Project/pages/';
 export const baseUrl = `https://manufflopes.github.io${rootDir}`;
-export const apiBaseUrl = 'https://open-desks-api.onrender.com';
+export const apiBaseUrl = 'https://open-desks-api.onrender.com/api';
