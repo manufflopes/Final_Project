@@ -15,10 +15,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     return;
   }
 
-  const test = JSON.stringify({
-    startDate,
-    endDate,
-  });
   const bookingResponse = await createBooking(
     {
       startDate,
@@ -30,10 +26,9 @@ document.addEventListener('DOMContentLoaded', async function () {
   const workspaceBookingConfirmation = document.createElement('div');
   workspaceBookingConfirmation.id = 'workspace-booking-confirmation';
 
-  // const imageSrc = workspaceInfo.image.includes('http')
-  //   ? workspaceInfo.image
-  //   : `../../images/${workspaceInfo.image}`;
-  const imageSrc = '';
+  const imageSrc = bookingResponse.image.includes('http')
+    ? bookingResponse.image
+    : '';
 
   // Options for the toLocaleDateString function to display a long date format
   const options = { year: 'numeric', month: 'long', day: 'numeric' };

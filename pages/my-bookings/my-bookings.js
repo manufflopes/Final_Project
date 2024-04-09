@@ -8,10 +8,10 @@ document.addEventListener('DOMContentLoaded', async function () {
   myBookings.id = 'my-bookings';
   myBookings.classList.add('gap-1');
 
-  const bookings = await getMyBookings();
-
-  const noContentSection = document.querySelector('.no-content-available');
-  if (!bookings.length) {
+  try {
+    const bookings = await getMyBookings();
+  } catch (error) {
+    const noContentSection = document.querySelector('.no-content-available');
     noContentSection.innerHTML =
       "<p class='none-available'>You don't have any booking yet!</p>";
     noContentSection.style.display = 'grid';
