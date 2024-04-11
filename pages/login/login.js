@@ -5,6 +5,7 @@ import { setLoaderVisibility } from "../../scripts/domBuilder.js";
 document.addEventListener("DOMContentLoaded", async function () {
   const loginForm = document.getElementById("login-form");
   const main = document.getElementsByTagName("main")[0];
+  const errorMessageContainer = document.getElementById("error-message"); // Get the error message container
 
   const registerLink = document.createElement("p");
   registerLink.classList.add("new-customer");
@@ -16,6 +17,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     const formData = Object.fromEntries(new FormData(event.target));
     const redirect = new URLSearchParams(location.search).get("callback");
     setLoaderVisibility(true);
-    await loginUser(formData, () => setLoaderVisibility(false), redirect);
+    await loginUser(formData, (errorMessage) => {
+      setLoaderVisibility(false);
+      errorMessageContainer.textContent = errorMessage;
+    }, redirect);
   });
 });

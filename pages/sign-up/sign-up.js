@@ -16,7 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
       //If the user is created, try to login
       await loginUser({ email: formData.email, password: formData.password });
     } catch (error) {
-      console.log(error);
+      const errorMessageContainer = document.getElementById("error-message");
+      errorMessageContainer.textContent = error.message;
+      console.log(error.message); // Display the error message
     }
   });
 });
