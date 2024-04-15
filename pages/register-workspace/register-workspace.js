@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     workspaceRegistrationForm.elements.type.value = workspaceData.type;
     workspaceRegistrationForm.elements.propertyId.value =
       workspaceData.propertyId;
-    workspaceRegistrationForm.elements.workspaceId.value = workspaceData.id;
+    workspaceRegistrationForm.elements.workspaceId.value = workspaceData._id;
 
     if (workspaceData.isSmokingAllowed) {
       workspaceRegistrationForm.elements.isSmokingAllowed_yes.checked = true;
