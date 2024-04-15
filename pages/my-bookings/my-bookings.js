@@ -23,8 +23,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     return;
   }
 
-  noContentSection.style.display = 'none';
-
   myBookings.innerHTML = bookings
     .map((booking) => {
       if (!booking.startDate) return '';
