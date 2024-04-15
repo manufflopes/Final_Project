@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   let bookings;
   try {
     bookings = await getMyBookings();
+    setLoaderVisibility(false);
   } catch (error) {
     const noContentSection = document.querySelector('.no-content-available');
     noContentSection.innerHTML =
