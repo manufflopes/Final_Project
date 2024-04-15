@@ -8,8 +8,9 @@ document.addEventListener('DOMContentLoaded', async function () {
   myBookings.id = 'my-bookings';
   myBookings.classList.add('gap-1');
 
+  let bookings;
   try {
-    const bookings = await getMyBookings();
+    bookings = await getMyBookings();
   } catch (error) {
     const noContentSection = document.querySelector('.no-content-available');
     noContentSection.innerHTML =
